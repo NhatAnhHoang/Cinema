@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">#07112a</item>
+
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
+        <item name="android:listDivider">@android:color/transparent</item>
+    </style>
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">#AE000000</item>
+    </style>
+</resources>

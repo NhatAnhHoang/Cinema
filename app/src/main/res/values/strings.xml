@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Cinema</string>
+
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_booking">Đặt vé</string>
+    <string name="nav_user">Tài khoản</string>
+    <string name="nav_food_drink">Đồ ăn/Đồ uống</string>
+
+    <string name="hint_search_movie">Tên phim…</string>
+    <string name="hint_email">Email…</string>
+    <string name="hint_password">Mật khẩu…</string>
+    <string name="hint_password_old">Mật khẩu cũ…</string>
+    <string name="hint_password_new">Mật khẩu mới…</string>
+    <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
+
+    <string name="waiting_message">Vui lòng đợi…</string>
+    <string name="sign_up">Đăng Ký</string>
+    <string name="sign_up_user">Đăng Ký Tài Khoản</string>
+    <string name="sign_in_user">Đăng Nhập Tài Khoản</string>
+    <string name="admin">Quản trị viên</string>
+    <string name="user">Người dùng</string>
+    <string name="have_account">Đã có tài khoản?</string>
+    <string name="have_not_account">Chưa có tài khoản?</string>
+    <string name="sign_in">Đăng Nhập</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="sign_out">Đăng xuất</string>
+    <string name="history_booking">Lịch sử đặt vé</string>
+
+    <string name="action_ok">Đồng ý</string>
+    <string name="action_cancel">Hủy</string>
+
+    <string name="msg_confirm_login_another_device">Bạn có chắc chắn muốn thoát ứng dụng?</string>
+    <string name="msg_email_require">Vui lòng nhập địa chỉ email</string>
+    <string name="msg_password_require">Vui lòng nhập mật khẩu</string>
+    <string name="msg_old_password_require">Vui lòng nhập mật khẩu cũ</string>
+    <string name="msg_new_password_require">Vui lòng nhập mật khẩu mới</string>
+    <string name="msg_confirm_password_require">Vui lòng xác nhận mật khẩu mới</string>
+    <string name="msg_old_password_invalid">Mật khẩu cũ không chính xác, vui lòng nhập lại</string>
+    <string name="msg_confirm_password_invalid">Xác nhận mật khẩu mới không trùng khớp</string>
+    <string name="msg_new_password_invalid">Mật khẩu mới phải khác mật khẩu cũ</string>
+    <string name="msg_change_password_successfully">Thay đổi mật khẩu thành công</string>
+    <string name="msg_email_invalid">Email không hợp lệ, vui lòng nhập lại</string>
+    <string name="msg_email_invalid_admin">Email sai định dạng dành cho quản trị viên</string>
+    <string name="msg_email_invalid_user">Email sai định dạng dành cho người dùng</string>
+    <string name="msg_sign_up_error">Đăng ký không thành công, vui lòng thử lại</string>
+    <string name="msg_sign_in_error">Đăng nhập không thành công, vui lòng thử lại</string>
+</resources>
