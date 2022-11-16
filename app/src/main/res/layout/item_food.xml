@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/define_dimen_10"
+    android:layout_marginEnd="@dimen/define_dimen_10"
+    app:cardCornerRadius="@dimen/define_dimen_6">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/define_dimen_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/img_edit"
+            android:layout_marginEnd="@dimen/define_dimen_5"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100 000 VNĐ"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/red"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/img_delete"
+            android:layout_marginEnd="@dimen/define_dimen_5"
+            android:padding="@dimen/define_dimen_5"
+            android:src="@drawable/ic_edit"/>
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/define_dimen_5"
+            android:src="@drawable/ic_delete"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

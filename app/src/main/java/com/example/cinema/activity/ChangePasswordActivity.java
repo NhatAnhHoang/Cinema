@@ -21,6 +21,7 @@ public class ChangePasswordActivity extends BaseActivity {
         mActivityChangePasswordBinding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(mActivityChangePasswordBinding.getRoot());
 
+        mActivityChangePasswordBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivityChangePasswordBinding.btnChangePassword.setOnClickListener(v -> onClickValidateChangePassword());
     }
 

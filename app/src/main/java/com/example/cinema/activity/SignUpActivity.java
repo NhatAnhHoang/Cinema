@@ -26,6 +26,7 @@ public class SignUpActivity extends BaseActivity {
 
         mActivitySignUpBinding.rdbUser.setChecked(true);
 
+        mActivitySignUpBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivitySignUpBinding.layoutSignIn.setOnClickListener(v -> finish());
         mActivitySignUpBinding.btnSignUp.setOnClickListener(v -> onClickValidateSignUp());
     }

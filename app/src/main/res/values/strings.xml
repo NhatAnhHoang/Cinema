@@ -12,6 +12,8 @@
     <string name="hint_password_old">Mật khẩu cũ…</string>
     <string name="hint_password_new">Mật khẩu mới…</string>
     <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
+    <string name="hint_name">Tên…</string>
+    <string name="hint_price">Giá…</string>
 
     <string name="waiting_message">Vui lòng đợi…</string>
     <string name="sign_up">Đăng Ký</string>
@@ -26,9 +28,15 @@
     <string name="change_password">Đổi mật khẩu</string>
     <string name="sign_out">Đăng xuất</string>
     <string name="history_booking">Lịch sử đặt vé</string>
+    <string name="reset_password">Gửi lại mật khẩu</string>
+    <string name="add_food_title">Thêm Đồ ăn/Đồ uống</string>
+    <string name="edit_food_title">Chỉnh sửa Đồ ăn/Đồ uống</string>
+    <string name="currency">000 VNĐ</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
+    <string name="action_add">Thêm</string>
+    <string name="action_edit">Chỉnh sửa</string>
 
     <string name="msg_confirm_login_another_device">Bạn có chắc chắn muốn thoát ứng dụng?</string>
     <string name="msg_email_require">Vui lòng nhập địa chỉ email</string>
@@ -40,9 +48,17 @@
     <string name="msg_confirm_password_invalid">Xác nhận mật khẩu mới không trùng khớp</string>
     <string name="msg_new_password_invalid">Mật khẩu mới phải khác mật khẩu cũ</string>
     <string name="msg_change_password_successfully">Thay đổi mật khẩu thành công</string>
+    <string name="msg_reset_password_successfully">Reset mật khẩu thành công, vui lòng kiểm tra email của bạn</string>
     <string name="msg_email_invalid">Email không hợp lệ, vui lòng nhập lại</string>
     <string name="msg_email_invalid_admin">Email sai định dạng dành cho quản trị viên</string>
     <string name="msg_email_invalid_user">Email sai định dạng dành cho người dùng</string>
     <string name="msg_sign_up_error">Đăng ký không thành công, vui lòng thử lại</string>
     <string name="msg_sign_in_error">Đăng nhập không thành công, vui lòng thử lại</string>
+    <string name="msg_name_food_require">Vui lòng nhập tên đồ ăn/đồ uống</string>
+    <string name="msg_price_food_require">Vui lòng nhập giá đồ ăn/đồ uống</string>
+    <string name="msg_add_food_successfully">Thêm đồ ăn/đồ uống thành công</string>
+    <string name="msg_delete_title">Xác nhận xóa</string>
+    <string name="msg_confirm_delete">Bạn có chắc chắn muốn xóa mục này không?</string>
+    <string name="msg_delete_food_successfully">Xóa đồ ăn/đồ uống thành công</string>
+    <string name="msg_edit_food_successfully">Chỉnh sửa đồ ăn/đồ uống thành công</string>
 </resources>

@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MyApplication extends Application {
 
     private static final String FIREBASE_URL = "https://cinema-c68f6-default-rtdb.firebaseio.com";
-    private DatabaseReference mDatabaseReference;
 
     public static MyApplication get(Context context) {
         return (MyApplication) context.getApplicationContext();
@@ -22,16 +21,13 @@ public class MyApplication extends Application {
         super.onCreate();
         DataStoreManager.init(getApplicationContext());
         FirebaseApp.initializeApp(this);
-        initFirebase();
     }
 
-    public void initFirebase() {
-        String mReference = "cinema";
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance(FIREBASE_URL);
-        mDatabaseReference = mFirebaseDatabase.getReference(mReference);
+    public DatabaseReference getFoodDatabaseReference() {
+        return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/food");
     }
 
-    public DatabaseReference getDatabaseReference() {
-        return mDatabaseReference;
+    public DatabaseReference getMovieDatabaseReference() {
+        return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/movie");
     }
 }
