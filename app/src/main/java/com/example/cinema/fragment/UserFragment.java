@@ -27,13 +27,6 @@ public class UserFragment extends Fragment {
 
         mFragmentUserBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
 
-        if (DataStoreManager.getUser().isAdmin()) {
-            mFragmentUserBinding.layoutHistoryBooking.setVisibility(View.GONE);
-            mFragmentUserBinding.viewHistoryBooking.setVisibility(View.GONE);
-        } else {
-            mFragmentUserBinding.layoutHistoryBooking.setVisibility(View.VISIBLE);
-            mFragmentUserBinding.viewHistoryBooking.setVisibility(View.VISIBLE);
-        }
         mFragmentUserBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
         mFragmentUserBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
 

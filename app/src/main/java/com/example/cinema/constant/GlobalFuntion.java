@@ -1,12 +1,22 @@
 package com.example.cinema.constant;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.cinema.listener.IGetDateListener;
+import com.example.cinema.model.Room;
+import com.example.cinema.model.SlotTime;
+import com.example.cinema.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class GlobalFuntion {
 
@@ -49,5 +59,51 @@ public class GlobalFuntion {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static List<Room> getListRooms() {
+        List<Room> list = new ArrayList<>();
+        list.add(new Room(1, "Phòng 1"));
+        list.add(new Room(2, "Phòng 2"));
+        list.add(new Room(3, "Phòng 3"));
+        list.add(new Room(4, "Phòng 4"));
+        list.add(new Room(5, "Phòng 5"));
+        list.add(new Room(6, "Phòng 6"));
+        list.add(new Room(7, "Phòng 7"));
+        list.add(new Room(8, "Phòng 8"));
+        list.add(new Room(9, "Phòng 9"));
+        list.add(new Room(10, "Phòng 10"));
+        list.add(new Room(11, "Phòng 11"));
+        list.add(new Room(12, "Phòng 12"));
+        return list;
+    }
+
+    public static List<SlotTime> getListSlotTimes() {
+        List<SlotTime> list = new ArrayList<>();
+        list.add(new SlotTime(1, "7AM - 8AM"));
+        list.add(new SlotTime(2, "8AM - 9AM"));
+        list.add(new SlotTime(3, "9AM - 10AM"));
+        list.add(new SlotTime(4, "10AM - 11AM"));
+        list.add(new SlotTime(5, "1PM - 2PM"));
+        list.add(new SlotTime(6, "2PM - 3PM"));
+        list.add(new SlotTime(7, "3PM - 4PM"));
+        list.add(new SlotTime(8, "4PM - 5PM"));
+        list.add(new SlotTime(9, "5PM - 6PM"));
+        list.add(new SlotTime(10, "6PM - 7PM"));
+        list.add(new SlotTime(11, "7PM - 8PM"));
+        list.add(new SlotTime(12, "8PM - 9PM"));
+        return list;
+    }
+
+    public static void showDatePicker(Context context, final IGetDateListener getDateListener) {
+        Calendar mCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener callBack = (view, year, monthOfYear, dayOfMonth) -> {
+            String date = StringUtil.getDoubleNumber(dayOfMonth) + "-" + StringUtil.getDoubleNumber(monthOfYear + 1) + "-" + year;
+            getDateListener.getDate(date);
+        };
+        DatePickerDialog datePicker = new DatePickerDialog(context,
+                callBack, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
+                mCalendar.get(Calendar.DATE));
+        datePicker.show();
     }
 }

@@ -14,6 +14,10 @@
     <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
     <string name="hint_name">Tên…</string>
     <string name="hint_price">Giá…</string>
+    <string name="hint_description">Mô tả…</string>
+    <string name="hint_image">Link ảnh…</string>
+    <string name="hint_url">Link video…</string>
+    <string name="hint_date">Khởi chiếu…</string>
 
     <string name="waiting_message">Vui lòng đợi…</string>
     <string name="sign_up">Đăng Ký</string>
@@ -32,6 +36,10 @@
     <string name="add_food_title">Thêm Đồ ăn/Đồ uống</string>
     <string name="edit_food_title">Chỉnh sửa Đồ ăn/Đồ uống</string>
     <string name="currency">000 VNĐ</string>
+    <string name="currency_movie">000 VNĐ / 1 vé</string>
+    <string name="date_movie">Khởi chiếu:</string>
+    <string name="add_movie_title">Thêm phim mới</string>
+    <string name="edit_movie_title">Chỉnh sửa thông tin phim</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -61,4 +69,15 @@
     <string name="msg_confirm_delete">Bạn có chắc chắn muốn xóa mục này không?</string>
     <string name="msg_delete_food_successfully">Xóa đồ ăn/đồ uống thành công</string>
     <string name="msg_edit_food_successfully">Chỉnh sửa đồ ăn/đồ uống thành công</string>
+
+    <string name="msg_add_movie_successfully">Thêm phim mới thành công</string>
+    <string name="msg_delete_movie_successfully">Xóa phim thành công</string>
+    <string name="msg_edit_movie_successfully">Chỉnh sửa thông tin phim thành công</string>
+
+    <string name="msg_name_movie_require">Vui lòng nhập tên phim</string>
+    <string name="msg_description_movie_require">Vui lòng nhập mô tả phim</string>
+    <string name="msg_price_movie_require">Vui lòng nhập giá phim</string>
+    <string name="msg_date_movie_require">Vui lòng nhập ngày phim khởi chiếu</string>
+    <string name="msg_image_movie_require">Vui lòng nhập link ảnh phim</string>
+    <string name="msg_video_movie_require">Vui lòng nhập link video phim</string>
 </resources>

@@ -42,6 +42,10 @@
         <activity
             android:name=".activity.AddFoodActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".activity.AddMovieActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

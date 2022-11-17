@@ -63,6 +63,7 @@ public class AddFoodActivity extends BaseActivity {
             return;
         }
 
+        // Update food
         if (isUpdate) {
             showProgressDialog(true);
             Map<String, Object> map = new HashMap<>();
@@ -77,6 +78,7 @@ public class AddFoodActivity extends BaseActivity {
             return;
         }
 
+        // Add food
         showProgressDialog(true);
         long foodId = System.currentTimeMillis();
         Food food = new Food(foodId, strName, Integer.parseInt(strPrice));

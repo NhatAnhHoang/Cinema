@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.AddFoodActivity;
-import com.example.cinema.activity.MainActivity;
 import com.example.cinema.adapter.FoodAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
@@ -99,14 +98,11 @@ public class FoodFragment extends Fragment {
         if (getActivity() == null) {
             return;
         }
-        MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.showProgressDialog(true);
         MyApplication.get(getActivity()).getFoodDatabaseReference()
                 .addChildEventListener(new ChildEventListener() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        mainActivity.showProgressDialog(false);
                         Food food = dataSnapshot.getValue(Food.class);
                         if (food == null || mListFood == null || mFoodAdapter == null) {
                             return;
