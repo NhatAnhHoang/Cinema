@@ -1,4 +1,4 @@
-package com.example.cinema.fragment;
+package com.example.cinema.fragment.admin;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.AddMovieActivity;
-import com.example.cinema.adapter.MovieAdapter;
+import com.example.cinema.adapter.admin.AdminMovieAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentHomeAdminBinding;
@@ -32,7 +32,7 @@ public class AdminHomeFragment extends Fragment {
 
     private FragmentHomeAdminBinding mFragmentHomeAdminBinding;
     private List<Movie> mListMovies;
-    private MovieAdapter mMovieAdapter;
+    private AdminMovieAdapter mAdminMovieAdapter;
 
     @Nullable
     @Override
@@ -51,7 +51,7 @@ public class AdminHomeFragment extends Fragment {
         mFragmentHomeAdminBinding.rcvMovie.setLayoutManager(linearLayoutManager);
 
         mListMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(getActivity(), mListMovies, new MovieAdapter.IManagerMovieListener() {
+        mAdminMovieAdapter = new AdminMovieAdapter(getActivity(), mListMovies, new AdminMovieAdapter.IManagerMovieListener() {
             @Override
             public void editMovie(Movie movie) {
                 onClickEditMovie(movie);
@@ -67,7 +67,7 @@ public class AdminHomeFragment extends Fragment {
 
             }
         });
-        mFragmentHomeAdminBinding.rcvMovie.setAdapter(mMovieAdapter);
+        mFragmentHomeAdminBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
 
         mFragmentHomeAdminBinding.btnAddMovie.setOnClickListener(v -> onClickAddMovie());
     }
@@ -109,18 +109,18 @@ public class AdminHomeFragment extends Fragment {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                         Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mMovieAdapter == null) {
+                        if (movie == null || mListMovies == null || mAdminMovieAdapter == null) {
                             return;
                         }
                         mListMovies.add(0, movie);
-                        mMovieAdapter.notifyDataSetChanged();
+                        mAdminMovieAdapter.notifyDataSetChanged();
                     }
 
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                         Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mMovieAdapter == null) {
+                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
                             return;
                         }
                         for (Movie movieEntity : mListMovies) {
@@ -134,14 +134,14 @@ public class AdminHomeFragment extends Fragment {
                                 break;
                             }
                         }
-                        mMovieAdapter.notifyDataSetChanged();
+                        mAdminMovieAdapter.notifyDataSetChanged();
                     }
 
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                         Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mMovieAdapter == null) {
+                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
                             return;
                         }
                         for (Movie movieObject : mListMovies) {
@@ -150,7 +150,7 @@ public class AdminHomeFragment extends Fragment {
                                 break;
                             }
                         }
-                        mMovieAdapter.notifyDataSetChanged();
+                        mAdminMovieAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -161,5 +161,13 @@ public class AdminHomeFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAdminMovieAdapter != null) {
+            mAdminMovieAdapter.release();
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cinema.fragment;
+package com.example.cinema.fragment.admin;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.AddFoodActivity;
-import com.example.cinema.adapter.FoodAdapter;
+import com.example.cinema.adapter.admin.FoodAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentFoodBinding;

@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.cinema.fragment.AdminHomeFragment;
+import com.example.cinema.fragment.admin.AdminHomeFragment;
 import com.example.cinema.fragment.BookingFragment;
-import com.example.cinema.fragment.FoodFragment;
+import com.example.cinema.fragment.admin.FoodFragment;
 import com.example.cinema.fragment.HomeFragment;
-import com.example.cinema.fragment.UserFragment;
+import com.example.cinema.fragment.AccountFragment;
 import com.example.cinema.prefs.DataStoreManager;
 
 public class MyViewPagerAdapter extends FragmentStateAdapter {
@@ -35,7 +35,7 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
                 return new BookingFragment();
 
             case 2:
-                return new UserFragment();
+                return new AccountFragment();
 
             default:
                 if (DataStoreManager.getUser().isAdmin()) {

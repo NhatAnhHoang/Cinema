@@ -12,25 +12,33 @@ import androidx.fragment.app.Fragment;
 import com.example.cinema.activity.ChangePasswordActivity;
 import com.example.cinema.activity.SignInActivity;
 import com.example.cinema.constant.GlobalFuntion;
-import com.example.cinema.databinding.FragmentUserBinding;
+import com.example.cinema.databinding.FragmentAccountBinding;
 import com.example.cinema.prefs.DataStoreManager;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserFragment extends Fragment {
+public class AccountFragment extends Fragment {
 
-    private FragmentUserBinding mFragmentUserBinding;
+    private FragmentAccountBinding mFragmentAccountBinding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragmentUserBinding = FragmentUserBinding.inflate(inflater, container, false);
+        mFragmentAccountBinding = FragmentAccountBinding.inflate(inflater, container, false);
 
-        mFragmentUserBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
+        mFragmentAccountBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
 
-        mFragmentUserBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
-        mFragmentUserBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
+        if (DataStoreManager.getUser().isAdmin()) {
+            mFragmentAccountBinding.layoutHistoryBooking.setVisibility(View.VISIBLE);
+            mFragmentAccountBinding.viewHistoryBooking.setVisibility(View.VISIBLE);
+        } else {
+            mFragmentAccountBinding.layoutHistoryBooking.setVisibility(View.GONE);
+            mFragmentAccountBinding.viewHistoryBooking.setVisibility(View.GONE);
+        }
 
-        return mFragmentUserBinding.getRoot();
+        mFragmentAccountBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
+        mFragmentAccountBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
+
+        return mFragmentAccountBinding.getRoot();
     }
 
     private void onClickChangePassword() {

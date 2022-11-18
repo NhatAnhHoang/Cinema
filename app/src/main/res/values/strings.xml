@@ -2,7 +2,7 @@
     <string name="app_name">Cinema</string>
 
     <string name="nav_home">Trang chủ</string>
-    <string name="nav_booking">Đặt vé</string>
+    <string name="nav_booking">Lịch sử đặt vé</string>
     <string name="nav_user">Tài khoản</string>
     <string name="nav_food_drink">Đồ ăn/Đồ uống</string>
 

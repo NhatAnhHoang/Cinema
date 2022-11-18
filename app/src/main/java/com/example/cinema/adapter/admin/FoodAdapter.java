@@ -1,4 +1,4 @@
-package com.example.cinema.adapter;
+package com.example.cinema.adapter.admin;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
