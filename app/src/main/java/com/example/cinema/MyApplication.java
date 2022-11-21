@@ -30,4 +30,8 @@ public class MyApplication extends Application {
     public DatabaseReference getMovieDatabaseReference() {
         return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/movie");
     }
+
+    public DatabaseReference getBookingDatabaseReference() {
+        return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/booking");
+    }
 }

@@ -38,8 +38,29 @@
     <string name="currency">000 VNĐ</string>
     <string name="currency_movie">000 VNĐ / 1 vé</string>
     <string name="date_movie">Khởi chiếu:</string>
+    <string name="price_movie">Giá vé:</string>
+    <string name="room_movie">Phòng chiếu:</string>
+    <string name="time_movie">Giờ chiếu:</string>
     <string name="add_movie_title">Thêm phim mới</string>
     <string name="edit_movie_title">Chỉnh sửa thông tin phim</string>
+    <string name="movie_detail">Chi tiết phim </string>
+    <string name="all_room">Tất cả phòng </string>
+    <string name="all_time">Mọi khung giờ </string>
+    <string name="watch_trailer">Xem Trailer </string>
+    <string name="description_movie">Mô tả phim </string>
+    <string name="video_trailer">Video Trailer </string>
+    <string name="select_room">Chọn phòng chiếu phim</string>
+    <string name="select_time">Chọn giờ chiếu phim</string>
+    <string name="select_food">Chọn đồ ăn / đồ uống</string>
+    <string name="count_booking">Số lượng vé muốn mua</string>
+    <string name="hint_count_booking">Số lượng vé…</string>
+    <string name="booking">Đặt vé</string>
+    <string name="count">Số lượng</string>
+    <string name="confirm_booking_infor">Xác nhận thông tin đặt vé</string>
+    <string name="movie_name">Tên phim:</string>
+    <string name="count_booking_label">Số lượng vé:</string>
+    <string name="food_drink_label">Đố ăn/uống:</string>
+    <string name="total_amount_label">Tổng tiền:</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -80,4 +101,7 @@
     <string name="msg_date_movie_require">Vui lòng nhập ngày phim khởi chiếu</string>
     <string name="msg_image_movie_require">Vui lòng nhập link ảnh phim</string>
     <string name="msg_video_movie_require">Vui lòng nhập link video phim</string>
+    <string name="msg_booking_count_require">Vui lòng nhập số lượng vé muốn đặt</string>
+    <string name="msg_booking_count_invalid">Vui lòng nhập số lượng lớn hơn 0</string>
+    <string name="msg_booking_movie_success">Đặt vé xem phim thành công !!!</string>
 </resources>

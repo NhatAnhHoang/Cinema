@@ -15,7 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.cinema.MyApplication;
+import com.example.cinema.activity.MovieDetailActivity;
 import com.example.cinema.adapter.MovieAdapter;
+import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentHomeBinding;
 import com.example.cinema.model.Movie;
@@ -46,7 +48,7 @@ public class HomeFragment extends Fragment {
         mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
         mListMovies = new ArrayList<>();
         mMovieAdapter = new MovieAdapter(getActivity(), mListMovies, movie -> {
-
+            goToMovieDetail(movie);
         });
         mFragmentHomeBinding.rcvMovie.setAdapter(mMovieAdapter);
 
@@ -80,6 +82,12 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void goToMovieDetail(Movie movie) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
+        GlobalFuntion.startActivity(getActivity(), MovieDetailActivity.class, bundle);
     }
 
     private void searchMovie() {

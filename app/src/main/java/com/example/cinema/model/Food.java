@@ -6,6 +6,7 @@ public class Food implements Serializable {
     private long id;
     private String name;
     private int price;
+    private int count;
 
     public Food() {
     }
@@ -38,5 +39,13 @@ public class Food implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

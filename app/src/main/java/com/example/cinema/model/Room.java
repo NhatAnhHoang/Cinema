@@ -3,10 +3,12 @@ package com.example.cinema.model;
 public class Room {
     private int id;
     private String title;
+    public boolean isSelected;
 
-    public Room(int id, String title) {
+    public Room(int id, String title, boolean isSelected) {
         this.id = id;
         this.title = title;
+        this.isSelected = isSelected;
     }
 
     public int getId() {
@@ -23,5 +25,13 @@ public class Room {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
