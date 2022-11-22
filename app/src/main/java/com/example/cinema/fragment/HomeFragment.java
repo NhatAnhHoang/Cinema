@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment {
                                 movieEntity.setDate(movie.getDate());
                                 movieEntity.setImage(movie.getImage());
                                 movieEntity.setUrl(movie.getUrl());
+                                movieEntity.setSeats(movie.getSeats());
                                 break;
                             }
                         }

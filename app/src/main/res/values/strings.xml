@@ -59,8 +59,11 @@
     <string name="confirm_booking_infor">Xác nhận thông tin đặt vé</string>
     <string name="movie_name">Tên phim:</string>
     <string name="count_booking_label">Số lượng vé:</string>
+    <string name="count_seat_label">Ghế đã chọn:</string>
     <string name="food_drink_label">Đố ăn/uống:</string>
     <string name="total_amount_label">Tổng tiền:</string>
+    <string name="select_seat_label">Chọn ghế ngồi</string>
+    <string name="main_screen">Màn hình chính</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -104,4 +107,5 @@
     <string name="msg_booking_count_require">Vui lòng nhập số lượng vé muốn đặt</string>
     <string name="msg_booking_count_invalid">Vui lòng nhập số lượng lớn hơn 0</string>
     <string name="msg_booking_movie_success">Đặt vé xem phim thành công !!!</string>
+    <string name="msg_count_seat_not_match">Vui lòng đặt số lượng ghế trùng với số lượng vé muốn mua</string>
 </resources>

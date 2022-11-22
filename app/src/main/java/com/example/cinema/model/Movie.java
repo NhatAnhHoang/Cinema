@@ -1,6 +1,7 @@
 package com.example.cinema.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Movie implements Serializable {
 
@@ -11,11 +12,13 @@ public class Movie implements Serializable {
     private String date;
     private String image;
     private String url;
+    private List<Seat> seats;
 
     public Movie() {
     }
 
-    public Movie(long id, String name, String description, int price, String date, String image, String url) {
+    public Movie(long id, String name, String description, int price, String date,
+                 String image, String url, List<Seat> seats) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,6 +26,7 @@ public class Movie implements Serializable {
         this.date = date;
         this.image = image;
         this.url = url;
+        this.seats = seats;
     }
 
     public long getId() {
@@ -79,5 +83,13 @@ public class Movie implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }

@@ -28,37 +28,6 @@
         android:background="@color/colorPrimaryDark" />
 
     <LinearLayout
-        android:id="@+id/layout_history_booking"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/define_dimen_10"
-        android:paddingBottom="@dimen/define_dimen_10">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_history_booking" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history_booking"
-            android:layout_marginStart="@dimen/define_dimen_10"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_history_booking"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/define_dimen_5"
-        android:layout_marginBottom="@dimen/define_dimen_5"
-        android:background="@color/black_overlay" />
-
-    <LinearLayout
         android:id="@+id/layout_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

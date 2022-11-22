@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.cinema.listener.IGetDateListener;
 import com.example.cinema.model.Room;
+import com.example.cinema.model.Seat;
 import com.example.cinema.model.SlotTime;
 import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
@@ -93,6 +94,29 @@ public class GlobalFuntion {
         list.add(new SlotTime(10, "6PM - 7PM", false));
         list.add(new SlotTime(11, "7PM - 8PM", false));
         list.add(new SlotTime(12, "8PM - 9PM", false));
+        return list;
+    }
+
+    public static List<Seat> getListSeats() {
+        List<Seat> list = new ArrayList<>();
+        list.add(new Seat(1, "1", false));
+        list.add(new Seat(2, "2", false));
+        list.add(new Seat(3, "3", false));
+        list.add(new Seat(4, "4", false));
+        list.add(new Seat(5, "5", false));
+        list.add(new Seat(6, "6", false));
+        list.add(new Seat(7, "7", false));
+        list.add(new Seat(8, "8", false));
+        list.add(new Seat(9, "9", false));
+        list.add(new Seat(10, "10", false));
+        list.add(new Seat(11, "11", false));
+        list.add(new Seat(12, "12", false));
+        list.add(new Seat(13, "13", false));
+        list.add(new Seat(14, "14", false));
+        list.add(new Seat(15, "15", false));
+        list.add(new Seat(16, "16", false));
+        list.add(new Seat(17, "17", false));
+        list.add(new Seat(18, "18", false));
         return list;
     }
 

@@ -27,14 +27,6 @@ public class AccountFragment extends Fragment {
 
         mFragmentAccountBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
 
-        if (DataStoreManager.getUser().isAdmin()) {
-            mFragmentAccountBinding.layoutHistoryBooking.setVisibility(View.VISIBLE);
-            mFragmentAccountBinding.viewHistoryBooking.setVisibility(View.VISIBLE);
-        } else {
-            mFragmentAccountBinding.layoutHistoryBooking.setVisibility(View.GONE);
-            mFragmentAccountBinding.viewHistoryBooking.setVisibility(View.GONE);
-        }
-
         mFragmentAccountBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
         mFragmentAccountBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
 
