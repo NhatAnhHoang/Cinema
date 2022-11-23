@@ -12,13 +12,13 @@ public class Movie implements Serializable {
     private String date;
     private String image;
     private String url;
-    private List<Seat> seats;
+    private List<RoomFirebase> rooms;
 
     public Movie() {
     }
 
     public Movie(long id, String name, String description, int price, String date,
-                 String image, String url, List<Seat> seats) {
+                 String image, String url, List<RoomFirebase> rooms) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,7 +26,7 @@ public class Movie implements Serializable {
         this.date = date;
         this.image = image;
         this.url = url;
-        this.seats = seats;
+        this.rooms = rooms;
     }
 
     public long getId() {
@@ -85,11 +85,11 @@ public class Movie implements Serializable {
         this.url = url;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public List<RoomFirebase> getRooms() {
+        return rooms;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setRooms(List<RoomFirebase> rooms) {
+        this.rooms = rooms;
     }
 }

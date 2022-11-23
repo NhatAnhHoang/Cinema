@@ -104,6 +104,8 @@
     <string name="msg_date_movie_require">Vui lòng nhập ngày phim khởi chiếu</string>
     <string name="msg_image_movie_require">Vui lòng nhập link ảnh phim</string>
     <string name="msg_video_movie_require">Vui lòng nhập link video phim</string>
+    <string name="msg_select_room_require">Vui lòng chọn phòng chiếu phim</string>
+    <string name="msg_select_time_require">Vui lòng chọn giờ chiếu phim</string>
     <string name="msg_booking_count_require">Vui lòng nhập số lượng vé muốn đặt</string>
     <string name="msg_booking_count_invalid">Vui lòng nhập số lượng lớn hơn 0</string>
     <string name="msg_booking_movie_success">Đặt vé xem phim thành công !!!</string>

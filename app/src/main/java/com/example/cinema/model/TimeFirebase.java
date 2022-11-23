@@ -1,17 +1,21 @@
 package com.example.cinema.model;
 
-public class Room {
+import java.io.Serializable;
+import java.util.List;
+
+public class TimeFirebase implements Serializable {
+
     private int id;
     private String title;
-    public boolean isSelected;
+    private List<Seat> seats;
 
-    public Room() {
+    public TimeFirebase() {
     }
 
-    public Room(int id, String title, boolean isSelected) {
+    public TimeFirebase(int id, String title, List<Seat> seats) {
         this.id = id;
         this.title = title;
-        this.isSelected = isSelected;
+        this.seats = seats;
     }
 
     public int getId() {
@@ -30,11 +34,11 @@ public class Room {
         this.title = title;
     }
 
-    public boolean isSelected() {
-        return isSelected;
+    public List<Seat> getSeats() {
+        return seats;
     }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }

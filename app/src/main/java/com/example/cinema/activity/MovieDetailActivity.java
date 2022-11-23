@@ -37,9 +37,11 @@ import com.example.cinema.model.BookingHistory;
 import com.example.cinema.model.Food;
 import com.example.cinema.model.Movie;
 import com.example.cinema.model.Room;
+import com.example.cinema.model.RoomFirebase;
 import com.example.cinema.model.Seat;
 import com.example.cinema.model.SeatLocal;
 import com.example.cinema.model.SlotTime;
+import com.example.cinema.model.TimeFirebase;
 import com.example.cinema.util.StringUtil;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -139,8 +141,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
 
         showListRooms();
-        showListTimes();
-        showListSeats();
         initListFoodAndDrink();
 
         mActivityMovieDetailBinding.btnBooking.setOnClickListener(view -> onClickBookingMovie());
@@ -150,17 +150,20 @@ public class MovieDetailActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mActivityMovieDetailBinding.rcvRoom.setLayoutManager(gridLayoutManager);
 
-        mListRooms = GlobalFuntion.getListRooms();
+        mListRooms = getListRoomLocal();
         mRoomAdapter = new RoomAdapter(mListRooms, this::onClickSelectRoom);
         mActivityMovieDetailBinding.rcvRoom.setAdapter(mRoomAdapter);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private void onClickSelectRoom(Room room) {
-        for (int i = 0; i < mListRooms.size(); i++) {
-            mListRooms.get(i).setSelected(mListRooms.get(i).getId() == room.getId());
+    private List<Room> getListRoomLocal() {
+        List<Room> list = new ArrayList<>();
+        if (mMovie.getRooms() != null) {
+            for (RoomFirebase roomFirebase : mMovie.getRooms()) {
+                Room room = new Room(roomFirebase.getId(), roomFirebase.getTitle(), false);
+                list.add(room);
+            }
         }
-        mRoomAdapter.notifyDataSetChanged();
+        return list;
     }
 
     private String getTitleRoomSelected() {
@@ -173,13 +176,51 @@ public class MovieDetailActivity extends AppCompatActivity {
         return mTitleRoomSelected;
     }
 
-    private void showListTimes() {
+    @SuppressLint("NotifyDataSetChanged")
+    private void onClickSelectRoom(Room room) {
+        for (int i = 0; i < mListRooms.size(); i++) {
+            mListRooms.get(i).setSelected(mListRooms.get(i).getId() == room.getId());
+        }
+        mRoomAdapter.notifyDataSetChanged();
+
+        showListTimes(room.getId());
+    }
+
+    private RoomFirebase getRoomFirebaseFromId(int roomId) {
+        RoomFirebase roomFirebase = new RoomFirebase();
+        if (mMovie.getRooms() != null) {
+            for (RoomFirebase roomFirebaseEntity : mMovie.getRooms()) {
+                if (roomFirebaseEntity.getId() == roomId) {
+                    roomFirebase = roomFirebaseEntity;
+                    break;
+                }
+            }
+        }
+        return roomFirebase;
+    }
+
+    private void showListTimes(int roomId) {
+        mActivityMovieDetailBinding.layoutSelecteTime.setVisibility(View.VISIBLE);
+        mActivityMovieDetailBinding.layoutSelecteSeat.setVisibility(View.GONE);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mActivityMovieDetailBinding.rcvTime.setLayoutManager(gridLayoutManager);
 
-        mListTimes = GlobalFuntion.getListSlotTimes();
+        mListTimes = getListTimeLocal(roomId);
         mTimeAdapter = new TimeAdapter(mListTimes, this::onClickSelectTime);
         mActivityMovieDetailBinding.rcvTime.setAdapter(mTimeAdapter);
+    }
+
+    private List<SlotTime> getListTimeLocal(int roomId) {
+        List<SlotTime> list = new ArrayList<>();
+        RoomFirebase roomFirebase = getRoomFirebaseFromId(roomId);
+        if (roomFirebase.getTimes() != null) {
+            for (TimeFirebase timeFirebase : roomFirebase.getTimes()) {
+                SlotTime slotTime = new SlotTime(timeFirebase.getId(), timeFirebase.getTitle(),
+                        false, roomId);
+                list.add(slotTime);
+            }
+        }
+        return list;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -188,6 +229,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             mListTimes.get(i).setSelected(mListTimes.get(i).getId() == time.getId());
         }
         mTimeAdapter.notifyDataSetChanged();
+
+        showListSeats(time);
     }
 
     private String getTitleTimeSelected() {
@@ -200,31 +243,52 @@ public class MovieDetailActivity extends AppCompatActivity {
         return mTitleTimeSelected;
     }
 
-    private void showListSeats() {
+    private void showListSeats(SlotTime time) {
+        mActivityMovieDetailBinding.layoutSelecteSeat.setVisibility(View.VISIBLE);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         mActivityMovieDetailBinding.rcvSeat.setLayoutManager(gridLayoutManager);
 
-        mListSeats = getListSeatLocal();
+        mListSeats = getListSeatLocal(time);
         mSeatAdapter = new SeatAdapter(mListSeats, this::onClickItemSeat);
         mActivityMovieDetailBinding.rcvSeat.setAdapter(mSeatAdapter);
     }
 
-    private List<SeatLocal> getListSeatLocal() {
+    private List<SeatLocal> getListSeatLocal(SlotTime time) {
+        RoomFirebase roomFirebase = getRoomFirebaseFromId(time.getRoomId());
+        TimeFirebase timeFirebase = getTimeFirebaseFromId(roomFirebase, time.getId());
+
         List<SeatLocal> list = new ArrayList<>();
-        if (mMovie.getSeats() != null) {
-            for (Seat seat : mMovie.getSeats()) {
-                SeatLocal seatLocal = new SeatLocal(seat.getId(), seat.getTitle(), seat.isSelected());
+        if (timeFirebase.getSeats() != null) {
+            for (Seat seat : timeFirebase.getSeats()) {
+                SeatLocal seatLocal = new SeatLocal(seat.getId(), seat.getTitle(),
+                        seat.isSelected(), time.getRoomId(), time.getId());
                 list.add(seatLocal);
             }
         }
         return list;
     }
 
-    private Seat getSeatFromId(int id) {
+    private TimeFirebase getTimeFirebaseFromId(RoomFirebase roomFirebase, int timeId) {
+        TimeFirebase timeFirebase = new TimeFirebase();
+        if (roomFirebase.getTimes() != null) {
+            for (TimeFirebase timeFirebaseEntity : roomFirebase.getTimes()) {
+                if (timeFirebaseEntity.getId() == timeId) {
+                    timeFirebase = timeFirebaseEntity;
+                    break;
+                }
+            }
+        }
+        return timeFirebase;
+    }
+
+    private Seat getSeatFirebaseFromId(int roomId, int timeId, int seatId) {
+        RoomFirebase roomFirebase = getRoomFirebaseFromId(roomId);
+        TimeFirebase timeFirebase = getTimeFirebaseFromId(roomFirebase, timeId);
+
         Seat seatResult = new Seat();
-        if (mMovie.getSeats() != null) {
-            for (Seat seat : mMovie.getSeats()) {
-                if (seat.getId() == id) {
+        if (timeFirebase.getSeats() != null) {
+            for (Seat seat : timeFirebase.getSeats()) {
+                if (seat.getId() == seatId) {
                     seatResult = seat;
                     break;
                 }
@@ -329,6 +393,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (mMovie == null) {
             return;
         }
+        if (StringUtil.isEmpty(getTitleRoomSelected())) {
+            Toast.makeText(this, getString(R.string.msg_select_room_require), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (StringUtil.isEmpty(getTitleTimeSelected())) {
+            Toast.makeText(this, getString(R.string.msg_select_time_require), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String strCountBooking = mActivityMovieDetailBinding.edtCountBooking.getText().toString().trim();
         if (StringUtil.isEmpty(strCountBooking)) {
             Toast.makeText(this, getString(R.string.msg_booking_count_require), Toast.LENGTH_SHORT).show();
@@ -352,7 +426,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void setListSeatUpdate() {
         for (SeatLocal seatChecked : getListSeatChecked()) {
-            getSeatFromId(seatChecked.getId()).setSelected(true);
+            getSeatFirebaseFromId(seatChecked.getRoomId(),
+                    seatChecked.getTimeId(), seatChecked.getId()).setSelected(true);
         }
     }
 

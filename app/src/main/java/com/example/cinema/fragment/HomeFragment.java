@@ -47,9 +47,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
         mListMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(getActivity(), mListMovies, movie -> {
-            goToMovieDetail(movie);
-        });
+        mMovieAdapter = new MovieAdapter(getActivity(), mListMovies, this::goToMovieDetail);
         mFragmentHomeBinding.rcvMovie.setAdapter(mMovieAdapter);
 
         mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchMovie());
@@ -137,7 +135,7 @@ public class HomeFragment extends Fragment {
                                 movieEntity.setDate(movie.getDate());
                                 movieEntity.setImage(movie.getImage());
                                 movieEntity.setUrl(movie.getUrl());
-                                movieEntity.setSeats(movie.getSeats());
+                                movieEntity.setRooms(movie.getRooms());
                                 break;
                             }
                         }

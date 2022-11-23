@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.cinema.listener.IGetDateListener;
-import com.example.cinema.model.Room;
+import com.example.cinema.model.RoomFirebase;
 import com.example.cinema.model.Seat;
-import com.example.cinema.model.SlotTime;
+import com.example.cinema.model.TimeFirebase;
 import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
 
@@ -63,37 +63,25 @@ public class GlobalFuntion {
         }
     }
 
-    public static List<Room> getListRooms() {
-        List<Room> list = new ArrayList<>();
-        list.add(new Room(1, "Phòng 1", true));
-        list.add(new Room(2, "Phòng 2", false));
-        list.add(new Room(3, "Phòng 3", false));
-        list.add(new Room(4, "Phòng 4", false));
-        list.add(new Room(5, "Phòng 5", false));
-        list.add(new Room(6, "Phòng 6", false));
-        list.add(new Room(7, "Phòng 7", false));
-        list.add(new Room(8, "Phòng 8", false));
-        list.add(new Room(9, "Phòng 9", false));
-        list.add(new Room(10, "Phòng 10", false));
-        list.add(new Room(11, "Phòng 11", false));
-        list.add(new Room(12, "Phòng 12", false));
+    public static List<RoomFirebase> getListRooms() {
+        List<RoomFirebase> list = new ArrayList<>();
+        list.add(new RoomFirebase(1, "Phòng 1", getListTimes()));
+        list.add(new RoomFirebase(2, "Phòng 2", getListTimes()));
+        list.add(new RoomFirebase(3, "Phòng 3", getListTimes()));
+        list.add(new RoomFirebase(4, "Phòng 4", getListTimes()));
+        list.add(new RoomFirebase(5, "Phòng 5", getListTimes()));
+        list.add(new RoomFirebase(6, "Phòng 6", getListTimes()));
         return list;
     }
 
-    public static List<SlotTime> getListSlotTimes() {
-        List<SlotTime> list = new ArrayList<>();
-        list.add(new SlotTime(1, "7AM - 8AM", true));
-        list.add(new SlotTime(2, "8AM - 9AM", false));
-        list.add(new SlotTime(3, "9AM - 10AM", false));
-        list.add(new SlotTime(4, "10AM - 11AM", false));
-        list.add(new SlotTime(5, "1PM - 2PM", false));
-        list.add(new SlotTime(6, "2PM - 3PM", false));
-        list.add(new SlotTime(7, "3PM - 4PM", false));
-        list.add(new SlotTime(8, "4PM - 5PM", false));
-        list.add(new SlotTime(9, "5PM - 6PM", false));
-        list.add(new SlotTime(10, "6PM - 7PM", false));
-        list.add(new SlotTime(11, "7PM - 8PM", false));
-        list.add(new SlotTime(12, "8PM - 9PM", false));
+    public static List<TimeFirebase> getListTimes() {
+        List<TimeFirebase> list = new ArrayList<>();
+        list.add(new TimeFirebase(1, "7AM - 8AM", getListSeats()));
+        list.add(new TimeFirebase(2, "8AM - 9AM", getListSeats()));
+        list.add(new TimeFirebase(3, "9AM - 10AM", getListSeats()));
+        list.add(new TimeFirebase(4, "10AM - 11AM", getListSeats()));
+        list.add(new TimeFirebase(5, "1PM - 2PM", getListSeats()));
+        list.add(new TimeFirebase(6, "2PM - 3PM", getListSeats()));
         return list;
     }
 

@@ -119,7 +119,7 @@ public class AddMovieActivity extends BaseActivity {
         showProgressDialog(true);
         long movieId = System.currentTimeMillis();
         Movie movie = new Movie(movieId, strName, strDescription, Integer.parseInt(strPrice),
-                strDate, strImage, strVideo, GlobalFuntion.getListSeats());
+                strDate, strImage, strVideo, GlobalFuntion.getListRooms());
         MyApplication.get(this).getMovieDatabaseReference().child(String.valueOf(movieId)).setValue(movie, (error, ref) -> {
             showProgressDialog(false);
             mActivityAddMovieBinding.edtName.setText("");

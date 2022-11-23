@@ -8,14 +8,18 @@ public class SeatLocal implements Serializable {
     private String title;
     private boolean selected;
     private boolean checked;
+    private int roomId;
+    private int timeId;
 
     public SeatLocal() {
     }
 
-    public SeatLocal(int id, String title, boolean selected) {
+    public SeatLocal(int id, String title, boolean selected, int roomId, int timeId) {
         this.id = id;
         this.title = title;
         this.selected = selected;
+        this.roomId = roomId;
+        this.timeId = timeId;
     }
 
     public int getId() {
@@ -48,5 +52,21 @@ public class SeatLocal implements Serializable {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public int getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(int timeId) {
+        this.timeId = timeId;
     }
 }
