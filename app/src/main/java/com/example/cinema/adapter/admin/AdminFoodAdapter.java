@@ -12,7 +12,7 @@ import com.example.cinema.model.Food;
 
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
+public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.FoodViewHolder> {
 
     private final List<Food> mListFood;
     private final IManagerFoodListener iManagerFoodListener;
@@ -23,7 +23,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         void deleteFood(Food food);
     }
 
-    public FoodAdapter(List<Food> list, IManagerFoodListener listener) {
+    public AdminFoodAdapter(List<Food> list, IManagerFoodListener listener) {
         this.mListFood = list;
         this.iManagerFoodListener = listener;
     }

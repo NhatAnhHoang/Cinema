@@ -1,17 +1,13 @@
 package com.example.cinema.activity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.cinema.R;
 import com.example.cinema.adapter.MyViewPagerAdapter;
 import com.example.cinema.databinding.ActivityMainBinding;
-import com.example.cinema.prefs.DataStoreManager;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends BaseActivity {
 
@@ -23,12 +19,6 @@ public class MainActivity extends BaseActivity {
 
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(this);
         activityMainBinding.viewpager2.setAdapter(myViewPagerAdapter);
-
-        if (DataStoreManager.getUser().isAdmin()) {
-            activityMainBinding.bottomNavigation.getMenu().findItem(R.id.nav_booking).setTitle(getString(R.string.nav_food_drink));
-        } else {
-            activityMainBinding.bottomNavigation.getMenu().findItem(R.id.nav_booking).setTitle(getString(R.string.nav_booking));
-        }
 
         activityMainBinding.viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -42,11 +32,7 @@ public class MainActivity extends BaseActivity {
 
                     case 1:
                         activityMainBinding.bottomNavigation.getMenu().findItem(R.id.nav_booking).setChecked(true);
-                        if (DataStoreManager.getUser().isAdmin()) {
-                            activityMainBinding.tvTitle.setText(getString(R.string.nav_food_drink));
-                        } else {
-                            activityMainBinding.tvTitle.setText(getString(R.string.nav_booking));
-                        }
+                        activityMainBinding.tvTitle.setText(getString(R.string.nav_booking));
                         break;
 
                     case 2:
@@ -57,26 +43,19 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        activityMainBinding.bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.nav_home) {
-                    activityMainBinding.viewpager2.setCurrentItem(0);
-                    activityMainBinding.tvTitle.setText(getString(R.string.nav_home));
-                } else if (id == R.id.nav_booking) {
-                    activityMainBinding.viewpager2.setCurrentItem(1);
-                    if (DataStoreManager.getUser().isAdmin()) {
-                        activityMainBinding.tvTitle.setText(getString(R.string.nav_food_drink));
-                    } else {
-                        activityMainBinding.tvTitle.setText(getString(R.string.nav_booking));
-                    }
-                } else if (id == R.id.nav_user) {
-                    activityMainBinding.viewpager2.setCurrentItem(2);
-                    activityMainBinding.tvTitle.setText(getString(R.string.nav_user));
-                }
-                return true;
+        activityMainBinding.bottomNavigation.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                activityMainBinding.viewpager2.setCurrentItem(0);
+                activityMainBinding.tvTitle.setText(getString(R.string.nav_home));
+            } else if (id == R.id.nav_booking) {
+                activityMainBinding.viewpager2.setCurrentItem(1);
+                activityMainBinding.tvTitle.setText(getString(R.string.nav_booking));
+            } else if (id == R.id.nav_user) {
+                activityMainBinding.viewpager2.setCurrentItem(2);
+                activityMainBinding.tvTitle.setText(getString(R.string.nav_user));
             }
+            return true;
         });
     }
 

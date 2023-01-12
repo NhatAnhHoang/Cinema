@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
-import com.example.cinema.activity.AddFoodActivity;
-import com.example.cinema.adapter.admin.FoodAdapter;
+import com.example.cinema.activity.admin.AddFoodActivity;
+import com.example.cinema.adapter.admin.AdminFoodAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
-import com.example.cinema.databinding.FragmentFoodBinding;
+import com.example.cinema.databinding.FragmentAdminFoodBinding;
 import com.example.cinema.model.Food;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,19 +28,19 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodFragment extends Fragment {
+public class AdminFoodFragment extends Fragment {
 
-    private FragmentFoodBinding mFragmentFoodBinding;
+    private FragmentAdminFoodBinding mFragmentAdminFoodBinding;
     private List<Food> mListFood;
-    private FoodAdapter mFoodAdapter;
+    private AdminFoodAdapter mAdminFoodAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragmentFoodBinding = FragmentFoodBinding.inflate(inflater, container, false);
+        mFragmentAdminFoodBinding = FragmentAdminFoodBinding.inflate(inflater, container, false);
         initView();
         getListFoods();
-        return mFragmentFoodBinding.getRoot();
+        return mFragmentAdminFoodBinding.getRoot();
     }
 
     private void initView() {
@@ -48,10 +48,10 @@ public class FoodFragment extends Fragment {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentFoodBinding.rcvFood.setLayoutManager(linearLayoutManager);
+        mFragmentAdminFoodBinding.rcvFood.setLayoutManager(linearLayoutManager);
 
         mListFood = new ArrayList<>();
-        mFoodAdapter = new FoodAdapter(mListFood, new FoodAdapter.IManagerFoodListener() {
+        mAdminFoodAdapter = new AdminFoodAdapter(mListFood, new AdminFoodAdapter.IManagerFoodListener() {
             @Override
             public void editFood(Food food) {
                 onClickEditFood(food);
@@ -62,9 +62,9 @@ public class FoodFragment extends Fragment {
                 deleteFoodItem(food);
             }
         });
-        mFragmentFoodBinding.rcvFood.setAdapter(mFoodAdapter);
+        mFragmentAdminFoodBinding.rcvFood.setAdapter(mAdminFoodAdapter);
 
-        mFragmentFoodBinding.btnAddFood.setOnClickListener(v -> onClickAddFood());
+        mFragmentAdminFoodBinding.btnAddFood.setOnClickListener(v -> onClickAddFood());
     }
 
     private void onClickAddFood() {
@@ -104,18 +104,18 @@ public class FoodFragment extends Fragment {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                         Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mFoodAdapter == null) {
+                        if (food == null || mListFood == null || mAdminFoodAdapter == null) {
                             return;
                         }
                         mListFood.add(0, food);
-                        mFoodAdapter.notifyDataSetChanged();
+                        mAdminFoodAdapter.notifyDataSetChanged();
                     }
 
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                         Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mListFood.isEmpty() || mFoodAdapter == null) {
+                        if (food == null || mListFood == null || mListFood.isEmpty() || mAdminFoodAdapter == null) {
                             return;
                         }
                         for (Food foodEntity : mListFood) {
@@ -125,14 +125,14 @@ public class FoodFragment extends Fragment {
                                 break;
                             }
                         }
-                        mFoodAdapter.notifyDataSetChanged();
+                        mAdminFoodAdapter.notifyDataSetChanged();
                     }
 
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                         Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mListFood.isEmpty() || mFoodAdapter == null) {
+                        if (food == null || mListFood == null || mListFood.isEmpty() || mAdminFoodAdapter == null) {
                             return;
                         }
                         for (Food foodObject : mListFood) {
@@ -141,7 +141,7 @@ public class FoodFragment extends Fragment {
                                 break;
                             }
                         }
-                        mFoodAdapter.notifyDataSetChanged();
+                        mAdminFoodAdapter.notifyDataSetChanged();
                     }
 
                     @Override

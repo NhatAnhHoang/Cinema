@@ -4,7 +4,13 @@
     <string name="nav_home">Trang chủ</string>
     <string name="nav_booking">Lịch sử đặt vé</string>
     <string name="nav_user">Tài khoản</string>
-    <string name="nav_food_drink">Đồ ăn/Đồ uống</string>
+
+    <!--Admin-->
+    <string name="nav_admin_category">Thể loại</string>
+    <string name="nav_admin_food_drink">Đồ ăn/uống</string>
+    <string name="nav_admin_movie">Phim</string>
+    <string name="nav_admin_booking">Lịch sử</string>
+    <string name="nav_admin_manage">Quản lý</string>
 
     <string name="hint_search_movie">Tên phim…</string>
     <string name="hint_email">Email…</string>
@@ -30,6 +36,7 @@
     <string name="sign_in">Đăng Nhập</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="change_password">Đổi mật khẩu</string>
+    <string name="report">Báo cáo doanh thu</string>
     <string name="sign_out">Đăng xuất</string>
     <string name="history_booking">Lịch sử đặt vé</string>
     <string name="reset_password">Gửi lại mật khẩu</string>

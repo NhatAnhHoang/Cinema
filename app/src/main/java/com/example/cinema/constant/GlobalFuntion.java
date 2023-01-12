@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import com.example.cinema.activity.MainActivity;
+import com.example.cinema.activity.admin.AdminMainActivity;
 import com.example.cinema.listener.IGetDateListener;
 import com.example.cinema.model.RoomFirebase;
 import com.example.cinema.model.Seat;
@@ -54,12 +55,11 @@ public class GlobalFuntion {
         }
     }
 
-    public static void hideSoftKeyboard(Activity activity, TextView textView) {
-        try {
-            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
+    public static void gotoMainActivity(Context context) {
+        if (DataStoreManager.getUser().isAdmin()) {
+            GlobalFuntion.startActivity(context, AdminMainActivity.class);
+        } else {
+            GlobalFuntion.startActivity(context, MainActivity.class);
         }
     }
 
@@ -122,7 +122,7 @@ public class GlobalFuntion {
 
     public static String getStringEmailUser() {
         return DataStoreManager.getUser().getEmail()
-                .replace("@","aa")
+                .replace("@", "aa")
                 .replace(".", "dot");
     }
 }

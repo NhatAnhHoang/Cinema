@@ -1,10 +1,11 @@
-package com.example.cinema.activity;
+package com.example.cinema.activity.admin;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
+import com.example.cinema.activity.BaseActivity;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.ActivityAddMovieBinding;

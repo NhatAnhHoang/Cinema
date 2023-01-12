@@ -10,15 +10,11 @@ import com.google.gson.Gson;
 
 public class DataStoreManager {
 
-    // public static final String PREF_IS_ADMIN = "PREF_IS_ADMIN";
     public static final String PREF_USER_INFOR = "PREF_USER_INFOR";
 
     private static DataStoreManager instance;
     private MySharedPreferences sharedPreferences;
 
-    /**
-     * Call when start application
-     */
     public static void init(Context context) {
         instance = new DataStoreManager();
         instance.sharedPreferences = new MySharedPreferences(context);
@@ -47,12 +43,4 @@ public class DataStoreManager {
         }
         return new User();
     }
-
-    /*public static void setIsAdmin(boolean isAdmin) {
-        DataStoreManager.getInstance().sharedPreferences.putBooleanValue(PREF_IS_ADMIN, isAdmin);
-    }
-
-    public static boolean getIsAdmin() {
-        return DataStoreManager.getInstance().sharedPreferences.getBooleanValue(PREF_IS_ADMIN);
-    }*/
 }

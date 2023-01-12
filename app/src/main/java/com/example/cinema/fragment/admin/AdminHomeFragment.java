@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
-import com.example.cinema.activity.AddMovieActivity;
+import com.example.cinema.activity.admin.AddMovieActivity;
 import com.example.cinema.adapter.admin.AdminMovieAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
-import com.example.cinema.databinding.FragmentHomeAdminBinding;
+import com.example.cinema.databinding.FragmentAdminHomeBinding;
 import com.example.cinema.model.Movie;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,17 +30,17 @@ import java.util.List;
 
 public class AdminHomeFragment extends Fragment {
 
-    private FragmentHomeAdminBinding mFragmentHomeAdminBinding;
+    private FragmentAdminHomeBinding mFragmentAdminHomeBinding;
     private List<Movie> mListMovies;
     private AdminMovieAdapter mAdminMovieAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragmentHomeAdminBinding = FragmentHomeAdminBinding.inflate(inflater, container, false);
+        mFragmentAdminHomeBinding = FragmentAdminHomeBinding.inflate(inflater, container, false);
         initView();
         getListMovies();
-        return mFragmentHomeAdminBinding.getRoot();
+        return mFragmentAdminHomeBinding.getRoot();
     }
 
     private void initView() {
@@ -48,7 +48,7 @@ public class AdminHomeFragment extends Fragment {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentHomeAdminBinding.rcvMovie.setLayoutManager(linearLayoutManager);
+        mFragmentAdminHomeBinding.rcvMovie.setLayoutManager(linearLayoutManager);
 
         mListMovies = new ArrayList<>();
         mAdminMovieAdapter = new AdminMovieAdapter(getActivity(), mListMovies, new AdminMovieAdapter.IManagerMovieListener() {
@@ -67,9 +67,9 @@ public class AdminHomeFragment extends Fragment {
 
             }
         });
-        mFragmentHomeAdminBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
+        mFragmentAdminHomeBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
 
-        mFragmentHomeAdminBinding.btnAddMovie.setOnClickListener(v -> onClickAddMovie());
+        mFragmentAdminHomeBinding.btnAddMovie.setOnClickListener(v -> onClickAddMovie());
     }
 
     private void onClickAddMovie() {

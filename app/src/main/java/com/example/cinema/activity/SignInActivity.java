@@ -1,5 +1,7 @@
 package com.example.cinema.activity;
 
+import static com.example.cinema.constant.ConstantKey.ADMIN_EMAIL_FORMAT;
+
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,8 +13,6 @@ import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static com.example.cinema.constant.ConstantKey.ADMIN_EMAIL_FORMAT;
 
 public class SignInActivity extends BaseActivity {
 
@@ -78,7 +78,7 @@ public class SignInActivity extends BaseActivity {
                                 userObject.setAdmin(true);
                             }
                             DataStoreManager.setUser(userObject);
-                            GlobalFuntion.startActivity(SignInActivity.this, MainActivity.class);
+                            GlobalFuntion.gotoMainActivity(this);
                             finishAffinity();
                         }
                     } else {

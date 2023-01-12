@@ -28,6 +28,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".activity.admin.AdminMainActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activity.SignInActivity"
             android:exported="false" />
 
@@ -44,11 +48,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".activity.AddFoodActivity"
+            android:name=".activity.admin.AddFoodActivity"
             android:exported="false" />
 
         <activity
-            android:name=".activity.AddMovieActivity"
+            android:name=".activity.admin.AddMovieActivity"
             android:exported="false" />
 
         <activity
