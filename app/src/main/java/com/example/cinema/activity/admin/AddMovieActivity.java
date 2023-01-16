@@ -202,7 +202,7 @@ public class AddMovieActivity extends BaseActivity {
         long movieId = System.currentTimeMillis();
         Movie movie = new Movie(movieId, strName, strDescription, Integer.parseInt(strPrice),
                 strDate, strImage, strImageBanner, strVideo, GlobalFuntion.getListRooms(),
-                mCategorySelected.getId(), mCategorySelected.getName());
+                mCategorySelected.getId(), mCategorySelected.getName(), 0);
         MyApplication.get(this).getMovieDatabaseReference().child(String.valueOf(movieId)).setValue(movie, (error, ref) -> {
             showProgressDialog(false);
             mActivityAddMovieBinding.spnCategory.setSelection(0);

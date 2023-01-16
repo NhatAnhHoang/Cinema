@@ -22,6 +22,7 @@ public class AdminMainActivity extends BaseActivity {
 
         AdminViewPagerAdapter adminViewPagerAdapter = new AdminViewPagerAdapter(this);
         activityAdminMainBinding.viewpager2.setAdapter(adminViewPagerAdapter);
+        activityAdminMainBinding.viewpager2.setUserInputEnabled(false);
 
         activityAdminMainBinding.viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

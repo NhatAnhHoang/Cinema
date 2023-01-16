@@ -1,85 +1,70 @@
 package com.example.cinema.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.activity.MovieDetailActivity;
+import com.example.cinema.adapter.BannerMovieAdapter;
+import com.example.cinema.adapter.CategoryAdapter;
 import com.example.cinema.adapter.MovieAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentHomeBinding;
+import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    private static final int MAX_BANNER_SIZE = 3;
     private FragmentHomeBinding mFragmentHomeBinding;
+
     private List<Movie> mListMovies;
-    private MovieAdapter mMovieAdapter;
+    private List<Movie> mListMoviesBanner;
+    private List<Category> mListCategory;
+
+    private final Handler mHandlerBanner = new Handler(Looper.getMainLooper());
+    private final Runnable mRunnableBanner = new Runnable() {
+        @Override
+        public void run() {
+            if (mListMoviesBanner == null || mListMoviesBanner.isEmpty()) {
+                return;
+            }
+            if (mFragmentHomeBinding.viewPager2.getCurrentItem() == mListMoviesBanner.size() - 1) {
+                mFragmentHomeBinding.viewPager2.setCurrentItem(0);
+                return;
+            }
+            mFragmentHomeBinding.viewPager2.setCurrentItem(mFragmentHomeBinding.viewPager2.getCurrentItem() + 1);
+        }
+    };
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        initView();
-        getListMovies("");
+
+        getListMovies();
+        getListCategory();
+
         return mFragmentHomeBinding.getRoot();
-    }
-
-    private void initView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-        mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
-        mListMovies = new ArrayList<>();
-        mMovieAdapter = new MovieAdapter(getActivity(), mListMovies, this::goToMovieDetail);
-        mFragmentHomeBinding.rcvMovie.setAdapter(mMovieAdapter);
-
-        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchMovie());
-
-        mFragmentHomeBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchMovie();
-                return true;
-            }
-            return false;
-        });
-
-        mFragmentHomeBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Do nothing
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String strKey = s.toString().trim();
-                if (strKey.equals("") || strKey.length() == 0) {
-                    mListMovies.clear();
-                    getListMovies("");
-                }
-            }
-        });
     }
 
     private void goToMovieDetail(Movie movie) {
@@ -88,91 +73,108 @@ public class HomeFragment extends Fragment {
         GlobalFuntion.startActivity(getActivity(), MovieDetailActivity.class, bundle);
     }
 
-    private void searchMovie() {
-        String strKey = mFragmentHomeBinding.edtSearchName.getText().toString().trim();
-        mListMovies.clear();
-        getListMovies(strKey);
-        GlobalFuntion.hideSoftKeyboard(getActivity());
-    }
-
-    private void getListMovies(String key) {
+    private void getListMovies() {
         if (getActivity() == null) {
             return;
         }
-        MyApplication.get(getActivity()).getMovieDatabaseReference()
-                .addChildEventListener(new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mMovieAdapter == null) {
-                            return;
-                        }
-
-                        if (key == null || key.equals("")) {
-                            mListMovies.add(0, movie);
-                        } else {
-                            if (movie.getName().toLowerCase().trim().contains(key.toLowerCase().trim())) {
-                                mListMovies.add(0, movie);
-                            }
-                        }
-
-                        mMovieAdapter.notifyDataSetChanged();
+        MyApplication.get(getActivity()).getMovieDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListMovies != null) {
+                    mListMovies.clear();
+                } else {
+                    mListMovies = new ArrayList<>();
+                }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Movie movie = dataSnapshot.getValue(Movie.class);
+                    if (movie != null) {
+                        mListMovies.add(0, movie);
                     }
+                }
+                displayListBannerMovies();
+                displayListAllMovies();
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mMovieAdapter == null) {
-                            return;
-                        }
-                        for (Movie movieEntity : mListMovies) {
-                            if (movie.getId() == movieEntity.getId()) {
-                                movieEntity.setName(movie.getName());
-                                movieEntity.setDescription(movie.getDescription());
-                                movieEntity.setPrice(movie.getPrice());
-                                movieEntity.setDate(movie.getDate());
-                                movieEntity.setImage(movie.getImage());
-                                movieEntity.setUrl(movie.getUrl());
-                                movieEntity.setRooms(movie.getRooms());
-                                break;
-                            }
-                        }
-                        mMovieAdapter.notifyDataSetChanged();
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mMovieAdapter == null) {
-                            return;
-                        }
-                        for (Movie movieDelete : mListMovies) {
-                            if (movie.getId() == movieDelete.getId()) {
-                                mListMovies.remove(movieDelete);
-                                break;
-                            }
-                        }
-                        mMovieAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mMovieAdapter != null) {
-            mMovieAdapter.release();
+    private void displayListBannerMovies() {
+        BannerMovieAdapter bannerMovieAdapter = new BannerMovieAdapter(getListBannerMovies(),
+                this::goToMovieDetail);
+        mFragmentHomeBinding.viewPager2.setAdapter(bannerMovieAdapter);
+        mFragmentHomeBinding.indicator3.setViewPager(mFragmentHomeBinding.viewPager2);
+
+        mFragmentHomeBinding.viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mHandlerBanner.removeCallbacks(mRunnableBanner);
+                mHandlerBanner.postDelayed(mRunnableBanner, 3000);
+            }
+        });
+    }
+
+    private List<Movie> getListBannerMovies() {
+        if (mListMoviesBanner != null) {
+            mListMoviesBanner.clear();
+        } else {
+            mListMoviesBanner = new ArrayList<>();
         }
+        if (mListMovies == null || mListMovies.isEmpty()) {
+            return mListMoviesBanner;
+        }
+        List<Movie> listClone = new ArrayList<>(mListMovies);
+        Collections.sort(listClone, (movie1, movie2) -> movie2.getBooked() - movie1.getBooked());
+
+        for (Movie movie : listClone) {
+            if (mListMoviesBanner.size() < MAX_BANNER_SIZE) {
+                mListMoviesBanner.add(movie);
+            }
+        }
+        return mListMoviesBanner;
+    }
+
+    private void displayListAllMovies() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
+        MovieAdapter movieAdapter = new MovieAdapter(mListMovies, this::goToMovieDetail);
+        mFragmentHomeBinding.rcvMovie.setAdapter(movieAdapter);
+    }
+
+    private void getListCategory() {
+        if (getActivity() == null) {
+            return;
+        }
+        MyApplication.get(getActivity()).getCategoryDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListCategory != null) {
+                    mListCategory.clear();
+                } else {
+                    mListCategory = new ArrayList<>();
+                }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Category category = dataSnapshot.getValue(Category.class);
+                    if (category != null) {
+                        mListCategory.add(0, category);
+                    }
+                }
+                displayListCategories();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void displayListCategories() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mFragmentHomeBinding.rcvCategory.setLayoutManager(linearLayoutManager);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(mListCategory, category -> {
+
+        });
+        mFragmentHomeBinding.rcvCategory.setAdapter(categoryAdapter);
     }
 }

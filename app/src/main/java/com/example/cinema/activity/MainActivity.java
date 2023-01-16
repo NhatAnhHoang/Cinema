@@ -19,6 +19,7 @@ public class MainActivity extends BaseActivity {
 
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(this);
         activityMainBinding.viewpager2.setAdapter(myViewPagerAdapter);
+        activityMainBinding.viewpager2.setUserInputEnabled(false);
 
         activityMainBinding.viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

@@ -1,6 +1,5 @@
 package com.example.cinema.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,7 +14,6 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private Context mContext;
     private final List<Movie> mListMovies;
     private final IManagerMovieListener iManagerMovieListener;
 
@@ -23,16 +21,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         void clickItemMovie(Movie movie);
     }
 
-    public MovieAdapter(Context mContext, List<Movie> mListMovies, IManagerMovieListener iManagerMovieListener) {
-        this.mContext = mContext;
+    public MovieAdapter(List<Movie> mListMovies, IManagerMovieListener iManagerMovieListener) {
         this.mListMovies = mListMovies;
         this.iManagerMovieListener = iManagerMovieListener;
-    }
-
-    public void release() {
-        if (mContext != null) {
-            mContext = null;
-        }
     }
 
     @NonNull
@@ -50,6 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
         GlideUtils.loadUrl(movie.getImage(), holder.mItemMovieBinding.imgMovie);
         holder.mItemMovieBinding.tvName.setText(movie.getName());
+        holder.mItemMovieBinding.tvBooked.setText(String.valueOf(movie.getBooked()));
 
         holder.mItemMovieBinding.layoutItem.setOnClickListener(v -> iManagerMovieListener.clickItemMovie(movie));
     }

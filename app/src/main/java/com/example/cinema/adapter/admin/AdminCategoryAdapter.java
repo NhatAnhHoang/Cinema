@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cinema.databinding.ItemCategoryBinding;
+import com.example.cinema.databinding.ItemCategoryAdminBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.util.GlideUtils;
 
@@ -31,8 +31,8 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemCategoryBinding itemCategoryBinding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new CategoryViewHolder(itemCategoryBinding);
+        ItemCategoryAdminBinding itemCategoryAdminBinding = ItemCategoryAdminBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new CategoryViewHolder(itemCategoryAdminBinding);
     }
 
     @Override
@@ -41,10 +41,10 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
         if (category == null) {
             return;
         }
-        GlideUtils.loadUrl(category.getImage(), holder.mItemCategoryBinding.imgCategory);
-        holder.mItemCategoryBinding.tvCategoryName.setText(category.getName());
-        holder.mItemCategoryBinding.imgEdit.setOnClickListener(v -> iManagerCategoryListener.editCategory(category));
-        holder.mItemCategoryBinding.imgDelete.setOnClickListener(v -> iManagerCategoryListener.deleteCategory(category));
+        GlideUtils.loadUrl(category.getImage(), holder.mItemCategoryAdminBinding.imgCategory);
+        holder.mItemCategoryAdminBinding.tvCategoryName.setText(category.getName());
+        holder.mItemCategoryAdminBinding.imgEdit.setOnClickListener(v -> iManagerCategoryListener.editCategory(category));
+        holder.mItemCategoryAdminBinding.imgDelete.setOnClickListener(v -> iManagerCategoryListener.deleteCategory(category));
     }
 
     @Override
@@ -57,11 +57,11 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemCategoryBinding mItemCategoryBinding;
+        private final ItemCategoryAdminBinding mItemCategoryAdminBinding;
 
-        public CategoryViewHolder(@NonNull ItemCategoryBinding itemCategoryBinding) {
-            super(itemCategoryBinding.getRoot());
-            this.mItemCategoryBinding = itemCategoryBinding;
+        public CategoryViewHolder(@NonNull ItemCategoryAdminBinding itemCategoryAdminBinding) {
+            super(itemCategoryAdminBinding.getRoot());
+            this.mItemCategoryAdminBinding = itemCategoryAdminBinding;
         }
     }
 }
