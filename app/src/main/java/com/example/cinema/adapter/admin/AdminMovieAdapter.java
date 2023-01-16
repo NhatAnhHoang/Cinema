@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemMovieAdminBinding;
 import com.example.cinema.model.Movie;
-import com.example.cinema.util.StringUtil;
+import com.example.cinema.util.GlideUtils;
 
 import java.util.List;
 
@@ -55,12 +53,9 @@ public class AdminMovieAdapter extends RecyclerView.Adapter<AdminMovieAdapter.Mo
         if (movie == null) {
             return;
         }
-        if (!StringUtil.isEmpty(movie.getImage())) {
-            Glide.with(mContext).load(movie.getImage()).error(R.drawable.img_no_available).into(holder.mItemMovieAdminBinding.imgMovie);
-        } else {
-            holder.mItemMovieAdminBinding.imgMovie.setImageResource(R.drawable.img_no_available);
-        }
+        GlideUtils.loadUrl(movie.getImage(), holder.mItemMovieAdminBinding.imgMovie);
         holder.mItemMovieAdminBinding.tvName.setText(movie.getName());
+        holder.mItemMovieAdminBinding.tvCategory.setText(movie.getCategoryName());
         holder.mItemMovieAdminBinding.tvDescription.setText(movie.getDescription());
         String strPrice = movie.getPrice() + ConstantKey.UNIT_CURRENCY_MOVIE;
         holder.mItemMovieAdminBinding.tvPrice.setText(strPrice);

@@ -27,6 +27,10 @@ public class MyApplication extends Application {
         return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/food");
     }
 
+    public DatabaseReference getCategoryDatabaseReference() {
+        return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/category");
+    }
+
     public DatabaseReference getMovieDatabaseReference() {
         return FirebaseDatabase.getInstance(FIREBASE_URL).getReference("/movie");
     }

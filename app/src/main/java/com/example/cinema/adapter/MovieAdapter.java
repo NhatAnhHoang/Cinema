@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.cinema.R;
 import com.example.cinema.databinding.ItemMovieBinding;
 import com.example.cinema.model.Movie;
-import com.example.cinema.util.StringUtil;
+import com.example.cinema.util.GlideUtils;
 
 import java.util.List;
 
@@ -50,11 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         if (movie == null) {
             return;
         }
-        if (!StringUtil.isEmpty(movie.getImage())) {
-            Glide.with(mContext).load(movie.getImage()).error(R.drawable.img_no_available).into(holder.mItemMovieBinding.imgMovie);
-        } else {
-            holder.mItemMovieBinding.imgMovie.setImageResource(R.drawable.img_no_available);
-        }
+        GlideUtils.loadUrl(movie.getImage(), holder.mItemMovieBinding.imgMovie);
         holder.mItemMovieBinding.tvName.setText(movie.getName());
 
         holder.mItemMovieBinding.layoutItem.setOnClickListener(v -> iManagerMovieListener.clickItemMovie(movie));

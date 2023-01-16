@@ -11,22 +11,29 @@ public class Movie implements Serializable {
     private int price;
     private String date;
     private String image;
+    private String imageBanner;
     private String url;
     private List<RoomFirebase> rooms;
+    private long categoryId;
+    private String categoryName;
 
     public Movie() {
     }
 
     public Movie(long id, String name, String description, int price, String date,
-                 String image, String url, List<RoomFirebase> rooms) {
+                 String image, String imageBanner, String url, List<RoomFirebase> rooms,
+                 long categoryId, String categoryName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.date = date;
         this.image = image;
+        this.imageBanner = imageBanner;
         this.url = url;
         this.rooms = rooms;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
     }
 
     public long getId() {
@@ -77,6 +84,14 @@ public class Movie implements Serializable {
         this.image = image;
     }
 
+    public String getImageBanner() {
+        return imageBanner;
+    }
+
+    public void setImageBanner(String imageBanner) {
+        this.imageBanner = imageBanner;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -91,5 +106,21 @@ public class Movie implements Serializable {
 
     public void setRooms(List<RoomFirebase> rooms) {
         this.rooms = rooms;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.adapter.FoodDrinkAdapter;
@@ -42,6 +41,7 @@ import com.example.cinema.model.Seat;
 import com.example.cinema.model.SeatLocal;
 import com.example.cinema.model.SlotTime;
 import com.example.cinema.model.TimeFirebase;
+import com.example.cinema.util.GlideUtils;
 import com.example.cinema.util.StringUtil;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -93,7 +93,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     private SeatAdapter mSeatAdapter;
 
 
-    private PlayerView mExoPlayerView;
     private ExtractorMediaSource mMediaSource;
     private SimpleExoPlayer mPlayer;
 
@@ -122,12 +121,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (mMovie == null) {
             return;
         }
-        if (!StringUtil.isEmpty(mMovie.getImage())) {
-            Glide.with(this).load(mMovie.getImage()).error(R.drawable.img_no_available)
-                    .into(mActivityMovieDetailBinding.imgMovie);
-        } else {
-            mActivityMovieDetailBinding.imgMovie.setImageResource(R.drawable.img_no_available);
-        }
+        GlideUtils.loadUrl(mMovie.getImage(), mActivityMovieDetailBinding.imgMovie);
         mActivityMovieDetailBinding.tvTitleMovie.setText(mMovie.getName());
         mActivityMovieDetailBinding.tvDateMovie.setText(mMovie.getDate());
         String strPrice = mMovie.getPrice() + ConstantKey.UNIT_CURRENCY_MOVIE;
@@ -595,7 +589,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void initExoPlayer() {
-        mExoPlayerView = mActivityMovieDetailBinding.exoplayer;
+        PlayerView mExoPlayerView = mActivityMovieDetailBinding.exoplayer;
 
         if (mPlayer != null) {
             return;

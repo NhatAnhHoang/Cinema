@@ -123,6 +123,7 @@ public class AdminFoodFragment extends Fragment {
                             Food foodEntity = mListFood.get(i);
                             if (food.getId() == foodEntity.getId()) {
                                 mListFood.set(i, food);
+                                break;
                             }
                         }
                         mAdminFoodAdapter.notifyDataSetChanged();

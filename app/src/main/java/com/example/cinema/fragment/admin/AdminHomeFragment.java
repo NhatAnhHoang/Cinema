@@ -120,17 +120,14 @@ public class AdminHomeFragment extends Fragment {
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                         Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
+                        if (movie == null || mListMovies == null
+                                || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
                             return;
                         }
-                        for (Movie movieEntity : mListMovies) {
+                        for (int i = 0; i < mListMovies.size(); i++) {
+                            Movie movieEntity = mListMovies.get(i);
                             if (movie.getId() == movieEntity.getId()) {
-                                movieEntity.setName(movie.getName());
-                                movieEntity.setDescription(movie.getDescription());
-                                movieEntity.setPrice(movie.getPrice());
-                                movieEntity.setDate(movie.getDate());
-                                movieEntity.setImage(movie.getImage());
-                                movieEntity.setUrl(movie.getUrl());
+                                mListMovies.set(i, movie);
                                 break;
                             }
                         }
@@ -141,7 +138,8 @@ public class AdminHomeFragment extends Fragment {
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                         Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
+                        if (movie == null || mListMovies == null
+                                || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
                             return;
                         }
                         for (Movie movieObject : mListMovies) {
