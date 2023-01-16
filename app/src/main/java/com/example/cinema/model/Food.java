@@ -7,14 +7,16 @@ public class Food implements Serializable {
     private String name;
     private int price;
     private int count;
+    private int quantity;
 
     public Food() {
     }
 
-    public Food(long id, String name, int price) {
+    public Food(long id, String name, int price, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public long getId() {
@@ -47,5 +49,13 @@ public class Food implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

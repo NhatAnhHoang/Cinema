@@ -44,6 +44,7 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.Food
         holder.mItemFoodBinding.tvName.setText(food.getName());
         String strPrice = food.getPrice() + ConstantKey.UNIT_CURRENCY;
         holder.mItemFoodBinding.tvPrice.setText(strPrice);
+        holder.mItemFoodBinding.tvQuantity.setText(String.valueOf(food.getQuantity()));
         holder.mItemFoodBinding.imgEdit.setOnClickListener(v -> iManagerFoodListener.editFood(food));
         holder.mItemFoodBinding.imgDelete.setOnClickListener(v -> iManagerFoodListener.deleteFood(food));
     }

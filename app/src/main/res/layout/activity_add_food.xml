@@ -58,7 +58,7 @@
                 android:background="@color/white"
                 android:hint="@string/hint_price"
                 android:inputType="number"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_small" />
 
@@ -72,6 +72,19 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
+
+        <EditText
+            android:id="@+id/edt_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_16"
+            android:background="@drawable/bg_white_corner_6_border_gray"
+            android:hint="@string/hint_quantity"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:padding="@dimen/define_dimen_12"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_small" />
 
         <Button
             android:id="@+id/btn_add_or_edit"

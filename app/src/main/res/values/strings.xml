@@ -20,6 +20,7 @@
     <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
     <string name="hint_name">Tên…</string>
     <string name="hint_price">Giá…</string>
+    <string name="hint_quantity">Số lượng…</string>
     <string name="hint_description">Mô tả…</string>
     <string name="hint_image">Link ảnh…</string>
     <string name="hint_url">Link video…</string>
@@ -71,6 +72,7 @@
     <string name="total_amount_label">Tổng tiền:</string>
     <string name="select_seat_label">Chọn ghế ngồi</string>
     <string name="main_screen">Màn hình chính</string>
+    <string name="label_quantity">Số lượng</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -95,6 +97,7 @@
     <string name="msg_sign_in_error">Đăng nhập không thành công, vui lòng thử lại</string>
     <string name="msg_name_food_require">Vui lòng nhập tên đồ ăn/đồ uống</string>
     <string name="msg_price_food_require">Vui lòng nhập giá đồ ăn/đồ uống</string>
+    <string name="msg_quantity_food_require">Vui lòng nhập số lượng</string>
     <string name="msg_add_food_successfully">Thêm đồ ăn/đồ uống thành công</string>
     <string name="msg_delete_title">Xác nhận xóa</string>
     <string name="msg_confirm_delete">Bạn có chắc chắn muốn xóa mục này không?</string>

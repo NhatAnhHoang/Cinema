@@ -115,14 +115,14 @@ public class AdminFoodFragment extends Fragment {
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                         Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mListFood.isEmpty() || mAdminFoodAdapter == null) {
+                        if (food == null || mListFood == null
+                                || mListFood.isEmpty() || mAdminFoodAdapter == null) {
                             return;
                         }
-                        for (Food foodEntity : mListFood) {
+                        for (int i = 0; i < mListFood.size(); i++) {
+                            Food foodEntity = mListFood.get(i);
                             if (food.getId() == foodEntity.getId()) {
-                                foodEntity.setName(food.getName());
-                                foodEntity.setPrice(food.getPrice());
-                                break;
+                                mListFood.set(i, food);
                             }
                         }
                         mAdminFoodAdapter.notifyDataSetChanged();
@@ -132,7 +132,8 @@ public class AdminFoodFragment extends Fragment {
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                         Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mListFood.isEmpty() || mAdminFoodAdapter == null) {
+                        if (food == null || mListFood == null
+                                || mListFood.isEmpty() || mAdminFoodAdapter == null) {
                             return;
                         }
                         for (Food foodObject : mListFood) {

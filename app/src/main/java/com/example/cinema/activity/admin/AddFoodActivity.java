@@ -45,6 +45,7 @@ public class AddFoodActivity extends BaseActivity {
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_edit));
             mActivityAddFoodBinding.edtName.setText(mFood.getName());
             mActivityAddFoodBinding.edtPrice.setText(String.valueOf(mFood.getPrice()));
+            mActivityAddFoodBinding.edtQuantity.setText(String.valueOf(mFood.getQuantity()));
         } else {
             mActivityAddFoodBinding.tvTitle.setText(getString(R.string.add_food_title));
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_add));
@@ -54,6 +55,8 @@ public class AddFoodActivity extends BaseActivity {
     private void addOrEditFood() {
         String strName = mActivityAddFoodBinding.edtName.getText().toString().trim();
         String strPrice = mActivityAddFoodBinding.edtPrice.getText().toString().trim();
+        String strQuantity = mActivityAddFoodBinding.edtQuantity.getText().toString().trim();
+
         if (StringUtil.isEmpty(strName)) {
             Toast.makeText(this, getString(R.string.msg_name_food_require), Toast.LENGTH_SHORT).show();
             return;
@@ -64,12 +67,19 @@ public class AddFoodActivity extends BaseActivity {
             return;
         }
 
+        if (StringUtil.isEmpty(strQuantity)) {
+            Toast.makeText(this, getString(R.string.msg_quantity_food_require), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Update food
         if (isUpdate) {
             showProgressDialog(true);
             Map<String, Object> map = new HashMap<>();
             map.put("name", strName);
             map.put("price", Integer.parseInt(strPrice));
+
+            map.put("quantity", Integer.parseInt(strQuantity));
             MyApplication.get(this).getFoodDatabaseReference()
                     .child(String.valueOf(mFood.getId())).updateChildren(map, (error, ref) -> {
                 showProgressDialog(false);
@@ -82,11 +92,13 @@ public class AddFoodActivity extends BaseActivity {
         // Add food
         showProgressDialog(true);
         long foodId = System.currentTimeMillis();
-        Food food = new Food(foodId, strName, Integer.parseInt(strPrice));
+
+        Food food = new Food(foodId, strName, Integer.parseInt(strPrice), Integer.parseInt(strQuantity));
         MyApplication.get(this).getFoodDatabaseReference().child(String.valueOf(foodId)).setValue(food, (error, ref) -> {
             showProgressDialog(false);
             mActivityAddFoodBinding.edtName.setText("");
             mActivityAddFoodBinding.edtPrice.setText("");
+            mActivityAddFoodBinding.edtQuantity.setText("");
             GlobalFuntion.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_food_successfully), Toast.LENGTH_SHORT).show();
         });
