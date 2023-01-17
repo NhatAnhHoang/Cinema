@@ -78,9 +78,11 @@
     <string name="edit_category_title">Chỉnh sửa thể loại</string>
     <string name="select_category">Chọn thể loại (*)</string>
     <string name="label_category">Thể loại:</string>
+    <string name="category">Thể loại</string>
     <string name="label_all_movies">Tất cả phim</string>
     <string name="label_movie_popular">Phim phổ biến nhất</string>
     <string name="label_list_category">Thể loại</string>
+    <string name="label_all">Tất cả</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>

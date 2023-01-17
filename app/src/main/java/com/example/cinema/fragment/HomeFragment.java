@@ -15,11 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cinema.MyApplication;
-import com.example.cinema.activity.MovieDetailActivity;
+import com.example.cinema.activity.SearchActivity;
 import com.example.cinema.adapter.BannerMovieAdapter;
 import com.example.cinema.adapter.CategoryAdapter;
 import com.example.cinema.adapter.MovieAdapter;
-import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentHomeBinding;
 import com.example.cinema.model.Category;
@@ -63,14 +62,13 @@ public class HomeFragment extends Fragment {
 
         getListMovies();
         getListCategory();
+        initListener();
 
         return mFragmentHomeBinding.getRoot();
     }
 
-    private void goToMovieDetail(Movie movie) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
-        GlobalFuntion.startActivity(getActivity(), MovieDetailActivity.class, bundle);
+    private void initListener() {
+        mFragmentHomeBinding.layoutSearch.setOnClickListener(v -> GlobalFuntion.startActivity(getActivity(), SearchActivity.class));
     }
 
     private void getListMovies() {
@@ -102,7 +100,7 @@ public class HomeFragment extends Fragment {
 
     private void displayListBannerMovies() {
         BannerMovieAdapter bannerMovieAdapter = new BannerMovieAdapter(getListBannerMovies(),
-                this::goToMovieDetail);
+                movie -> GlobalFuntion.goToMovieDetail(getActivity(), movie));
         mFragmentHomeBinding.viewPager2.setAdapter(bannerMovieAdapter);
         mFragmentHomeBinding.indicator3.setViewPager(mFragmentHomeBinding.viewPager2);
 
@@ -139,7 +137,8 @@ public class HomeFragment extends Fragment {
     private void displayListAllMovies() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
-        MovieAdapter movieAdapter = new MovieAdapter(mListMovies, this::goToMovieDetail);
+        MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
+                movie -> GlobalFuntion.goToMovieDetail(getActivity(), movie));
         mFragmentHomeBinding.rcvMovie.setAdapter(movieAdapter);
     }
 

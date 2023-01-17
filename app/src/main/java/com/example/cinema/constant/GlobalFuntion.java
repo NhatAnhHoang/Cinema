@@ -9,17 +9,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.cinema.activity.MainActivity;
+import com.example.cinema.activity.MovieDetailActivity;
 import com.example.cinema.activity.admin.AdminMainActivity;
 import com.example.cinema.listener.IGetDateListener;
+import com.example.cinema.model.Movie;
 import com.example.cinema.model.RoomFirebase;
 import com.example.cinema.model.Seat;
 import com.example.cinema.model.TimeFirebase;
 import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GlobalFuntion {
 
@@ -45,6 +49,12 @@ public class GlobalFuntion {
         }
     }
 
+    public static String getTextSearch(String input) {
+        String nfdNormalizedString = Normalizer.normalize(input, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
+
     public static void hideSoftKeyboard(Activity activity) {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.
@@ -61,6 +71,12 @@ public class GlobalFuntion {
         } else {
             GlobalFuntion.startActivity(context, MainActivity.class);
         }
+    }
+
+    public static void goToMovieDetail(Context context, Movie movie) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
+        GlobalFuntion.startActivity(context, MovieDetailActivity.class, bundle);
     }
 
     public static List<RoomFirebase> getListRooms() {

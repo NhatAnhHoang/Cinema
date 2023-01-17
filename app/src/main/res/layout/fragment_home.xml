@@ -8,26 +8,23 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/define_dimen_10"
         android:background="@drawable/bg_white_corner_6_border_gray"
         android:padding="@dimen/define_dimen_2">
 
-        <EditText
-            android:id="@+id/edt_search_name"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/img_search"
             android:background="@color/white"
             android:hint="@string/hint_name"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
             android:padding="@dimen/define_dimen_10"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small"
-            tools:ignore="Autofill" />
+            android:textSize="@dimen/text_size_small" />
 
         <ImageView
             android:id="@+id/img_search"
