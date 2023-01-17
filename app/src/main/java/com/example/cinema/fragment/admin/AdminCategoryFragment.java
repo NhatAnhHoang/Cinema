@@ -3,9 +3,12 @@ package com.example.cinema.fragment.admin;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +24,7 @@ import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentAdminCategoryBinding;
 import com.example.cinema.model.Category;
+import com.example.cinema.util.StringUtil;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +44,8 @@ public class AdminCategoryFragment extends Fragment {
         mFragmentAdminCategoryBinding = FragmentAdminCategoryBinding.inflate(inflater, container, false);
 
         initView();
-        getListCategory();
+        initListener();
+        getListCategory("");
         return mFragmentAdminCategoryBinding.getRoot();
     }
 
@@ -65,8 +70,42 @@ public class AdminCategoryFragment extends Fragment {
             }
         });
         mFragmentAdminCategoryBinding.rcvCategory.setAdapter(mAdminCategoryAdapter);
+    }
 
+    private void initListener() {
         mFragmentAdminCategoryBinding.btnAddCategory.setOnClickListener(v -> onClickAddCategory());
+
+        mFragmentAdminCategoryBinding.imgSearch.setOnClickListener(view1 -> searchCategory());
+
+        mFragmentAdminCategoryBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchCategory();
+                return true;
+            }
+            return false;
+        });
+
+        mFragmentAdminCategoryBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String strKey = s.toString().trim();
+                if (strKey.equals("") || strKey.length() == 0) {
+                    getListCategory("");
+                }
+            }
+        });
+    }
+
+    private void searchCategory() {
+        String strKey = mFragmentAdminCategoryBinding.edtSearchName.getText().toString().trim();
+        getListCategory(strKey);
+        GlobalFuntion.hideSoftKeyboard(getActivity());
     }
 
     private void onClickAddCategory() {
@@ -96,9 +135,14 @@ public class AdminCategoryFragment extends Fragment {
                 .show();
     }
 
-    public void getListCategory() {
+    public void getListCategory(String key) {
         if (getActivity() == null) {
             return;
+        }
+        if (mListCategory != null) {
+            mListCategory.clear();
+        } else {
+            mListCategory = new ArrayList<>();
         }
         MyApplication.get(getActivity()).getCategoryDatabaseReference()
                 .addChildEventListener(new ChildEventListener() {
@@ -109,7 +153,14 @@ public class AdminCategoryFragment extends Fragment {
                         if (category == null || mListCategory == null || mAdminCategoryAdapter == null) {
                             return;
                         }
-                        mListCategory.add(0, category);
+                        if (StringUtil.isEmpty(key)) {
+                            mListCategory.add(0, category);
+                        } else {
+                            if (GlobalFuntion.getTextSearch(category.getName()).toLowerCase().trim()
+                                    .contains(GlobalFuntion.getTextSearch(key).toLowerCase().trim())) {
+                                mListCategory.add(0, category);
+                            }
+                        }
                         mAdminCategoryAdapter.notifyDataSetChanged();
                     }
 
