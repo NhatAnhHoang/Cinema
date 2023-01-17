@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cinema.MyApplication;
+import com.example.cinema.activity.CategoryActivity;
 import com.example.cinema.activity.SearchActivity;
 import com.example.cinema.adapter.BannerMovieAdapter;
 import com.example.cinema.adapter.CategoryAdapter;
 import com.example.cinema.adapter.MovieAdapter;
+import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentHomeBinding;
 import com.example.cinema.model.Category;
@@ -169,10 +171,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void displayListCategories() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL, false);
         mFragmentHomeBinding.rcvCategory.setLayoutManager(linearLayoutManager);
         CategoryAdapter categoryAdapter = new CategoryAdapter(mListCategory, category -> {
-
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ConstantKey.KEY_INTENT_CATEGORY_OBJECT, category);
+            GlobalFuntion.startActivity(getActivity(), CategoryActivity.class, bundle);
         });
         mFragmentHomeBinding.rcvCategory.setAdapter(categoryAdapter);
     }
