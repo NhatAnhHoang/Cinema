@@ -7,7 +7,7 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivitySplashBinding;
 import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
@@ -27,9 +27,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goToNextActivity() {
         if (DataStoreManager.getUser() != null && !StringUtil.isEmpty(DataStoreManager.getUser().getEmail())) {
-            GlobalFuntion.gotoMainActivity(this);
+            GlobalFunction.gotoMainActivity(this);
         } else {
-            GlobalFuntion.startActivity(this, SignInActivity.class);
+            GlobalFunction.startActivity(this, SignInActivity.class);
         }
         finish();
     }

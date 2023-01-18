@@ -7,7 +7,7 @@ import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityAddCategoryBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.util.StringUtil;
@@ -77,7 +77,7 @@ public class AddCategoryActivity extends BaseActivity {
                 showProgressDialog(false);
                 Toast.makeText(AddCategoryActivity.this,
                         getString(R.string.msg_edit_category_successfully), Toast.LENGTH_SHORT).show();
-                GlobalFuntion.hideSoftKeyboard(AddCategoryActivity.this);
+                GlobalFunction.hideSoftKeyboard(AddCategoryActivity.this);
             });
             return;
         }
@@ -91,7 +91,7 @@ public class AddCategoryActivity extends BaseActivity {
             showProgressDialog(false);
             mActivityAddCategoryBinding.edtName.setText("");
             mActivityAddCategoryBinding.edtImage.setText("");
-            GlobalFuntion.hideSoftKeyboard(this);
+            GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_category_successfully), Toast.LENGTH_SHORT).show();
         });
     }

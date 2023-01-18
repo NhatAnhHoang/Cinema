@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.cinema.R;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivitySignInBinding;
 import com.example.cinema.model.User;
 import com.example.cinema.prefs.DataStoreManager;
@@ -27,14 +27,14 @@ public class SignInActivity extends BaseActivity {
         mActivitySignInBinding.rdbUser.setChecked(true);
 
         mActivitySignInBinding.layoutSignUp.setOnClickListener(
-                v -> GlobalFuntion.startActivity(SignInActivity.this, SignUpActivity.class));
+                v -> GlobalFunction.startActivity(SignInActivity.this, SignUpActivity.class));
 
         mActivitySignInBinding.btnSignIn.setOnClickListener(v -> onClickValidateSignIn());
         mActivitySignInBinding.tvForgotPassword.setOnClickListener(v -> onClickForgotPassword());
     }
 
     private void onClickForgotPassword() {
-        GlobalFuntion.startActivity(this, ForgotPasswordActivity.class);
+        GlobalFunction.startActivity(this, ForgotPasswordActivity.class);
     }
 
     private void onClickValidateSignIn() {
@@ -78,7 +78,7 @@ public class SignInActivity extends BaseActivity {
                                 userObject.setAdmin(true);
                             }
                             DataStoreManager.setUser(userObject);
-                            GlobalFuntion.gotoMainActivity(this);
+                            GlobalFunction.gotoMainActivity(this);
                             finishAffinity();
                         }
                     } else {

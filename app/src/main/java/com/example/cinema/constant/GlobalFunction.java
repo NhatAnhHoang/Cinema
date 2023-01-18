@@ -1,12 +1,16 @@
 package com.example.cinema.constant;
 
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.cinema.activity.MainActivity;
 import com.example.cinema.activity.MovieDetailActivity;
@@ -18,6 +22,9 @@ import com.example.cinema.model.Seat;
 import com.example.cinema.model.TimeFirebase;
 import com.example.cinema.prefs.DataStoreManager;
 import com.example.cinema.util.StringUtil;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -25,7 +32,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class GlobalFuntion {
+public class GlobalFunction {
 
     public static void startActivity(Context context, Class<?> clz) {
         Intent intent = new Intent(context, clz);
@@ -38,15 +45,6 @@ public class GlobalFuntion {
         intent.putExtras(bundle);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }
-
-    public static void showSoftKeyboard(Activity activity, EditText editText) {
-        try {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public static String getTextSearch(String input) {
@@ -67,16 +65,16 @@ public class GlobalFuntion {
 
     public static void gotoMainActivity(Context context) {
         if (DataStoreManager.getUser().isAdmin()) {
-            GlobalFuntion.startActivity(context, AdminMainActivity.class);
+            GlobalFunction.startActivity(context, AdminMainActivity.class);
         } else {
-            GlobalFuntion.startActivity(context, MainActivity.class);
+            GlobalFunction.startActivity(context, MainActivity.class);
         }
     }
 
     public static void goToMovieDetail(Context context, Movie movie) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
-        GlobalFuntion.startActivity(context, MovieDetailActivity.class, bundle);
+        GlobalFunction.startActivity(context, MovieDetailActivity.class, bundle);
     }
 
     public static List<RoomFirebase> getListRooms() {
@@ -134,5 +132,31 @@ public class GlobalFuntion {
                 callBack, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
                 mCalendar.get(Calendar.DATE));
         datePicker.show();
+    }
+
+    public static void gentQRCodeFromString(ImageView imageView, String id) {
+        if (imageView == null) {
+            return;
+        }
+        BitMatrix result;
+        try {
+            result = new MultiFormatWriter().encode(id, BarcodeFormat.QR_CODE,
+                    512, 512, null);
+            int w = result.getWidth();
+            int h = result.getHeight();
+            int[] pixels = new int[w * h];
+            for (int y = 0; y < h; y++) {
+                int offset = y * w;
+                for (int x = 0; x < w; x++) {
+                    pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
+                }
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

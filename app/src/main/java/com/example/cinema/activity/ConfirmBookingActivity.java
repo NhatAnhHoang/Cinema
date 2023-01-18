@@ -28,7 +28,7 @@ import com.example.cinema.adapter.SeatAdapter;
 import com.example.cinema.adapter.SelectPaymentAdapter;
 import com.example.cinema.adapter.TimeAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.constant.PayPalConfig;
 import com.example.cinema.databinding.ActivityConfirmBookingBinding;
 import com.example.cinema.listener.IOnSingleClickListener;
@@ -481,7 +481,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
 
                             Toast.makeText(ConfirmBookingActivity.this,
                                     getString(R.string.msg_booking_movie_success), Toast.LENGTH_LONG).show();
-                            GlobalFuntion.hideSoftKeyboard(ConfirmBookingActivity.this);
+                            GlobalFunction.hideSoftKeyboard(ConfirmBookingActivity.this);
                         }));
     }
 

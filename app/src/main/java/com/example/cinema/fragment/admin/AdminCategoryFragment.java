@@ -21,7 +21,7 @@ import com.example.cinema.R;
 import com.example.cinema.activity.admin.AddCategoryActivity;
 import com.example.cinema.adapter.admin.AdminCategoryAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminCategoryBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.util.StringUtil;
@@ -105,17 +105,17 @@ public class AdminCategoryFragment extends Fragment {
     private void searchCategory() {
         String strKey = mFragmentAdminCategoryBinding.edtSearchName.getText().toString().trim();
         getListCategory(strKey);
-        GlobalFuntion.hideSoftKeyboard(getActivity());
+        GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
     private void onClickAddCategory() {
-        GlobalFuntion.startActivity(getActivity(), AddCategoryActivity.class);
+        GlobalFunction.startActivity(getActivity(), AddCategoryActivity.class);
     }
 
     private void onClickEditCategory(Category category) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_CATEGORY_OBJECT, category);
-        GlobalFuntion.startActivity(getActivity(), AddCategoryActivity.class, bundle);
+        GlobalFunction.startActivity(getActivity(), AddCategoryActivity.class, bundle);
     }
 
     private void deleteCategoryItem(Category category) {
@@ -156,8 +156,8 @@ public class AdminCategoryFragment extends Fragment {
                         if (StringUtil.isEmpty(key)) {
                             mListCategory.add(0, category);
                         } else {
-                            if (GlobalFuntion.getTextSearch(category.getName()).toLowerCase().trim()
-                                    .contains(GlobalFuntion.getTextSearch(key).toLowerCase().trim())) {
+                            if (GlobalFunction.getTextSearch(category.getName()).toLowerCase().trim()
+                                    .contains(GlobalFunction.getTextSearch(key).toLowerCase().trim())) {
                                 mListCategory.add(0, category);
                             }
                         }

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.cinema.R;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivitySignUpBinding;
 import com.example.cinema.model.User;
 import com.example.cinema.prefs.DataStoreManager;
@@ -72,7 +72,7 @@ public class SignUpActivity extends BaseActivity {
                                 userObject.setAdmin(true);
                             }
                             DataStoreManager.setUser(userObject);
-                            GlobalFuntion.gotoMainActivity(this);
+                            GlobalFunction.gotoMainActivity(this);
                             finishAffinity();
                         }
                     } else {

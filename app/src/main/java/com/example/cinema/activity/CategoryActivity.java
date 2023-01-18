@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.adapter.MovieAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityCategoryBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
@@ -76,7 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mActivityCategoryBinding.rcvData.setLayoutManager(gridLayoutManager);
         MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
-                movie -> GlobalFuntion.goToMovieDetail(this, movie));
+                movie -> GlobalFunction.goToMovieDetail(this, movie));
         mActivityCategoryBinding.rcvData.setAdapter(movieAdapter);
     }
 }

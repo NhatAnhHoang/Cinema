@@ -21,7 +21,7 @@ import com.example.cinema.adapter.BannerMovieAdapter;
 import com.example.cinema.adapter.CategoryAdapter;
 import com.example.cinema.adapter.MovieAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentHomeBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initListener() {
-        mFragmentHomeBinding.layoutSearch.setOnClickListener(v -> GlobalFuntion.startActivity(getActivity(), SearchActivity.class));
+        mFragmentHomeBinding.layoutSearch.setOnClickListener(v -> GlobalFunction.startActivity(getActivity(), SearchActivity.class));
     }
 
     private void getListMovies() {
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
 
     private void displayListBannerMovies() {
         BannerMovieAdapter bannerMovieAdapter = new BannerMovieAdapter(getListBannerMovies(),
-                movie -> GlobalFuntion.goToMovieDetail(getActivity(), movie));
+                movie -> GlobalFunction.goToMovieDetail(getActivity(), movie));
         mFragmentHomeBinding.viewPager2.setAdapter(bannerMovieAdapter);
         mFragmentHomeBinding.indicator3.setViewPager(mFragmentHomeBinding.viewPager2);
 
@@ -140,7 +140,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
         MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
-                movie -> GlobalFuntion.goToMovieDetail(getActivity(), movie));
+                movie -> GlobalFunction.goToMovieDetail(getActivity(), movie));
         mFragmentHomeBinding.rcvMovie.setAdapter(movieAdapter);
     }
 
@@ -177,7 +177,7 @@ public class HomeFragment extends Fragment {
         CategoryAdapter categoryAdapter = new CategoryAdapter(mListCategory, category -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable(ConstantKey.KEY_INTENT_CATEGORY_OBJECT, category);
-            GlobalFuntion.startActivity(getActivity(), CategoryActivity.class, bundle);
+            GlobalFunction.startActivity(getActivity(), CategoryActivity.class, bundle);
         });
         mFragmentHomeBinding.rcvCategory.setAdapter(categoryAdapter);
     }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/define_dimen_10"
     android:layout_marginEnd="@dimen/define_dimen_10"
+    android:layout_marginBottom="@dimen/define_dimen_10"
     app:cardCornerRadius="@dimen/define_dimen_6">
 
     <LinearLayout
+        android:id="@+id/layout_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -16,6 +18,54 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_id"
+                android:layout_width="@dimen/define_dimen_100"
+                android:layout_height="wrap_content"
+                android:text="@string/label_id"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/define_dimen_5"
+                android:layout_toEndOf="@+id/label_id"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/define_dimen_10">
+
+            <TextView
+                android:id="@+id/label_email"
+                android:layout_width="@dimen/define_dimen_100"
+                android:layout_height="wrap_content"
+                android:text="@string/label_email"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/define_dimen_5"
+                android:layout_toEndOf="@+id/label_email"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/define_dimen_10">
 
             <TextView
                 android:id="@+id/label_name"
@@ -45,8 +95,8 @@
                 android:layout_width="@dimen/define_dimen_100"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/text_size_small"
-                android:text="@string/date_movie"/>
+                android:text="@string/date_movie"
+                android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:id="@+id/tv_date_movie"
@@ -210,7 +260,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/define_dimen_10"
-            android:background="@color/colorPrimaryDark"/>
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -229,14 +279,25 @@
 
             <TextView
                 android:id="@+id/tv_total_amount"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/define_dimen_5"
+                android:layout_marginEnd="@dimen/define_dimen_5"
+                android:layout_toStartOf="@+id/img_qr"
                 android:layout_toEndOf="@+id/label_total_amount"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_qr"
+                android:layout_width="@dimen/define_dimen_30"
+                android:layout_height="@dimen/define_dimen_30"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_qr_code"
+                tools:ignore="ContentDescription" />
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

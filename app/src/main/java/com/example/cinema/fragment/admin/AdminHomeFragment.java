@@ -22,7 +22,7 @@ import com.example.cinema.R;
 import com.example.cinema.activity.admin.AddMovieActivity;
 import com.example.cinema.adapter.admin.AdminMovieAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminHomeBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
@@ -173,13 +173,13 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
     }
 
     private void onClickAddMovie() {
-        GlobalFuntion.startActivity(getActivity(), AddMovieActivity.class);
+        GlobalFunction.startActivity(getActivity(), AddMovieActivity.class);
     }
 
     private void onClickEditMovie(Movie movie) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
-        GlobalFuntion.startActivity(getActivity(), AddMovieActivity.class, bundle);
+        GlobalFunction.startActivity(getActivity(), AddMovieActivity.class, bundle);
     }
 
     private void deleteMovieItem(Movie movie) {
@@ -203,7 +203,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
         if (getActivity() == null) {
             return;
         }
-        GlobalFuntion.hideSoftKeyboard(getActivity());
+        GlobalFunction.hideSoftKeyboard(getActivity());
         if (mListMovies != null) {
             mListMovies.clear();
         } else {
@@ -280,8 +280,8 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
                 return true;
             } else return movie.getCategoryId() == categoryId;
         } else {
-            boolean isMatch = GlobalFuntion.getTextSearch(movie.getName()).toLowerCase().trim()
-                    .contains(GlobalFuntion.getTextSearch(key).toLowerCase().trim());
+            boolean isMatch = GlobalFunction.getTextSearch(movie.getName()).toLowerCase().trim()
+                    .contains(GlobalFunction.getTextSearch(key).toLowerCase().trim());
             if (categoryId == 0) {
                 return isMatch;
             } else return isMatch && movie.getCategoryId() == categoryId;

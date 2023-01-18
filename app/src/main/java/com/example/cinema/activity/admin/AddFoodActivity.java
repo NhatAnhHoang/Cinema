@@ -7,7 +7,7 @@ import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityAddFoodBinding;
 import com.example.cinema.model.Food;
 import com.example.cinema.util.StringUtil;
@@ -84,7 +84,7 @@ public class AddFoodActivity extends BaseActivity {
                     .child(String.valueOf(mFood.getId())).updateChildren(map, (error, ref) -> {
                 showProgressDialog(false);
                 Toast.makeText(AddFoodActivity.this, getString(R.string.msg_edit_food_successfully), Toast.LENGTH_SHORT).show();
-                GlobalFuntion.hideSoftKeyboard(AddFoodActivity.this);
+                GlobalFunction.hideSoftKeyboard(AddFoodActivity.this);
             });
             return;
         }
@@ -99,7 +99,7 @@ public class AddFoodActivity extends BaseActivity {
             mActivityAddFoodBinding.edtName.setText("");
             mActivityAddFoodBinding.edtPrice.setText("");
             mActivityAddFoodBinding.edtQuantity.setText("");
-            GlobalFuntion.hideSoftKeyboard(this);
+            GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_food_successfully), Toast.LENGTH_SHORT).show();
         });
     }

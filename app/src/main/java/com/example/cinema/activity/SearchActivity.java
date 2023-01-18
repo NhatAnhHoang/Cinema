@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.adapter.MovieAdapter;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivitySearchBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initListener() {
         mActivitySearchBinding.imageBack.setOnClickListener(v -> {
-            GlobalFuntion.hideSoftKeyboard(SearchActivity.this);
+            GlobalFunction.hideSoftKeyboard(SearchActivity.this);
             onBackPressed();
         });
         mActivitySearchBinding.imageDelete.setOnClickListener(v -> mActivitySearchBinding.edtKeyword.setText(""));
@@ -169,7 +169,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mActivitySearchBinding.rcvData.setLayoutManager(gridLayoutManager);
         MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
-                movie -> GlobalFuntion.goToMovieDetail(this, movie));
+                movie -> GlobalFunction.goToMovieDetail(this, movie));
         mActivitySearchBinding.rcvData.setAdapter(movieAdapter);
     }
 
@@ -184,8 +184,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 return true;
             } else return movie.getCategoryId() == categoryId;
         } else {
-            boolean isMatch = GlobalFuntion.getTextSearch(movie.getName()).toLowerCase().trim()
-                    .contains(GlobalFuntion.getTextSearch(key).toLowerCase().trim());
+            boolean isMatch = GlobalFunction.getTextSearch(movie.getName()).toLowerCase().trim()
+                    .contains(GlobalFunction.getTextSearch(key).toLowerCase().trim());
             if (categoryId == 0) {
                 return isMatch;
             } else return isMatch && movie.getCategoryId() == categoryId;

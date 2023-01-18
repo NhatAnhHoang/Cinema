@@ -12,7 +12,7 @@ import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
 import com.example.cinema.adapter.admin.AdminSelectCategoryAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityAddMovieBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
@@ -52,7 +52,7 @@ public class AddMovieActivity extends BaseActivity {
         mActivityAddMovieBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivityAddMovieBinding.btnAddOrEdit.setOnClickListener(v -> addOrEditMovie());
         mActivityAddMovieBinding.tvDate.setOnClickListener(v ->
-                GlobalFuntion.showDatePicker(this, date -> mActivityAddMovieBinding.tvDate.setText(date)));
+                GlobalFunction.showDatePicker(this, date -> mActivityAddMovieBinding.tvDate.setText(date)));
     }
 
     private void initView() {
@@ -192,7 +192,7 @@ public class AddMovieActivity extends BaseActivity {
                     .child(String.valueOf(mMovie.getId())).updateChildren(map, (error, ref) -> {
                 showProgressDialog(false);
                 Toast.makeText(AddMovieActivity.this, getString(R.string.msg_edit_movie_successfully), Toast.LENGTH_SHORT).show();
-                GlobalFuntion.hideSoftKeyboard(this);
+                GlobalFunction.hideSoftKeyboard(this);
             });
             return;
         }
@@ -201,7 +201,7 @@ public class AddMovieActivity extends BaseActivity {
         showProgressDialog(true);
         long movieId = System.currentTimeMillis();
         Movie movie = new Movie(movieId, strName, strDescription, Integer.parseInt(strPrice),
-                strDate, strImage, strImageBanner, strVideo, GlobalFuntion.getListRooms(),
+                strDate, strImage, strImageBanner, strVideo, GlobalFunction.getListRooms(),
                 mCategorySelected.getId(), mCategorySelected.getName(), 0);
         MyApplication.get(this).getMovieDatabaseReference().child(String.valueOf(movieId)).setValue(movie, (error, ref) -> {
             showProgressDialog(false);
@@ -213,7 +213,7 @@ public class AddMovieActivity extends BaseActivity {
             mActivityAddMovieBinding.edtImage.setText("");
             mActivityAddMovieBinding.edtImageBanner.setText("");
             mActivityAddMovieBinding.edtVideo.setText("");
-            GlobalFuntion.hideSoftKeyboard(this);
+            GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_movie_successfully), Toast.LENGTH_SHORT).show();
         });
     }

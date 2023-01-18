@@ -21,7 +21,7 @@ import com.example.cinema.R;
 import com.example.cinema.activity.admin.AddFoodActivity;
 import com.example.cinema.adapter.admin.AdminFoodAdapter;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminFoodBinding;
 import com.example.cinema.model.Food;
 import com.example.cinema.util.StringUtil;
@@ -105,18 +105,18 @@ public class AdminFoodFragment extends Fragment {
     private void searchFood() {
         String strKey = mFragmentAdminFoodBinding.edtSearchName.getText().toString().trim();
         getListFoods(strKey);
-        GlobalFuntion.hideSoftKeyboard(getActivity());
+        GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
 
     private void onClickAddFood() {
-        GlobalFuntion.startActivity(getActivity(), AddFoodActivity.class);
+        GlobalFunction.startActivity(getActivity(), AddFoodActivity.class);
     }
 
     private void onClickEditFood(Food food) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_FOOD_OBJECT, food);
-        GlobalFuntion.startActivity(getActivity(), AddFoodActivity.class, bundle);
+        GlobalFunction.startActivity(getActivity(), AddFoodActivity.class, bundle);
     }
 
     private void deleteFoodItem(Food food) {
@@ -157,8 +157,8 @@ public class AdminFoodFragment extends Fragment {
                         if (StringUtil.isEmpty(key)) {
                             mListFood.add(0, food);
                         } else {
-                            if (GlobalFuntion.getTextSearch(food.getName()).toLowerCase().trim()
-                                    .contains(GlobalFuntion.getTextSearch(key).toLowerCase().trim())) {
+                            if (GlobalFunction.getTextSearch(food.getName()).toLowerCase().trim()
+                                    .contains(GlobalFunction.getTextSearch(key).toLowerCase().trim())) {
                                 mListFood.add(0, food);
                             }
                         }

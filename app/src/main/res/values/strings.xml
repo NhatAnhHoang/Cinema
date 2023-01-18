@@ -19,6 +19,7 @@
     <string name="hint_password_new">Mật khẩu mới…</string>
     <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
     <string name="hint_name">Tên…</string>
+    <string name="hint_id">ID…</string>
     <string name="hint_price">Giá…</string>
     <string name="hint_quantity">Số lượng…</string>
     <string name="hint_description">Mô tả…</string>
@@ -69,6 +70,8 @@
     <string name="count">Số lượng</string>
     <string name="confirm_booking_infor">Xác nhận thông tin đặt vé</string>
     <string name="movie_name">Tên phim:</string>
+    <string name="label_email">Email:</string>
+    <string name="label_id">Mã:</string>
     <string name="count_booking_label">Số lượng vé:</string>
     <string name="count_seat_label">Ghế đã chọn:</string>
     <string name="food_drink_label">Đố ăn/uống:</string>

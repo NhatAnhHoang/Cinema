@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.constant.ConstantKey;
-import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityMovieDetailBinding;
 import com.example.cinema.model.Movie;
 import com.example.cinema.util.GlideUtils;
@@ -121,7 +121,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, mMovie);
-        GlobalFuntion.startActivity(this, ConfirmBookingActivity.class, bundle);
+        GlobalFunction.startActivity(this, ConfirmBookingActivity.class, bundle);
     }
 
     private void scrollToLayoutTrailer() {
