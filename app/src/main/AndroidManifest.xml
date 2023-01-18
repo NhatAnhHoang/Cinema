@@ -68,6 +68,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".activity.ConfirmBookingActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activity.MovieDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:exported="false" />

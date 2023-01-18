@@ -135,10 +135,4 @@ public class GlobalFuntion {
                 mCalendar.get(Calendar.DATE));
         datePicker.show();
     }
-
-    public static String getStringEmailUser() {
-        return DataStoreManager.getUser().getEmail()
-                .replace("@", "aa")
-                .replace(".", "dot");
-    }
 }

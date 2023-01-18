@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.adapter.BookingHistoryAdapter;
-import com.example.cinema.constant.GlobalFuntion;
 import com.example.cinema.databinding.FragmentBookingBinding;
 import com.example.cinema.model.BookingHistory;
-import com.google.firebase.database.ChildEventListener;
+import com.example.cinema.prefs.DataStoreManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,65 +50,27 @@ public class BookingFragment extends Fragment {
         mFragmentBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void getListBookingHistory() {
         if (getActivity() == null) {
             return;
         }
-        MyApplication.get(getActivity()).getBookingDatabaseReference().child(GlobalFuntion.getStringEmailUser())
-                .addChildEventListener(new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
-                        if (bookingHistory == null || mListBookingHistory == null
-                                || mBookingHistoryAdapter == null) {
-                            return;
-                        }
+        MyApplication.get(getActivity()).getBookingDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
+                    if (bookingHistory != null
+                            && DataStoreManager.getUser().getEmail().equals(bookingHistory.getUser())) {
                         mListBookingHistory.add(0, bookingHistory);
                         mBookingHistoryAdapter.notifyDataSetChanged();
                     }
+                }
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
-                        if (bookingHistory == null || mListBookingHistory == null
-                                || mListBookingHistory.isEmpty() || mBookingHistoryAdapter == null) {
-                            return;
-                        }
-                        for (int i = 0; i < mListBookingHistory.size(); i++) {
-                            if (bookingHistory.getId() == mListBookingHistory.get(i).getId()) {
-                                mListBookingHistory.set(i, bookingHistory);
-                                break;
-                            }
-                        }
-                        mBookingHistoryAdapter.notifyDataSetChanged();
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
-                        if (bookingHistory == null || mListBookingHistory == null
-                                || mListBookingHistory.isEmpty() || mBookingHistoryAdapter == null) {
-                            return;
-                        }
-                        for (BookingHistory bookingObject : mListBookingHistory) {
-                            if (bookingHistory.getId() == bookingObject.getId()) {
-                                mListBookingHistory.remove(bookingObject);
-                                break;
-                            }
-                        }
-                        mBookingHistoryAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

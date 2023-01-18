@@ -48,6 +48,7 @@
     <string name="currency_movie">000 VNĐ / 1 vé</string>
     <string name="date_movie">Khởi chiếu:</string>
     <string name="price_movie">Giá vé:</string>
+    <string name="name_movie">Tên phim:</string>
     <string name="room_movie">Phòng chiếu:</string>
     <string name="time_movie">Giờ chiếu:</string>
     <string name="add_movie_title">Thêm phim mới</string>
@@ -57,6 +58,7 @@
     <string name="all_time">Mọi khung giờ </string>
     <string name="watch_trailer">Xem Trailer </string>
     <string name="description_movie">Mô tả phim </string>
+    <string name="infor_movie">Thông tin chiếu phim </string>
     <string name="video_trailer">Video Trailer </string>
     <string name="select_room">Chọn phòng chiếu phim</string>
     <string name="select_time">Chọn giờ chiếu phim</string>
@@ -83,6 +85,11 @@
     <string name="label_movie_popular">Phim phổ biến nhất</string>
     <string name="label_list_category">Thể loại</string>
     <string name="label_all">Tất cả</string>
+    <string name="confirm_booking">Xác nhận đặt vé</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="payment_method">Phương thức thanh toán</string>
+    <string name="label_payment">Thanh toán:</string>
+    <string name="quantity_stock">Hiện tại còn:</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -118,6 +125,7 @@
     <string name="msg_edit_category_successfully">Chỉnh sửa thể loại thành công</string>
     <string name="msg_add_category_successfully">Thêm thể loại thành công</string>
     <string name="msg_delete_category_successfully">Xóa thể loại thành công</string>
+    <string name="msg_count_invalid">Hiện tại không đủ số lượng bạn muốn mua</string>
 
     <string name="msg_add_movie_successfully">Thêm phim mới thành công</string>
     <string name="msg_delete_movie_successfully">Xóa phim thành công</string>
@@ -133,8 +141,6 @@
     <string name="msg_video_movie_require">Vui lòng nhập link video phim</string>
     <string name="msg_select_room_require">Vui lòng chọn phòng chiếu phim</string>
     <string name="msg_select_time_require">Vui lòng chọn giờ chiếu phim</string>
-    <string name="msg_booking_count_require">Vui lòng nhập số lượng vé muốn đặt</string>
-    <string name="msg_booking_count_invalid">Vui lòng nhập số lượng lớn hơn 0</string>
     <string name="msg_booking_movie_success">Đặt vé xem phim thành công !!!</string>
-    <string name="msg_count_seat_not_match">Vui lòng đặt số lượng ghế trùng với số lượng vé muốn mua</string>
+    <string name="msg_count_seat">Vui lòng đặt số lượng vé muốn mua</string>
 </resources>

@@ -39,6 +39,7 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         holder.mItemBookingHistoryBinding.tvCountBooking.setText(bookingHistory.getCount());
         holder.mItemBookingHistoryBinding.tvCountSeat.setText(bookingHistory.getSeats());
         holder.mItemBookingHistoryBinding.tvFoodDrink.setText(bookingHistory.getFoods());
+        holder.mItemBookingHistoryBinding.tvPaymentMethod.setText(bookingHistory.getPayment());
         holder.mItemBookingHistoryBinding.tvTotalAmount.setText(bookingHistory.getTotal());
     }
 

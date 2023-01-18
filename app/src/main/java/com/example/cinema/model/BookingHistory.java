@@ -9,13 +9,16 @@ public class BookingHistory {
     private String count;
     private String seats;
     private String foods;
+    private String payment;
     private String total;
+    private String user;
 
     public BookingHistory() {
     }
 
     public BookingHistory(long id, String name, String date, String room, String time,
-                          String count, String seats, String foods, String total) {
+                          String count, String seats, String foods, String payment,
+                          String total, String user) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -24,7 +27,9 @@ public class BookingHistory {
         this.count = count;
         this.seats = seats;
         this.foods = foods;
+        this.payment = payment;
         this.total = total;
+        this.user = user;
     }
 
     public long getId() {
@@ -91,11 +96,27 @@ public class BookingHistory {
         this.foods = foods;
     }
 
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
     public String getTotal() {
         return total;
     }
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/define_dimen_6">
@@ -30,10 +31,29 @@
                 android:id="@+id/tv_price_food"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100 000 VNĐ"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@string/quantity_stock"/>
+
+                <TextView
+                    android:id="@+id/tv_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginStart="@dimen/define_dimen_5" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +82,8 @@
                 android:inputType="number"
                 android:padding="@dimen/define_dimen_5"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_xsmall" />
+                android:textSize="@dimen/text_size_xsmall"
+                tools:ignore="Autofill,LabelFor" />
         </LinearLayout>
 
     </RelativeLayout>

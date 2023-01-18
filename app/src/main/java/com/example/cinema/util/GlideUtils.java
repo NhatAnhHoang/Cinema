@@ -8,6 +8,9 @@ import com.example.cinema.R;
 public class GlideUtils {
 
     public static void loadUrlBanner(String url, ImageView imageView) {
+        if (imageView == null) {
+            return;
+        }
         if (StringUtil.isEmpty(url)) {
             imageView.setImageResource(R.drawable.img_no_image);
             return;
@@ -20,6 +23,9 @@ public class GlideUtils {
     }
 
     public static void loadUrl(String url, ImageView imageView) {
+        if (imageView == null) {
+            return;
+        }
         if (StringUtil.isEmpty(url)) {
             imageView.setImageResource(R.drawable.img_no_available);
             return;

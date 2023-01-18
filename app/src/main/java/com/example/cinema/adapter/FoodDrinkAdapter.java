@@ -1,13 +1,16 @@
 package com.example.cinema.adapter;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemFoodDrinkBinding;
 import com.example.cinema.model.Food;
@@ -46,6 +49,7 @@ public class FoodDrinkAdapter extends RecyclerView.Adapter<FoodDrinkAdapter.Food
         holder.mItemFoodDrinkBinding.tvNameFood.setText(food.getName());
         String strPrice = food.getPrice() + ConstantKey.UNIT_CURRENCY;
         holder.mItemFoodDrinkBinding.tvPriceFood.setText(strPrice);
+        holder.mItemFoodDrinkBinding.tvStock.setText(String.valueOf(food.getQuantity()));
         holder.mItemFoodDrinkBinding.edtCount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,7 +65,13 @@ public class FoodDrinkAdapter extends RecyclerView.Adapter<FoodDrinkAdapter.Food
             public void afterTextChanged(Editable editable) {
                 if (!StringUtil.isEmpty(editable.toString().trim())) {
                     int count = Integer.parseInt(editable.toString());
-                    iManagerFoodDrinkListener.selectCount(food, count);
+                    if (count > food.getQuantity()) {
+                        Context context = holder.mItemFoodDrinkBinding.edtCount.getContext();
+                        Toast.makeText(context, context.getString(R.string.msg_count_invalid), Toast.LENGTH_SHORT).show();
+                        holder.mItemFoodDrinkBinding.edtCount.setText("");
+                    } else {
+                        iManagerFoodDrinkListener.selectCount(food, count);
+                    }
                 } else {
                     iManagerFoodDrinkListener.selectCount(food, 0);
                 }

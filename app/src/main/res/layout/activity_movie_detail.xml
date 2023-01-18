@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,7 +18,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/define_dimen_5"
             android:padding="@dimen/define_dimen_5"
-            android:src="@drawable/ic_back_white" />
+            android:src="@drawable/ic_back_white"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,9 +48,10 @@
                 <ImageView
                     android:id="@+id/img_movie"
                     android:layout_width="@dimen/define_dimen_130"
-                    android:layout_height="@dimen/define_dimen_180"
+                    android:layout_height="@dimen/define_dimen_155"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/img_no_available" />
+                    android:src="@drawable/img_no_available"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,6 +67,29 @@
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/define_dimen_5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="italic"
+                            android:text="@string/label_category"/>
+
+                        <TextView
+                            android:id="@+id/tv_category_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="italic"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/text_size_small"
+                            android:layout_marginStart="@dimen/define_dimen_5" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -108,48 +134,6 @@
                             android:layout_marginStart="@dimen/define_dimen_5" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/define_dimen_5"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_small"
-                            android:text="@string/room_movie"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/text_size_small"
-                            android:layout_marginStart="@dimen/define_dimen_5"
-                            android:text="@string/all_room"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/define_dimen_5"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_small"
-                            android:text="@string/time_movie"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/text_size_small"
-                            android:layout_marginStart="@dimen/define_dimen_5"
-                            android:text="@string/all_time"/>
-                    </LinearLayout>
-
                     <Button
                         android:id="@+id/btn_watch_trailer"
                         android:layout_width="match_parent"
@@ -161,6 +145,57 @@
                         android:background="@drawable/bg_green_corner_8"/>
                 </LinearLayout>
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/infor_movie"
+                android:textColor="@color/teal_700"
+                android:layout_marginTop="@dimen/define_dimen_20"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@string/room_movie"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginStart="@dimen/define_dimen_5"
+                    android:text="@string/all_room"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/define_dimen_5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@string/time_movie"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginStart="@dimen/define_dimen_5"
+                    android:text="@string/all_time"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -204,133 +239,9 @@
                     android:layout_width="@dimen/define_dimen_60"
                     android:layout_height="@dimen/define_dimen_60"
                     android:src="@drawable/ic_play_movie_white"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    tools:ignore="ContentDescription" />
             </RelativeLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/select_room"
-                android:textColor="@color/teal_700"
-                android:layout_marginTop="@dimen/define_dimen_20"
-                android:textSize="@dimen/text_size_small"
-                android:textStyle="bold"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_room"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:id="@+id/layout_selecte_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/define_dimen_20"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_time"
-                    android:textColor="@color/teal_700"
-                    android:textSize="@dimen/text_size_small"
-                    android:textStyle="bold"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_selecte_seat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/define_dimen_20"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/count_booking"
-                    android:textColor="@color/teal_700"
-                    android:textSize="@dimen/text_size_small"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/edt_count_booking"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/define_dimen_5"
-                    android:background="@drawable/bg_white_corner_6_border_gray"
-                    android:hint="@string/hint_count_booking"
-                    android:inputType="number"
-                    android:padding="@dimen/define_dimen_12"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/text_size_small" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_seat_label"
-                    android:textColor="@color/teal_700"
-                    android:layout_marginTop="@dimen/define_dimen_20"
-                    android:textSize="@dimen/text_size_small"
-                    android:textStyle="bold"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/define_dimen_10"
-                    android:background="@drawable/bg_white_corner_6_border_gray"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_gravity="center_horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_small"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:text="@string/main_screen"/>
-
-                        <View
-                            android:layout_width="@dimen/define_dimen_150"
-                            android:layout_height="@dimen/define_dimen_10"
-                            android:layout_marginTop="@dimen/define_dimen_2"
-                            android:background="@color/black"/>
-                    </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcv_seat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/define_dimen_10"
-                        android:layout_marginStart="@dimen/define_dimen_5"
-                        android:layout_marginBottom="@dimen/define_dimen_5"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/select_food"
-                android:textColor="@color/teal_700"
-                android:layout_marginTop="@dimen/define_dimen_20"
-                android:textSize="@dimen/text_size_small"
-                android:textStyle="bold"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_food_drink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btn_booking"
