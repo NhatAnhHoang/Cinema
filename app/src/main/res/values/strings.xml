@@ -93,6 +93,7 @@
     <string name="payment_method">Phương thức thanh toán</string>
     <string name="label_payment">Thanh toán:</string>
     <string name="quantity_stock">Hiện tại còn:</string>
+    <string name="request_qr">Quét QR Code</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>

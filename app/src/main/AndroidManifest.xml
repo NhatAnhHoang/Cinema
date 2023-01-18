@@ -4,6 +4,10 @@
     package="com.example.cinema">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"/>
 
     <application
         android:name=".MyApplication"
@@ -70,6 +74,12 @@
         <activity
             android:name=".activity.ConfirmBookingActivity"
             android:exported="false" />
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"/>
 
         <activity
             android:name=".activity.MovieDetailActivity"

@@ -17,11 +17,18 @@ import com.example.cinema.MyApplication;
 import com.example.cinema.adapter.BookingHistoryAdapter;
 import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminBookingBinding;
+import com.example.cinema.event.ResultQrCodeEvent;
+import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
 import com.example.cinema.util.StringUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.integration.android.IntentIntegrator;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +44,9 @@ public class AdminBookingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentAdminBookingBinding = FragmentAdminBookingBinding.inflate(inflater, container, false);
 
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         initListener();
         getListBookingHistory("");
 
@@ -69,6 +79,12 @@ public class AdminBookingFragment extends Fragment {
                 if (strKey.equals("") || strKey.length() == 0) {
                     getListBookingHistory("");
                 }
+            }
+        });
+        mFragmentAdminBookingBinding.imgScanQr.setOnClickListener(new IOnSingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                clickOpenScanQRCode();
             }
         });
     }
@@ -129,5 +145,30 @@ public class AdminBookingFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (mBookingHistoryAdapter != null) mBookingHistoryAdapter.release();
+    }
+
+    private void clickOpenScanQRCode() {
+        IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
+        intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        intentIntegrator.setPrompt("Quét mã order vé xem phim");
+        intentIntegrator.setCameraId(0);
+        intentIntegrator.setOrientationLocked(true);
+        intentIntegrator.initiateScan();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(ResultQrCodeEvent event) {
+        if (event != null) {
+            mFragmentAdminBookingBinding.edtSearchId.setText(event.getResult());
+            getListBookingHistory(event.getResult());
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

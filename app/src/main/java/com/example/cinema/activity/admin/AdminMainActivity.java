@@ -1,8 +1,10 @@
 package com.example.cinema.activity.admin;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -10,6 +12,11 @@ import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
 import com.example.cinema.adapter.admin.AdminViewPagerAdapter;
 import com.example.cinema.databinding.ActivityAdminMainBinding;
+import com.example.cinema.event.ResultQrCodeEvent;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.greenrobot.eventbus.EventBus;
 
 @SuppressLint("NonConstantResourceId")
 public class AdminMainActivity extends BaseActivity {
@@ -103,6 +110,17 @@ public class AdminMainActivity extends BaseActivity {
                 .onNegative((dialog, which) -> dialog.dismiss())
                 .cancelable(true)
                 .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null && intentResult.getContents() != null) {
+            EventBus.getDefault().post(new ResultQrCodeEvent(intentResult.getContents()));
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
