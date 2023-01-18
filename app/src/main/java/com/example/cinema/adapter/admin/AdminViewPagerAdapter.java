@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.cinema.fragment.AccountFragment;
 import com.example.cinema.fragment.admin.AdminBookingFragment;
 import com.example.cinema.fragment.admin.AdminCategoryFragment;
 import com.example.cinema.fragment.admin.AdminFoodFragment;

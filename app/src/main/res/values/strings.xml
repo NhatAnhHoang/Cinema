@@ -126,6 +126,7 @@
     <string name="msg_add_category_successfully">Thêm thể loại thành công</string>
     <string name="msg_delete_category_successfully">Xóa thể loại thành công</string>
     <string name="msg_count_invalid">Hiện tại không đủ số lượng bạn muốn mua</string>
+    <string name="msg_payment_error">Thanh toán lỗi, vui lòng thử lại !!!</string>
 
     <string name="msg_add_movie_successfully">Thêm phim mới thành công</string>
     <string name="msg_delete_movie_successfully">Xóa phim thành công</string>

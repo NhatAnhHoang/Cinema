@@ -1,6 +1,5 @@
 package com.example.cinema.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,30 +26,16 @@ public class BookingFragment extends Fragment {
 
     private FragmentBookingBinding mFragmentBookingBinding;
     private List<BookingHistory> mListBookingHistory;
-    private BookingHistoryAdapter mBookingHistoryAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentBookingBinding = FragmentBookingBinding.inflate(inflater, container, false);
-        initView();
+
         getListBookingHistory();
         return mFragmentBookingBinding.getRoot();
     }
 
-    private void initView() {
-        if (getActivity() == null) {
-            return;
-        }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
-
-        mListBookingHistory = new ArrayList<>();
-        mBookingHistoryAdapter = new BookingHistoryAdapter(mListBookingHistory);
-        mFragmentBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
     public void getListBookingHistory() {
         if (getActivity() == null) {
             return;
@@ -58,19 +43,37 @@ public class BookingFragment extends Fragment {
         MyApplication.get(getActivity()).getBookingDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListBookingHistory != null) {
+                    mListBookingHistory.clear();
+                } else {
+                    mListBookingHistory = new ArrayList<>();
+                }
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
                     if (bookingHistory != null
                             && DataStoreManager.getUser().getEmail().equals(bookingHistory.getUser())) {
                         mListBookingHistory.add(0, bookingHistory);
-                        mBookingHistoryAdapter.notifyDataSetChanged();
                     }
                 }
+
+                displayListBookingHistory();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    private void displayListBookingHistory() {
+        if (getActivity() == null) {
+            return;
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mFragmentBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
+
+        BookingHistoryAdapter bookingHistoryAdapter = new BookingHistoryAdapter(mListBookingHistory);
+        mFragmentBookingBinding.rcvBookingHistory.setAdapter(bookingHistoryAdapter);
     }
 }

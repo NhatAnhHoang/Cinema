@@ -1,9 +1,12 @@
 package com.example.cinema.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,8 +29,8 @@ import com.example.cinema.adapter.SelectPaymentAdapter;
 import com.example.cinema.adapter.TimeAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFuntion;
+import com.example.cinema.constant.PayPalConfig;
 import com.example.cinema.databinding.ActivityConfirmBookingBinding;
-import com.example.cinema.event.OrderSuccessEvent;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
 import com.example.cinema.model.Food;
@@ -44,15 +47,29 @@ import com.example.cinema.util.StringUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmBookingActivity extends AppCompatActivity {
+
+    public static final int PAYPAL_REQUEST_CODE = 199;
+    public static final String PAYPAL_PAYMENT_STATUS_APPROVED = "approved";
+    //Paypal Configuration Object
+    public static final PayPalConfiguration PAYPAL_CONFIG = new PayPalConfiguration()
+            .environment(PayPalConfig.PAYPAL_ENVIRONMENT_DEV)
+            .clientId(PayPalConfig.PAYPAL_CLIENT_ID_DEV)
+            .acceptCreditCards(false);
+    private Dialog mDialog;
 
     private ActivityConfirmBookingBinding mActivityConfirmBookingBinding;
     private Movie mMovie;
@@ -72,6 +89,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     private SeatAdapter mSeatAdapter;
 
     private PaymentMethod mPaymentMethodSelected;
+    private BookingHistory mBookingHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +97,6 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         mActivityConfirmBookingBinding = ActivityConfirmBookingBinding.inflate(getLayoutInflater());
         setContentView(mActivityConfirmBookingBinding.getRoot());
 
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
         getDataIntent();
     }
 
@@ -389,27 +404,27 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     }
 
     private void showDialogConfirmBooking() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_dialog_confirm_booking);
-        Window window = dialog.getWindow();
+        mDialog = new Dialog(this);
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mDialog.setContentView(R.layout.layout_dialog_confirm_booking);
+        Window window = mDialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setCancelable(false);
+        mDialog.setCancelable(false);
 
         // Get view
-        final TextView tvNameMovie = dialog.findViewById(R.id.tv_name_movie);
-        final TextView tvDateMovie = dialog.findViewById(R.id.tv_date_movie);
-        final TextView tvRoomMovie = dialog.findViewById(R.id.tv_room_movie);
-        final TextView tvTimeMovie = dialog.findViewById(R.id.tv_time_movie);
-        final TextView tvCountBooking = dialog.findViewById(R.id.tv_count_booking);
-        final TextView tvCountSeat = dialog.findViewById(R.id.tv_count_seat);
-        final TextView tvFoodDrink = dialog.findViewById(R.id.tv_food_drink);
-        final TextView tvPaymentMethod = dialog.findViewById(R.id.tv_payment_method);
-        final TextView tvTotalAmount = dialog.findViewById(R.id.tv_total_amount);
+        final TextView tvNameMovie = mDialog.findViewById(R.id.tv_name_movie);
+        final TextView tvDateMovie = mDialog.findViewById(R.id.tv_date_movie);
+        final TextView tvRoomMovie = mDialog.findViewById(R.id.tv_room_movie);
+        final TextView tvTimeMovie = mDialog.findViewById(R.id.tv_time_movie);
+        final TextView tvCountBooking = mDialog.findViewById(R.id.tv_count_booking);
+        final TextView tvCountSeat = mDialog.findViewById(R.id.tv_count_seat);
+        final TextView tvFoodDrink = mDialog.findViewById(R.id.tv_food_drink);
+        final TextView tvPaymentMethod = mDialog.findViewById(R.id.tv_payment_method);
+        final TextView tvTotalAmount = mDialog.findViewById(R.id.tv_total_amount);
 
-        final TextView tvDialogCancel = dialog.findViewById(R.id.tv_dialog_cancel);
-        final TextView tvDialogOk = dialog.findViewById(R.id.tv_dialog_ok);
+        final TextView tvDialogCancel = mDialog.findViewById(R.id.tv_dialog_cancel);
+        final TextView tvDialogOk = mDialog.findViewById(R.id.tv_dialog_ok);
 
         // Set data
         int countView = getListSeatChecked().size();
@@ -429,39 +444,65 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         tvDialogCancel.setOnClickListener(new IOnSingleClickListener() {
             @Override
             public void onSingleClick(View v) {
-                dialog.dismiss();
+                mDialog.dismiss();
             }
         });
 
         tvDialogOk.setOnClickListener(new IOnSingleClickListener() {
             @Override
             public void onSingleClick(View v) {
-                mMovie.setBooked(mMovie.getBooked() + countView);
+                long id = System.currentTimeMillis();
+                mBookingHistory = new BookingHistory(id, mMovie.getName(),
+                        mMovie.getDate(), getTitleRoomSelected(), getTitleTimeSelected(),
+                        tvCountBooking.getText().toString(), getStringSeatChecked(),
+                        getStringFoodAndDrink(), mPaymentMethodSelected.getName(),
+                        strTotalAmount, DataStoreManager.getUser().getEmail());
 
-                MyApplication.get(ConfirmBookingActivity.this).getMovieDatabaseReference()
-                        .child(String.valueOf(mMovie.getId())).setValue(mMovie, (error, ref) -> {
-                    long id = System.currentTimeMillis();
-                    BookingHistory bookingHistory = new BookingHistory(id, mMovie.getName(),
-                            mMovie.getDate(), getTitleRoomSelected(), getTitleTimeSelected(),
-                            tvCountBooking.getText().toString(), getStringSeatChecked(),
-                            getStringFoodAndDrink(), mPaymentMethodSelected.getName(),
-                            strTotalAmount, DataStoreManager.getUser().getEmail());
-
-                    MyApplication.get(ConfirmBookingActivity.this).getBookingDatabaseReference()
-                            .child(String.valueOf(id))
-                            .setValue(bookingHistory, (error1, ref1) -> {
-                                finish();
-
-                                Toast.makeText(ConfirmBookingActivity.this,
-                                        getString(R.string.msg_booking_movie_success), Toast.LENGTH_LONG).show();
-                                GlobalFuntion.hideSoftKeyboard(ConfirmBookingActivity.this);
-                                dialog.dismiss();
-                            });
-                });
+                if (ConstantKey.PAYMENT_CASH == mPaymentMethodSelected.getType()) {
+                    sendRequestOrder();
+                } else {
+                    getPaymentPaypal(getTotalAmount());
+                }
             }
         });
 
-        dialog.show();
+        mDialog.show();
+    }
+
+    private void sendRequestOrder() {
+        mMovie.setBooked(mMovie.getBooked() + Integer.parseInt(mBookingHistory.getCount()));
+        MyApplication.get(ConfirmBookingActivity.this).getMovieDatabaseReference()
+                .child(String.valueOf(mMovie.getId())).setValue(mMovie, (error, ref) ->
+                MyApplication.get(ConfirmBookingActivity.this).getBookingDatabaseReference()
+                        .child(String.valueOf(mBookingHistory.getId()))
+                        .setValue(mBookingHistory, (error1, ref1) -> {
+                            if (mDialog != null) mDialog.dismiss();
+                            finish();
+
+                            Toast.makeText(ConfirmBookingActivity.this,
+                                    getString(R.string.msg_booking_movie_success), Toast.LENGTH_LONG).show();
+                            GlobalFuntion.hideSoftKeyboard(ConfirmBookingActivity.this);
+                        }));
+    }
+
+    private void getPaymentPaypal(int price) {
+        //Creating a paypalpayment
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(price)),
+                PayPalConfig.PAYPAL_CURRENCY, PayPalConfig.PAYPAl_CONTENT_TEXT,
+                PayPalPayment.PAYMENT_INTENT_SALE);
+
+        //Creating Paypal Payment activity intent
+        Intent intent = new Intent(this, PaymentActivity.class);
+
+        //putting the paypal configuration to the intent
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, PAYPAL_CONFIG);
+
+        //Puting paypal payment to the intent
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+
+        //Starting the intent activity for result
+        //the request code will be used on the method onActivityResult
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
     }
 
     private List<SeatLocal> getListSeatChecked() {
@@ -547,16 +588,41 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         return priceMovie + priceFoodDrink;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(OrderSuccessEvent event) {
-        finish();
-    }
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+            boolean isPaymentSuccess = false;
+
+            //If the result is OK i.e. user has not canceled the payment
+            if (resultCode == Activity.RESULT_OK) {
+                //Getting the payment confirmation
+                PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+
+                //if confirmation is not null
+                if (confirm != null) {
+                    try {
+                        //Getting the payment details
+                        String paymentDetails = confirm.toJSONObject().toString(4);
+                        Log.e("Payment Result", paymentDetails);
+
+                        JSONObject jsonDetails = new JSONObject(paymentDetails);
+                        JSONObject jsonResponse = jsonDetails.getJSONObject("response");
+                        String strState = jsonResponse.getString("state");
+                        Log.e("Payment State", strState);
+                        if (PAYPAL_PAYMENT_STATUS_APPROVED.equals(strState)) {
+                            isPaymentSuccess = true;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.msg_payment_error), Toast.LENGTH_SHORT).show();
+            }
+
+            // Send result payment
+            if (isPaymentSuccess) sendRequestOrder();
         }
     }
 }
