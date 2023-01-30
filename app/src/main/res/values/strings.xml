@@ -94,6 +94,12 @@
     <string name="label_payment">Thanh toán:</string>
     <string name="quantity_stock">Hiện tại còn:</string>
     <string name="request_qr">Quét QR Code</string>
+    <string name="revenue">Doanh thu</string>
+    <string name="label_total_revenue">Tổng doanh thu:</string>
+    <string name="column_stt">STT</string>
+    <string name="column_movie_name">Tên phim</string>
+    <string name="column_quantity">Số lượng vé</string>
+    <string name="column_total_amount">Tổng Tiền</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>

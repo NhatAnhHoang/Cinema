@@ -2,6 +2,7 @@ package com.example.cinema.model;
 
 public class BookingHistory {
     private long id;
+    private long movieId;
     private String name;
     private String date;
     private String room;
@@ -10,16 +11,17 @@ public class BookingHistory {
     private String seats;
     private String foods;
     private String payment;
-    private String total;
+    private int total;
     private String user;
 
     public BookingHistory() {
     }
 
-    public BookingHistory(long id, String name, String date, String room, String time,
+    public BookingHistory(long id, long movieId, String name, String date, String room, String time,
                           String count, String seats, String foods, String payment,
-                          String total, String user) {
+                          int total, String user) {
         this.id = id;
+        this.movieId = movieId;
         this.name = name;
         this.date = date;
         this.room = room;
@@ -38,6 +40,14 @@ public class BookingHistory {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(long movieId) {
+        this.movieId = movieId;
     }
 
     public String getName() {
@@ -104,11 +114,11 @@ public class BookingHistory {
         this.payment = payment;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

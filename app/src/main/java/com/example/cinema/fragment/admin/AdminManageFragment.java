@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cinema.activity.ChangePasswordActivity;
 import com.example.cinema.activity.SignInActivity;
+import com.example.cinema.activity.admin.AdminRevenueActivity;
 import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminManageBinding;
 import com.example.cinema.prefs.DataStoreManager;
@@ -25,10 +26,15 @@ public class AdminManageFragment extends Fragment {
 
         fragmentAdminManageBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
 
+        fragmentAdminManageBinding.layoutReport.setOnClickListener(v -> onClickReport());
         fragmentAdminManageBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
         fragmentAdminManageBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
 
         return fragmentAdminManageBinding.getRoot();
+    }
+
+    private void onClickReport() {
+        GlobalFunction.startActivity(getActivity(), AdminRevenueActivity.class);
     }
 
     private void onClickChangePassword() {

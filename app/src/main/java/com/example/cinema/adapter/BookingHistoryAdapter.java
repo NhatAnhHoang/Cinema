@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cinema.R;
+import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemBookingHistoryBinding;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
@@ -63,7 +64,8 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         holder.mItemBookingHistoryBinding.tvCountSeat.setText(bookingHistory.getSeats());
         holder.mItemBookingHistoryBinding.tvFoodDrink.setText(bookingHistory.getFoods());
         holder.mItemBookingHistoryBinding.tvPaymentMethod.setText(bookingHistory.getPayment());
-        holder.mItemBookingHistoryBinding.tvTotalAmount.setText(bookingHistory.getTotal());
+        String strTotal = bookingHistory.getTotal() + ConstantKey.UNIT_CURRENCY;
+        holder.mItemBookingHistoryBinding.tvTotalAmount.setText(strTotal);
 
         if (mIsAdmin) {
             holder.mItemBookingHistoryBinding.imgQr.setVisibility(View.GONE);

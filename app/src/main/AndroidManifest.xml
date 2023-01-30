@@ -76,6 +76,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".activity.admin.AdminRevenueActivity"
+            android:exported="false" />
+
+        <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="android:screenOrientation"

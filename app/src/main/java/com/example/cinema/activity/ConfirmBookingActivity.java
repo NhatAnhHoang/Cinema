@@ -452,11 +452,11 @@ public class ConfirmBookingActivity extends AppCompatActivity {
             @Override
             public void onSingleClick(View v) {
                 long id = System.currentTimeMillis();
-                mBookingHistory = new BookingHistory(id, mMovie.getName(),
+                mBookingHistory = new BookingHistory(id, mMovie.getId(), mMovie.getName(),
                         mMovie.getDate(), getTitleRoomSelected(), getTitleTimeSelected(),
                         tvCountBooking.getText().toString(), getStringSeatChecked(),
                         getStringFoodAndDrink(), mPaymentMethodSelected.getName(),
-                        strTotalAmount, DataStoreManager.getUser().getEmail());
+                        getTotalAmount(), DataStoreManager.getUser().getEmail());
 
                 if (ConstantKey.PAYMENT_CASH == mPaymentMethodSelected.getType()) {
                     sendRequestOrder();
