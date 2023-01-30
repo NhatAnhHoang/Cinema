@@ -1,6 +1,5 @@
 package com.example.cinema.fragment.admin;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,9 +24,9 @@ import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminCategoryBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.util.StringUtil;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,40 +35,15 @@ public class AdminCategoryFragment extends Fragment {
 
     private FragmentAdminCategoryBinding mFragmentAdminCategoryBinding;
     private List<Category> mListCategory;
-    private AdminCategoryAdapter mAdminCategoryAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentAdminCategoryBinding = FragmentAdminCategoryBinding.inflate(inflater, container, false);
 
-        initView();
         initListener();
         getListCategory("");
         return mFragmentAdminCategoryBinding.getRoot();
-    }
-
-    private void initView() {
-        if (getActivity() == null) {
-            return;
-        }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentAdminCategoryBinding.rcvCategory.setLayoutManager(linearLayoutManager);
-
-        mListCategory = new ArrayList<>();
-        mAdminCategoryAdapter = new AdminCategoryAdapter(mListCategory,
-                new AdminCategoryAdapter.IManagerCategoryListener() {
-            @Override
-            public void editCategory(Category category) {
-                onClickEditCategory(category);
-            }
-
-            @Override
-            public void deleteCategory(Category category) {
-                deleteCategoryItem(category);
-            }
-        });
-        mFragmentAdminCategoryBinding.rcvCategory.setAdapter(mAdminCategoryAdapter);
     }
 
     private void initListener() {
@@ -87,10 +61,12 @@ public class AdminCategoryFragment extends Fragment {
 
         mFragmentAdminCategoryBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -139,20 +115,17 @@ public class AdminCategoryFragment extends Fragment {
         if (getActivity() == null) {
             return;
         }
-        if (mListCategory != null) {
-            mListCategory.clear();
-        } else {
-            mListCategory = new ArrayList<>();
-        }
-        MyApplication.get(getActivity()).getCategoryDatabaseReference()
-                .addChildEventListener(new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Category category = dataSnapshot.getValue(Category.class);
-                        if (category == null || mListCategory == null || mAdminCategoryAdapter == null) {
-                            return;
-                        }
+        MyApplication.get(getActivity()).getCategoryDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListCategory != null) {
+                    mListCategory.clear();
+                } else {
+                    mListCategory = new ArrayList<>();
+                }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Category category = dataSnapshot.getValue(Category.class);
+                    if (category != null) {
                         if (StringUtil.isEmpty(key)) {
                             mListCategory.add(0, category);
                         } else {
@@ -161,51 +134,36 @@ public class AdminCategoryFragment extends Fragment {
                                 mListCategory.add(0, category);
                             }
                         }
-                        mAdminCategoryAdapter.notifyDataSetChanged();
                     }
+                }
+                loadListData();
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Category category = dataSnapshot.getValue(Category.class);
-                        if (category == null || mListCategory == null
-                                || mListCategory.isEmpty() || mAdminCategoryAdapter == null) {
-                            return;
-                        }
-                        for (int i = 0; i < mListCategory.size(); i++) {
-                            Category categoryEntity = mListCategory.get(i);
-                            if (category.getId() == categoryEntity.getId()) {
-                                mListCategory.set(i, category);
-                                break;
-                            }
-                        }
-                        mAdminCategoryAdapter.notifyDataSetChanged();
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
-                    @SuppressLint("NotifyDataSetChanged")
+    private void loadListData() {
+        if (getActivity() == null) {
+            return;
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mFragmentAdminCategoryBinding.rcvCategory.setLayoutManager(linearLayoutManager);
+
+        AdminCategoryAdapter adminCategoryAdapter = new AdminCategoryAdapter(mListCategory,
+                new AdminCategoryAdapter.IManagerCategoryListener() {
                     @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        Category category = dataSnapshot.getValue(Category.class);
-                        if (category == null || mListCategory == null
-                                || mListCategory.isEmpty() || mAdminCategoryAdapter == null) {
-                            return;
-                        }
-                        for (Category categoryObject : mListCategory) {
-                            if (category.getId() == categoryObject.getId()) {
-                                mListCategory.remove(categoryObject);
-                                break;
-                            }
-                        }
-                        mAdminCategoryAdapter.notifyDataSetChanged();
+                    public void editCategory(Category category) {
+                        onClickEditCategory(category);
                     }
 
                     @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void deleteCategory(Category category) {
+                        deleteCategoryItem(category);
                     }
                 });
+        mFragmentAdminCategoryBinding.rcvCategory.setAdapter(adminCategoryAdapter);
     }
 }

@@ -81,7 +81,11 @@ public class AdminRevenueActivity extends AppCompatActivity {
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mActivityAdminRevenueBinding.rcvData.setLayoutManager(linearLayoutManager);
-        AdminRevenueAdapter adminRevenueAdapter = new AdminRevenueAdapter(mListRevenue);
+
+        List<Revenue> listFinal = new ArrayList<>(mListRevenue);
+        listFinal.sort((statistical1, statistical2)
+                -> statistical2.getTotalPrice() - statistical1.getTotalPrice());
+        AdminRevenueAdapter adminRevenueAdapter = new AdminRevenueAdapter(listFinal);
         mActivityAdminRevenueBinding.rcvData.setAdapter(adminRevenueAdapter);
 
         // Calculate total

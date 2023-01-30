@@ -16,7 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/define_dimen_120">
+            android:layout_height="@dimen/define_dimen_130">
 
             <ImageView
                 android:id="@+id/img_movie"

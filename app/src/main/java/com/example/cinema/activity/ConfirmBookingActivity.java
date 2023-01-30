@@ -91,6 +91,8 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     private PaymentMethod mPaymentMethodSelected;
     private BookingHistory mBookingHistory;
 
+    private List<Food> mListFoodNeedUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -311,27 +313,26 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         mActivityConfirmBookingBinding.rcvFoodDrink.addItemDecoration(decoration);
 
-        mListFood = new ArrayList<>();
-        mFoodDrinkAdapter = new FoodDrinkAdapter(mListFood, this::selectedCountFoodAndDrink);
-        mActivityConfirmBookingBinding.rcvFoodDrink.setAdapter(mFoodDrinkAdapter);
-
         getListFoodAndDrink();
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void getListFoodAndDrink() {
         MyApplication.get(this).getFoodDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListFood != null) {
+                    mListFood.clear();
+                } else {
+                    mListFood = new ArrayList<>();
+                }
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Food food = dataSnapshot.getValue(Food.class);
                     if (food != null && food.getQuantity() > 0) {
                         mListFood.add(0, food);
                     }
                 }
-                if (mFoodDrinkAdapter != null) {
-                    mFoodDrinkAdapter.notifyDataSetChanged();
-                }
+                mFoodDrinkAdapter = new FoodDrinkAdapter(mListFood, (food, count) -> selectedCountFoodAndDrink(food, count));
+                mActivityConfirmBookingBinding.rcvFoodDrink.setAdapter(mFoodDrinkAdapter);
             }
 
             @Override
@@ -428,6 +429,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
 
         // Set data
         int countView = getListSeatChecked().size();
+        mListFoodNeedUpdate = new ArrayList<>(getListFoodSelected());
 
         tvNameMovie.setText(mMovie.getName());
         tvDateMovie.setText(mMovie.getDate());
@@ -476,6 +478,9 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                 MyApplication.get(ConfirmBookingActivity.this).getBookingDatabaseReference()
                         .child(String.valueOf(mBookingHistory.getId()))
                         .setValue(mBookingHistory, (error1, ref1) -> {
+
+                            updateQuantityFoodDrink();
+
                             if (mDialog != null) mDialog.dismiss();
                             finish();
 
@@ -483,6 +488,33 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                                     getString(R.string.msg_booking_movie_success), Toast.LENGTH_LONG).show();
                             GlobalFunction.hideSoftKeyboard(ConfirmBookingActivity.this);
                         }));
+    }
+
+    private void updateQuantityFoodDrink() {
+        if (mListFoodNeedUpdate == null || mListFoodNeedUpdate.isEmpty()) {
+            return;
+        }
+        for (Food food : mListFoodNeedUpdate) {
+            changeQuantity(food.getId(), food.getCount());
+        }
+    }
+
+    private void changeQuantity(long foodId, int quantity) {
+        MyApplication.get(this).getQuantityDatabaseReference(foodId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Integer currentQuantity = snapshot.getValue(Integer.class);
+                        if (currentQuantity != null) {
+                            int totalQuantity = currentQuantity - quantity;
+                            MyApplication.get(ConfirmBookingActivity.this).getQuantityDatabaseReference(foodId).removeEventListener(this);
+                            MyApplication.get(ConfirmBookingActivity.this).getQuantityDatabaseReference(foodId).setValue(totalQuantity);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
     }
 
     private void getPaymentPaypal(int price) {

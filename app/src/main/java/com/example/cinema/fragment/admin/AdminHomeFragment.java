@@ -1,6 +1,5 @@
 package com.example.cinema.fragment.admin;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +26,6 @@ import com.example.cinema.databinding.FragmentAdminHomeBinding;
 import com.example.cinema.model.Category;
 import com.example.cinema.model.Movie;
 import com.example.cinema.util.StringUtil;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -49,37 +47,10 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentAdminHomeBinding = FragmentAdminHomeBinding.inflate(inflater, container, false);
-        initView();
+
         initListener();
         getListCategory();
         return mFragmentAdminHomeBinding.getRoot();
-    }
-
-    private void initView() {
-        if (getActivity() == null) {
-            return;
-        }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentAdminHomeBinding.rcvMovie.setLayoutManager(linearLayoutManager);
-
-        mListMovies = new ArrayList<>();
-        mAdminMovieAdapter = new AdminMovieAdapter(getActivity(), mListMovies, new AdminMovieAdapter.IManagerMovieListener() {
-            @Override
-            public void editMovie(Movie movie) {
-                onClickEditMovie(movie);
-            }
-
-            @Override
-            public void deleteMovie(Movie movie) {
-                deleteMovieItem(movie);
-            }
-
-            @Override
-            public void clickItemMovie(Movie movie) {
-
-            }
-        });
-        mFragmentAdminHomeBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
     }
 
     private void initListener() {
@@ -97,10 +68,12 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
 
         mFragmentAdminHomeBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -136,7 +109,8 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
 
@@ -204,69 +178,53 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
             return;
         }
         GlobalFunction.hideSoftKeyboard(getActivity());
-        if (mListMovies != null) {
-            mListMovies.clear();
-        } else {
-            mListMovies = new ArrayList<>();
+
+        MyApplication.get(getActivity()).getMovieDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListMovies != null) {
+                    mListMovies.clear();
+                } else {
+                    mListMovies = new ArrayList<>();
+                }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Movie movie = dataSnapshot.getValue(Movie.class);
+                    if (isMovieResult(movie)) {
+                        mListMovies.add(0, movie);
+                    }
+                }
+                loadListMovie();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void loadListMovie() {
+        if (getActivity() == null) {
+            return;
         }
-        MyApplication.get(getActivity()).getMovieDatabaseReference()
-                .addChildEventListener(new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null || mAdminMovieAdapter == null) {
-                            return;
-                        }
-                        if (isMovieResult(movie)) {
-                            mListMovies.add(0, movie);
-                        }
-                        mAdminMovieAdapter.notifyDataSetChanged();
-                    }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mFragmentAdminHomeBinding.rcvMovie.setLayoutManager(linearLayoutManager);
+        mAdminMovieAdapter = new AdminMovieAdapter(getActivity(), mListMovies, new AdminMovieAdapter.IManagerMovieListener() {
+            @Override
+            public void editMovie(Movie movie) {
+                onClickEditMovie(movie);
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null
-                                || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
-                            return;
-                        }
-                        for (int i = 0; i < mListMovies.size(); i++) {
-                            Movie movieEntity = mListMovies.get(i);
-                            if (movie.getId() == movieEntity.getId()) {
-                                mListMovies.set(i, movie);
-                                break;
-                            }
-                        }
-                        mAdminMovieAdapter.notifyDataSetChanged();
-                    }
+            @Override
+            public void deleteMovie(Movie movie) {
+                deleteMovieItem(movie);
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        Movie movie = dataSnapshot.getValue(Movie.class);
-                        if (movie == null || mListMovies == null
-                                || mListMovies.isEmpty() || mAdminMovieAdapter == null) {
-                            return;
-                        }
-                        for (Movie movieObject : mListMovies) {
-                            if (movie.getId() == movieObject.getId()) {
-                                mListMovies.remove(movieObject);
-                                break;
-                            }
-                        }
-                        mAdminMovieAdapter.notifyDataSetChanged();
-                    }
+            @Override
+            public void clickItemMovie(Movie movie) {
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+            }
+        });
+        mFragmentAdminHomeBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
     }
 
     private boolean isMovieResult(Movie movie) {

@@ -1,6 +1,5 @@
 package com.example.cinema.fragment.admin;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,9 +24,9 @@ import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminFoodBinding;
 import com.example.cinema.model.Food;
 import com.example.cinema.util.StringUtil;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,40 +35,16 @@ public class AdminFoodFragment extends Fragment {
 
     private FragmentAdminFoodBinding mFragmentAdminFoodBinding;
     private List<Food> mListFood;
-    private AdminFoodAdapter mAdminFoodAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentAdminFoodBinding = FragmentAdminFoodBinding.inflate(inflater, container, false);
 
-        initView();
         getListFoods("");
         initListener();
 
         return mFragmentAdminFoodBinding.getRoot();
-    }
-
-    private void initView() {
-        if (getActivity() == null) {
-            return;
-        }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentAdminFoodBinding.rcvFood.setLayoutManager(linearLayoutManager);
-
-        mListFood = new ArrayList<>();
-        mAdminFoodAdapter = new AdminFoodAdapter(mListFood, new AdminFoodAdapter.IManagerFoodListener() {
-            @Override
-            public void editFood(Food food) {
-                onClickEditFood(food);
-            }
-
-            @Override
-            public void deleteFood(Food food) {
-                deleteFoodItem(food);
-            }
-        });
-        mFragmentAdminFoodBinding.rcvFood.setAdapter(mAdminFoodAdapter);
     }
 
     private void initListener() {
@@ -87,10 +62,12 @@ public class AdminFoodFragment extends Fragment {
 
         mFragmentAdminFoodBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -140,20 +117,18 @@ public class AdminFoodFragment extends Fragment {
         if (getActivity() == null) {
             return;
         }
-        if (mListFood != null) {
-            mListFood.clear();
-        } else {
-            mListFood = new ArrayList<>();
-        }
-        MyApplication.get(getActivity()).getFoodDatabaseReference()
-                .addChildEventListener(new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mAdminFoodAdapter == null) {
-                            return;
-                        }
+        MyApplication.get(getActivity()).getFoodDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (mListFood != null) {
+                    mListFood.clear();
+                } else {
+                    mListFood = new ArrayList<>();
+                }
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Food food = dataSnapshot.getValue(Food.class);
+                    if (food != null) {
                         if (StringUtil.isEmpty(key)) {
                             mListFood.add(0, food);
                         } else {
@@ -162,51 +137,35 @@ public class AdminFoodFragment extends Fragment {
                                 mListFood.add(0, food);
                             }
                         }
-                        mAdminFoodAdapter.notifyDataSetChanged();
                     }
+                }
+                loadListData();
+            }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null
-                                || mListFood.isEmpty() || mAdminFoodAdapter == null) {
-                            return;
-                        }
-                        for (int i = 0; i < mListFood.size(); i++) {
-                            Food foodEntity = mListFood.get(i);
-                            if (food.getId() == foodEntity.getId()) {
-                                mListFood.set(i, food);
-                                break;
-                            }
-                        }
-                        mAdminFoodAdapter.notifyDataSetChanged();
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null
-                                || mListFood.isEmpty() || mAdminFoodAdapter == null) {
-                            return;
-                        }
-                        for (Food foodObject : mListFood) {
-                            if (food.getId() == foodObject.getId()) {
-                                mListFood.remove(foodObject);
-                                break;
-                            }
-                        }
-                        mAdminFoodAdapter.notifyDataSetChanged();
-                    }
+    private void loadListData() {
+        if (getActivity() == null) {
+            return;
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mFragmentAdminFoodBinding.rcvFood.setLayoutManager(linearLayoutManager);
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                    }
+        AdminFoodAdapter adminFoodAdapter = new AdminFoodAdapter(mListFood, new AdminFoodAdapter.IManagerFoodListener() {
+            @Override
+            public void editFood(Food food) {
+                onClickEditFood(food);
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+            @Override
+            public void deleteFood(Food food) {
+                deleteFoodItem(food);
+            }
+        });
+        mFragmentAdminFoodBinding.rcvFood.setAdapter(adminFoodAdapter);
     }
 }
