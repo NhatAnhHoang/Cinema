@@ -23,6 +23,7 @@ import com.example.cinema.databinding.FragmentBookingBinding;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
 import com.example.cinema.prefs.DataStoreManager;
+import com.example.cinema.util.DateTimeUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -41,11 +42,12 @@ public class BookingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentBookingBinding = FragmentBookingBinding.inflate(inflater, container, false);
 
-        getListBookingHistory();
+        getListBookingHistory(false);
+        mFragmentBookingBinding.chbBookingUsed.setOnCheckedChangeListener((buttonView, isChecked) -> getListBookingHistory(isChecked));
         return mFragmentBookingBinding.getRoot();
     }
 
-    public void getListBookingHistory() {
+    public void getListBookingHistory(boolean isUsed) {
         if (getActivity() == null) {
             return;
         }
@@ -62,7 +64,16 @@ public class BookingFragment extends Fragment {
                     BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
                     if (bookingHistory != null
                             && DataStoreManager.getUser().getEmail().equals(bookingHistory.getUser())) {
-                        mListBookingHistory.add(0, bookingHistory);
+                        boolean isExpire = DateTimeUtils.convertDateToTimeStamp(bookingHistory.getDate()) < DateTimeUtils.getLongCurrentTimeStamp();
+                        if (isUsed) {
+                            if (isExpire || bookingHistory.isUsed()) {
+                                mListBookingHistory.add(0, bookingHistory);
+                            }
+                        } else {
+                            if (!isExpire && !bookingHistory.isUsed()) {
+                                mListBookingHistory.add(0, bookingHistory);
+                            }
+                        }
                     }
                 }
 
@@ -83,7 +94,7 @@ public class BookingFragment extends Fragment {
         mFragmentBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
 
         mBookingHistoryAdapter = new BookingHistoryAdapter(getActivity(), false,
-                mListBookingHistory, this::showDialogConfirmBooking);
+                mListBookingHistory, this::showDialogConfirmBooking, null);
         mFragmentBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
     }
 

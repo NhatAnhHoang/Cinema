@@ -92,6 +92,7 @@
     <string name="confirm">Xác nhận</string>
     <string name="payment_method">Phương thức thanh toán</string>
     <string name="label_payment">Thanh toán:</string>
+    <string name="label_date_create">Ngày:</string>
     <string name="quantity_stock">Hiện tại còn:</string>
     <string name="request_qr">Quét QR Code</string>
     <string name="revenue">Doanh thu</string>
@@ -100,6 +101,8 @@
     <string name="column_movie_name">Tên phim</string>
     <string name="column_quantity">Số lượng vé</string>
     <string name="column_total_amount">Tổng Tiền</string>
+    <string name="label_booking_used">Vé đã sử dụng</string>
+    <string name="label_confirm_booking">Xác nhận vé</string>
 
     <string name="action_ok">Đồng ý</string>
     <string name="action_cancel">Hủy</string>
@@ -137,6 +140,8 @@
     <string name="msg_delete_category_successfully">Xóa thể loại thành công</string>
     <string name="msg_count_invalid">Hiện tại không đủ số lượng bạn muốn mua</string>
     <string name="msg_payment_error">Thanh toán lỗi, vui lòng thử lại !!!</string>
+    <string name="msg_movie_date_invalid">Phim đã qua ngày công chiếu, vui lòng chọn phim khác !!!</string>
+    <string name="msg_confirm_booking_success">Xác nhận vé thành công !!!</string>
 
     <string name="msg_add_movie_successfully">Thêm phim mới thành công</string>
     <string name="msg_delete_movie_successfully">Xóa phim thành công</string>

@@ -51,8 +51,13 @@ public class AddMovieActivity extends BaseActivity {
 
         mActivityAddMovieBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivityAddMovieBinding.btnAddOrEdit.setOnClickListener(v -> addOrEditMovie());
-        mActivityAddMovieBinding.tvDate.setOnClickListener(v ->
-                GlobalFunction.showDatePicker(this, date -> mActivityAddMovieBinding.tvDate.setText(date)));
+        mActivityAddMovieBinding.tvDate.setOnClickListener(v -> {
+            if (isUpdate) {
+                GlobalFunction.showDatePicker(AddMovieActivity.this, mMovie.getDate(), date -> mActivityAddMovieBinding.tvDate.setText(date));
+            } else {
+                GlobalFunction.showDatePicker(AddMovieActivity.this, "", date -> mActivityAddMovieBinding.tvDate.setText(date));
+            }
+        });
     }
 
     private void initView() {
@@ -181,7 +186,10 @@ public class AddMovieActivity extends BaseActivity {
             map.put("name", strName);
             map.put("description", strDescription);
             map.put("price", Integer.parseInt(strPrice));
-            map.put("date", strDate);
+            if (!strDate.equals(mMovie.getDate())) {
+                map.put("date", strDate);
+                map.put("rooms", GlobalFunction.getListRooms());
+            }
             map.put("image", strImage);
             map.put("imageBanner", strImageBanner);
             map.put("url", strVideo);

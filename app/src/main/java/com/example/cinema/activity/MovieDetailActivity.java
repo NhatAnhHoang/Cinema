@@ -8,15 +8,18 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinema.MyApplication;
+import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.ActivityMovieDetailBinding;
 import com.example.cinema.model.Movie;
+import com.example.cinema.util.DateTimeUtils;
 import com.example.cinema.util.GlideUtils;
 import com.example.cinema.util.StringUtil;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -117,6 +120,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void onClickGoToConfirmBooking() {
         if (mMovie == null) {
+            return;
+        }
+        if (DateTimeUtils.convertDateToTimeStamp(mMovie.getDate()) < DateTimeUtils.getLongCurrentTimeStamp()) {
+            Toast.makeText(this, getString(R.string.msg_movie_date_invalid), Toast.LENGTH_SHORT).show();
             return;
         }
         Bundle bundle = new Bundle();

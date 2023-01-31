@@ -232,7 +232,10 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
             return false;
         }
         String key = mFragmentAdminHomeBinding.edtSearchName.getText().toString().trim();
-        long categoryId = mCategorySelected.getId();
+        long categoryId = 0;
+        if (mCategorySelected != null) {
+            categoryId = mCategorySelected.getId();
+        }
         if (StringUtil.isEmpty(key)) {
             if (categoryId == 0) {
                 return true;

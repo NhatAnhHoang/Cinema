@@ -22,18 +22,24 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
     private Context mContext;
     private final List<BookingHistory> mListBookingHistory;
     private final IClickQRListener iClickQRListener;
+    private final IClickConfirmListener iClickConfirmListener;
     private final boolean mIsAdmin;
 
     public interface IClickQRListener {
         void onClickOpenQrCode(String id);
     }
 
+    public interface IClickConfirmListener {
+        void onClickConfirmBooking(String id);
+    }
+
     public BookingHistoryAdapter(Context context, boolean isAdmin,
-                                 List<BookingHistory> mListBookingHistory, IClickQRListener listener) {
+                                 List<BookingHistory> mListBookingHistory, IClickQRListener listener, IClickConfirmListener confirmListener) {
         this.mContext = context;
         this.mIsAdmin = isAdmin;
         this.mListBookingHistory = mListBookingHistory;
         this.iClickQRListener = listener;
+        this.iClickConfirmListener = confirmListener;
     }
 
     @NonNull
@@ -49,7 +55,8 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         if (bookingHistory == null) {
             return;
         }
-        if (DateTimeUtils.convertDateToTimeStamp(bookingHistory.getDate()) < DateTimeUtils.getLongCurrentTimeStamp()) {
+        boolean isExpire = DateTimeUtils.convertDateToTimeStamp(bookingHistory.getDate()) < DateTimeUtils.getLongCurrentTimeStamp();
+        if (isExpire || bookingHistory.isUsed()) {
             holder.mItemBookingHistoryBinding.layoutItem.setBackgroundColor(mContext.getResources().getColor(R.color.black_overlay));
         } else {
             holder.mItemBookingHistoryBinding.layoutItem.setBackgroundColor(mContext.getResources().getColor(R.color.white));
@@ -66,20 +73,37 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         holder.mItemBookingHistoryBinding.tvPaymentMethod.setText(bookingHistory.getPayment());
         String strTotal = bookingHistory.getTotal() + ConstantKey.UNIT_CURRENCY;
         holder.mItemBookingHistoryBinding.tvTotalAmount.setText(strTotal);
+        holder.mItemBookingHistoryBinding.tvDateCreate.setText(DateTimeUtils.convertTimeStampToDate(String.valueOf(bookingHistory.getId())));
 
         if (mIsAdmin) {
             holder.mItemBookingHistoryBinding.imgQr.setVisibility(View.GONE);
             holder.mItemBookingHistoryBinding.layoutEmail.setVisibility(View.VISIBLE);
             holder.mItemBookingHistoryBinding.tvEmail.setText(bookingHistory.getUser());
+            if (isExpire || bookingHistory.isUsed()) {
+                holder.mItemBookingHistoryBinding.layoutConfirm.setVisibility(View.GONE);
+            } else {
+                holder.mItemBookingHistoryBinding.layoutConfirm.setVisibility(View.VISIBLE);
+                holder.mItemBookingHistoryBinding.chbConfirm.setOnClickListener(new IOnSingleClickListener() {
+                    @Override
+                    public void onSingleClick(View v) {
+                        iClickConfirmListener.onClickConfirmBooking(String.valueOf(bookingHistory.getId()));
+                    }
+                });
+            }
         } else {
+            holder.mItemBookingHistoryBinding.layoutConfirm.setVisibility(View.GONE);
             holder.mItemBookingHistoryBinding.layoutEmail.setVisibility(View.GONE);
             holder.mItemBookingHistoryBinding.imgQr.setVisibility(View.VISIBLE);
-            holder.mItemBookingHistoryBinding.imgQr.setOnClickListener(new IOnSingleClickListener() {
-                @Override
-                public void onSingleClick(View v) {
-                    iClickQRListener.onClickOpenQrCode(String.valueOf(bookingHistory.getId()));
-                }
-            });
+            if (isExpire || bookingHistory.isUsed()) {
+                holder.mItemBookingHistoryBinding.imgQr.setOnClickListener(null);
+            } else {
+                holder.mItemBookingHistoryBinding.imgQr.setOnClickListener(new IOnSingleClickListener() {
+                    @Override
+                    public void onSingleClick(View v) {
+                        iClickQRListener.onClickOpenQrCode(String.valueOf(bookingHistory.getId()));
+                    }
+                });
+            }
         }
     }
 

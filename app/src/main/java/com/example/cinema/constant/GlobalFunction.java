@@ -122,8 +122,21 @@ public class GlobalFunction {
         return list;
     }
 
-    public static void showDatePicker(Context context, final IGetDateListener getDateListener) {
+    public static void showDatePicker(Context context, String currentDate, final IGetDateListener getDateListener) {
         Calendar mCalendar = Calendar.getInstance();
+        int currentDay = mCalendar.get(Calendar.DATE);
+        int currentMonth = mCalendar.get(Calendar.MONTH);
+        int currentYear = mCalendar.get(Calendar.YEAR);
+        mCalendar.set(currentYear, currentMonth, currentDay);
+
+        if (!StringUtil.isEmpty(currentDate)) {
+            String[] split = currentDate.split("-");
+            currentDay = Integer.parseInt(split[0]);
+            currentMonth = Integer.parseInt(split[1]);
+            currentYear = Integer.parseInt(split[2]);
+            mCalendar.set(currentYear, currentMonth - 1, currentDay);
+        }
+
         DatePickerDialog.OnDateSetListener callBack = (view, year, monthOfYear, dayOfMonth) -> {
             String date = StringUtil.getDoubleNumber(dayOfMonth) + "-" + StringUtil.getDoubleNumber(monthOfYear + 1) + "-" + year;
             getDateListener.getDate(date);

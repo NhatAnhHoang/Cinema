@@ -9,6 +9,7 @@ import java.util.Locale;
 public class DateTimeUtils {
 
     private static final String DEFAULT_FORMAT_DATE = "dd-MM-yyyy";
+    private static final String DEFAULT_FORMAT_DATE_2 = "dd/MM/yyyy, hh:mm a";
 
     public static String getDateToday() {
         Calendar c = Calendar.getInstance();
@@ -34,5 +35,21 @@ public class DateTimeUtils {
             }
         }
         return Long.parseLong(result);
+    }
+
+    public static String convertTimeStampToDate(String strTimeStamp) {
+        String result = "";
+        if (strTimeStamp != null) {
+            try {
+                float floatTimestamp = Float.parseFloat(strTimeStamp);
+                long timestamp = (long) floatTimestamp;
+                SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_FORMAT_DATE_2, Locale.ENGLISH);
+                Date date = (new Date(timestamp));
+                result = sdf.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 }

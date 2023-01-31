@@ -13,13 +13,14 @@ public class BookingHistory {
     private String payment;
     private int total;
     private String user;
+    private boolean used;
 
     public BookingHistory() {
     }
 
     public BookingHistory(long id, long movieId, String name, String date, String room, String time,
                           String count, String seats, String foods, String payment,
-                          int total, String user) {
+                          int total, String user, boolean used) {
         this.id = id;
         this.movieId = movieId;
         this.name = name;
@@ -32,6 +33,7 @@ public class BookingHistory {
         this.payment = payment;
         this.total = total;
         this.user = user;
+        this.used = used;
     }
 
     public long getId() {
@@ -128,5 +130,13 @@ public class BookingHistory {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cinema.MyApplication;
+import com.example.cinema.R;
 import com.example.cinema.adapter.BookingHistoryAdapter;
 import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentAdminBookingBinding;
 import com.example.cinema.event.ResultQrCodeEvent;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
+import com.example.cinema.util.DateTimeUtils;
 import com.example.cinema.util.StringUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +41,8 @@ public class AdminBookingFragment extends Fragment {
     private FragmentAdminBookingBinding mFragmentAdminBookingBinding;
     private List<BookingHistory> mListBookingHistory;
     private BookingHistoryAdapter mBookingHistoryAdapter;
+    private boolean mIsUsedChecked;
+    private String mKeyWord = "";
 
     @Nullable
     @Override
@@ -48,13 +53,17 @@ public class AdminBookingFragment extends Fragment {
             EventBus.getDefault().register(this);
         }
         initListener();
-        getListBookingHistory("");
+        getListBookingHistory();
 
         return mFragmentAdminBookingBinding.getRoot();
     }
 
     private void initListener() {
         mFragmentAdminBookingBinding.imgSearch.setOnClickListener(view1 -> searchBooking());
+        mFragmentAdminBookingBinding.chbBookingUsed.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mIsUsedChecked = isChecked;
+            getListBookingHistory();
+        });
 
         mFragmentAdminBookingBinding.edtSearchId.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -77,7 +86,8 @@ public class AdminBookingFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 String strKey = s.toString().trim();
                 if (strKey.equals("") || strKey.length() == 0) {
-                    getListBookingHistory("");
+                    mKeyWord = "";
+                    getListBookingHistory();
                 }
             }
         });
@@ -90,12 +100,12 @@ public class AdminBookingFragment extends Fragment {
     }
 
     private void searchBooking() {
-        String strKey = mFragmentAdminBookingBinding.edtSearchId.getText().toString().trim();
-        getListBookingHistory(strKey);
+        mKeyWord = mFragmentAdminBookingBinding.edtSearchId.getText().toString().trim();
+        getListBookingHistory();
         GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
-    public void getListBookingHistory(String id) {
+    public void getListBookingHistory() {
         if (getActivity() == null) {
             return;
         }
@@ -111,11 +121,26 @@ public class AdminBookingFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     BookingHistory bookingHistory = dataSnapshot.getValue(BookingHistory.class);
                     if (bookingHistory != null) {
-                        if (StringUtil.isEmpty(id)) {
-                            mListBookingHistory.add(0, bookingHistory);
+                        boolean isExpire = DateTimeUtils.convertDateToTimeStamp(bookingHistory.getDate()) < DateTimeUtils.getLongCurrentTimeStamp();
+                        if (mIsUsedChecked) {
+                            if (isExpire || bookingHistory.isUsed()) {
+                                if (StringUtil.isEmpty(mKeyWord)) {
+                                    mListBookingHistory.add(0, bookingHistory);
+                                } else {
+                                    if (String.valueOf(bookingHistory.getId()).contains(mKeyWord)) {
+                                        mListBookingHistory.add(0, bookingHistory);
+                                    }
+                                }
+                            }
                         } else {
-                            if (String.valueOf(bookingHistory.getId()).contains(id)) {
-                                mListBookingHistory.add(0, bookingHistory);
+                            if (!isExpire && !bookingHistory.isUsed()) {
+                                if (StringUtil.isEmpty(mKeyWord)) {
+                                    mListBookingHistory.add(0, bookingHistory);
+                                } else {
+                                    if (String.valueOf(bookingHistory.getId()).contains(mKeyWord)) {
+                                        mListBookingHistory.add(0, bookingHistory);
+                                    }
+                                }
                             }
                         }
                     }
@@ -137,8 +162,16 @@ public class AdminBookingFragment extends Fragment {
         mFragmentAdminBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
 
         mBookingHistoryAdapter = new BookingHistoryAdapter(getActivity(), true,
-                mListBookingHistory, null);
+                mListBookingHistory, null, this::updateStatusBooking);
         mFragmentAdminBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
+    }
+
+    private void updateStatusBooking(String id) {
+        if (getActivity() == null) {
+            return;
+        }
+        MyApplication.get(getActivity()).getBookingDatabaseReference().child(id).child("used").setValue(true,
+                (error, ref) -> Toast.makeText(getActivity(), getString(R.string.msg_confirm_booking_success), Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -160,7 +193,8 @@ public class AdminBookingFragment extends Fragment {
     public void onMessageEvent(ResultQrCodeEvent event) {
         if (event != null) {
             mFragmentAdminBookingBinding.edtSearchId.setText(event.getResult());
-            getListBookingHistory(event.getResult());
+            mKeyWord = event.getResult();
+            getListBookingHistory();
         }
     }
 
