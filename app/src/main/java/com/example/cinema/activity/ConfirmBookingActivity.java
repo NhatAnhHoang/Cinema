@@ -61,6 +61,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmBookingActivity extends AppCompatActivity {
+    private String NhatAnh = "Hoàng Nhật Anh";
 
     public static final int PAYPAL_REQUEST_CODE = 199;
     public static final String PAYPAL_PAYMENT_STATUS_APPROVED = "approved";
