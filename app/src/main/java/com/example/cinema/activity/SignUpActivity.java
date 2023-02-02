@@ -34,13 +34,19 @@ public class SignUpActivity extends BaseActivity {
     private void onClickValidateSignUp() {
         String strEmail = mActivitySignUpBinding.edtEmail.getText().toString().trim();
         String strPassword = mActivitySignUpBinding.edtPassword.getText().toString().trim();
+        String strPasswordConfirm = mActivitySignUpBinding.edtPasswordConfirm.getText().toString().trim();
         if (StringUtil.isEmpty(strEmail)) {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_require), Toast.LENGTH_SHORT).show();
         } else if (StringUtil.isEmpty(strPassword)) {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_password_require), Toast.LENGTH_SHORT).show();
+        } else if (StringUtil.isEmpty(strPasswordConfirm)) {
+            Toast.makeText(SignUpActivity.this, getString(R.string.msg_password_require_confirm), Toast.LENGTH_SHORT).show();
         } else if (!StringUtil.isValidEmail(strEmail)) {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (!strPassword.equals(strPasswordConfirm)) {
+            Toast.makeText(SignUpActivity.this, getString(R.string.msg_confirm), Toast.LENGTH_SHORT).show();
+        }
+        else {
             if (mActivitySignUpBinding.rdbAdmin.isChecked()) {
                 if (!strEmail.contains(ADMIN_EMAIL_FORMAT)) {
                     Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();

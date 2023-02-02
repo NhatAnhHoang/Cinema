@@ -43,12 +43,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/img_movie"
-                    android:layout_width="@dimen/define_dimen_130"
-                    android:layout_height="@dimen/define_dimen_155"
+                    android:layout_width="@dimen/define_dimen_180"
+                    android:layout_height="@dimen/define_dimen_250"
                     android:scaleType="centerCrop"
                     android:src="@drawable/img_no_available"
                     tools:ignore="ContentDescription" />
@@ -133,7 +133,6 @@
                             android:textSize="@dimen/text_size_small"
                             android:layout_marginStart="@dimen/define_dimen_5" />
                     </LinearLayout>
-
                     <Button
                         android:id="@+id/btn_watch_trailer"
                         android:layout_width="match_parent"
@@ -141,7 +140,7 @@
                         android:textSize="@dimen/text_size_small"
                         android:text="@string/watch_trailer"
                         android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/define_dimen_10"
+                        android:layout_marginTop="107dp"
                         android:background="@drawable/bg_green_corner_8"/>
                 </LinearLayout>
             </RelativeLayout>

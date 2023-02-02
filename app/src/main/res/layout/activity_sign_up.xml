@@ -25,29 +25,55 @@
             android:text="@string/sign_up"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_xnormal"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/define_dimen_50"/>
 
         <EditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/define_dimen_50"
             android:layout_marginTop="@dimen/define_dimen_20"
             android:hint="@string/hint_email"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            android:background="@drawable/custom_edittext"
+            android:drawableRight="@drawable/ic_email"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginBottom="@dimen/define_dimen_20"/>
 
         <EditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/define_dimen_50"
             android:hint="@string/hint_password"
             android:layout_marginTop="@dimen/define_dimen_10"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            android:background="@drawable/custom_edittext"
+            android:drawableRight="@drawable/ic_key"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginBottom="@dimen/define_dimen_20"/>
+        <EditText
+            android:id="@+id/edt_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/define_dimen_50"
+            android:layout_marginTop="@dimen/define_dimen_10"
+            android:hint="@string/hint_password_confirm_singin"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_small"
+            android:background="@drawable/custom_edittext"
+            android:drawableRight="@drawable/ic_key"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginBottom="@dimen/define_dimen_20"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -74,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/define_dimen_30"
-            android:background="@drawable/bg_main_corner_8"
+            android:background="@drawable/custom_button"
             android:text="@string/sign_up_user"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small" />

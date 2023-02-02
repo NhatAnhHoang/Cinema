@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
@@ -65,7 +66,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         getDataIntent();
     }
-
     private void getDataIntent() {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
@@ -229,5 +229,31 @@ public class MovieDetailActivity extends AppCompatActivity {
             // Set play video
             mPlayer.setPlayWhenReady(true);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        showDialogLogout();
+    }
+
+    private void showDialogLogout() {
+        new MaterialDialog.Builder(this)
+                .title("Cảnh Báo!")
+                .content("Bạn có muốn rời đi không ?")
+                .positiveText(getString(R.string.action_ok))
+                .negativeText(getString(R.string.action_cancel))
+                .onPositive((dialog, which) -> {
+                    dialog.dismiss();
+                    pauseVideo();
+                    finish();
+
+                })
+                .onNegative((dialog, which) -> dialog.dismiss())
+                .cancelable(true)
+                .show();
+    }
+
+    private void pauseVideo() {
+        mPlayer.setPlayWhenReady(false);
+
     }
 }

@@ -3,6 +3,7 @@ package com.example.cinema.activity.admin;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
@@ -65,8 +66,11 @@ public class AddCategoryActivity extends BaseActivity {
             return;
         }
 
+
+
         // Update category
         if (isUpdate) {
+
             showProgressDialog(true);
             Map<String, Object> map = new HashMap<>();
             map.put("name", strName);
@@ -77,7 +81,9 @@ public class AddCategoryActivity extends BaseActivity {
                 showProgressDialog(false);
                 Toast.makeText(AddCategoryActivity.this,
                         getString(R.string.msg_edit_category_successfully), Toast.LENGTH_SHORT).show();
+
                 GlobalFunction.hideSoftKeyboard(AddCategoryActivity.this);
+                finish();
             });
             return;
         }
@@ -94,5 +100,24 @@ public class AddCategoryActivity extends BaseActivity {
             GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_category_successfully), Toast.LENGTH_SHORT).show();
         });
+    }
+    private void showDialogLogout() {
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.app_name))
+                .content("Bạn đang thoát")
+                .positiveText(getString(R.string.action_ok))
+                .negativeText(getString(R.string.action_cancel))
+                .onPositive((dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
+                })
+                .onNegative((dialog, which) -> dialog.dismiss())
+                .cancelable(true)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showDialogLogout();
     }
 }

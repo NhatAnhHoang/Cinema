@@ -73,7 +73,7 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void displayListMovies() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mActivityCategoryBinding.rcvData.setLayoutManager(gridLayoutManager);
         MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
                 movie -> GlobalFunction.goToMovieDetail(this, movie));

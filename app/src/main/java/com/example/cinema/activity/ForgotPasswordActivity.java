@@ -44,6 +44,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                         Toast.makeText(ForgotPasswordActivity.this,
                                 getString(R.string.msg_reset_password_successfully),
                                 Toast.LENGTH_SHORT).show();
+                        finish();
                         mActivityForgotPasswordBinding.edtEmail.setText("");
                     }
                 });

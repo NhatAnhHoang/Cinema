@@ -5,12 +5,12 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <CheckBox
+    <Switch
         android:id="@+id/chb_booking_used"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/define_dimen_10"
-        android:text="@string/label_booking_used"/>
+        android:text="@string/label_booking_used" />
 
     <View
         android:layout_width="match_parent"

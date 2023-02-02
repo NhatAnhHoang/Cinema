@@ -1,18 +1,23 @@
 package com.example.cinema.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemBookingHistoryBinding;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
+import com.example.cinema.model.Food;
 import com.example.cinema.util.DateTimeUtils;
 
 import java.util.List;
@@ -86,7 +91,26 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
                 holder.mItemBookingHistoryBinding.chbConfirm.setOnClickListener(new IOnSingleClickListener() {
                     @Override
                     public void onSingleClick(View v) {
-                        iClickConfirmListener.onClickConfirmBooking(String.valueOf(bookingHistory.getId()));
+                        new MaterialDialog.Builder(v.getContext())
+                                .title(bookingHistory.getName())
+                                .content(
+                                        bookingHistory.getRoom()+
+                                        "\nGhế "
+                                        +bookingHistory.getSeats()
+
+
+                                )
+                                .positiveText("oke")
+                                .negativeText("không")
+                                .onPositive((dialog, which) -> {
+                                    iClickConfirmListener.onClickConfirmBooking(String.valueOf(bookingHistory.getId()));
+                                    dialog.dismiss();
+                                })
+                                .onNegative((dialog, which) -> {
+                                    dialog.dismiss();
+                                    holder.mItemBookingHistoryBinding.chbConfirm.setChecked(false);
+                                })
+                                .show();
                     }
                 });
             }
@@ -120,9 +144,7 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
     }
 
     public static class BookingHistoryViewHolder extends RecyclerView.ViewHolder {
-
         private final ItemBookingHistoryBinding mItemBookingHistoryBinding;
-
         public BookingHistoryViewHolder(@NonNull ItemBookingHistoryBinding itemBookingHistoryBinding) {
             super(itemBookingHistoryBinding.getRoot());
             this.mItemBookingHistoryBinding = itemBookingHistoryBinding;

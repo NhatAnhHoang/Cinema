@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MyApplication extends Application {
 
-    private static final String FIREBASE_URL = "https://cinema-c68f6-default-rtdb.firebaseio.com";
+    private static final String FIREBASE_URL = "https://cinema-2f325-default-rtdb.firebaseio.com";
 
     public static MyApplication get(Context context) {
         return (MyApplication) context.getApplicationContext();

@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void displayListAllMovies() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mFragmentHomeBinding.rcvMovie.setLayoutManager(gridLayoutManager);
         MovieAdapter movieAdapter = new MovieAdapter(mListMovies,
                 movie -> GlobalFunction.goToMovieDetail(getActivity(), movie));

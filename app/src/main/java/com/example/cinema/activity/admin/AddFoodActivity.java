@@ -3,6 +3,7 @@ package com.example.cinema.activity.admin;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.activity.BaseActivity;
@@ -85,6 +86,7 @@ public class AddFoodActivity extends BaseActivity {
                 showProgressDialog(false);
                 Toast.makeText(AddFoodActivity.this, getString(R.string.msg_edit_food_successfully), Toast.LENGTH_SHORT).show();
                 GlobalFunction.hideSoftKeyboard(AddFoodActivity.this);
+                finish();
             });
             return;
         }
@@ -102,5 +104,24 @@ public class AddFoodActivity extends BaseActivity {
             GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_food_successfully), Toast.LENGTH_SHORT).show();
         });
+    }
+    private void showDialogLogout() {
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.app_name))
+                .content("Bạn đang thoát")
+                .positiveText(getString(R.string.action_ok))
+                .negativeText(getString(R.string.action_cancel))
+                .onPositive((dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
+                })
+                .onNegative((dialog, which) -> dialog.dismiss())
+                .cancelable(true)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showDialogLogout();
     }
 }

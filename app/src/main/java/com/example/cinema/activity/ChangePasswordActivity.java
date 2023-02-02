@@ -60,9 +60,8 @@ public class ChangePasswordActivity extends BaseActivity {
                         User userLogin = DataStoreManager.getUser();
                         userLogin.setPassword(newPassword);
                         DataStoreManager.setUser(userLogin);
-                        mActivityChangePasswordBinding.edtOldPassword.setText("");
-                        mActivityChangePasswordBinding.edtNewPassword.setText("");
-                        mActivityChangePasswordBinding.edtConfirmPassword.setText("");
+                        finish();
+
                     }
                 });
     }

@@ -487,6 +487,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                             Toast.makeText(ConfirmBookingActivity.this,
                                     getString(R.string.msg_booking_movie_success), Toast.LENGTH_LONG).show();
                             GlobalFunction.hideSoftKeyboard(ConfirmBookingActivity.this);
+                            finish();
                         }));
     }
 

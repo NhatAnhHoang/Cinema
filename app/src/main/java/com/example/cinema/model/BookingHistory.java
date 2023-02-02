@@ -17,7 +17,7 @@ public class BookingHistory {
 
     public BookingHistory() {
     }
-
+//commit
     public BookingHistory(long id, long movieId, String name, String date, String room, String time,
                           String count, String seats, String foods, String payment,
                           int total, String user, boolean used) {

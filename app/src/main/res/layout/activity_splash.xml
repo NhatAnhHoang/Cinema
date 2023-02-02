@@ -2,15 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
-
-    <TextView
+    android:background="@drawable/background_splash">
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/yellow"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_xxhuge"
-        android:text="@string/app_name"/>
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:src="@drawable/popcorn" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_xxhuge"
+            android:text="@string/app_name"/>
+    </LinearLayout>
 
 </RelativeLayout>

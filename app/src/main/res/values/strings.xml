@@ -13,8 +13,9 @@
     <string name="nav_admin_manage">Quản lý</string>
 
     <string name="hint_search_movie">Tên phim…</string>
-    <string name="hint_email">Email…</string>
+    <string name="hint_email">Email… ex: abc@gmai.com</string>
     <string name="hint_password">Mật khẩu…</string>
+    <string name="hint_password_confirm_singin">Xác Nhận Mật khẩu…</string>
     <string name="hint_password_old">Mật khẩu cũ…</string>
     <string name="hint_password_new">Mật khẩu mới…</string>
     <string name="hint_password_confirm">Xác nhận mật khẩu mới…</string>
@@ -39,7 +40,7 @@
     <string name="sign_in">Đăng Nhập</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="change_password">Đổi mật khẩu</string>
-    <string name="report">Báo cáo doanh thu</string>
+    <string name="report">Báo cáo doanh thu trong ngày</string>
     <string name="sign_out">Đăng xuất</string>
     <string name="history_booking">Lịch sử đặt vé</string>
     <string name="reset_password">Gửi lại mật khẩu</string>
@@ -112,6 +113,7 @@
     <string name="msg_confirm_login_another_device">Bạn có chắc chắn muốn thoát ứng dụng?</string>
     <string name="msg_email_require">Vui lòng nhập địa chỉ email</string>
     <string name="msg_password_require">Vui lòng nhập mật khẩu</string>
+    <string name="msg_password_require_confirm">Vui lòng nhập mật khẩu xác nhận</string>
     <string name="msg_old_password_require">Vui lòng nhập mật khẩu cũ</string>
     <string name="msg_new_password_require">Vui lòng nhập mật khẩu mới</string>
     <string name="msg_confirm_password_require">Vui lòng xác nhận mật khẩu mới</string>
@@ -121,6 +123,7 @@
     <string name="msg_change_password_successfully">Thay đổi mật khẩu thành công</string>
     <string name="msg_reset_password_successfully">Reset mật khẩu thành công, vui lòng kiểm tra email của bạn</string>
     <string name="msg_email_invalid">Email không hợp lệ, vui lòng nhập lại</string>
+    <string name="msg_confirm">Mật khẩu không trùng khớp !</string>
     <string name="msg_email_invalid_admin">Email sai định dạng dành cho quản trị viên</string>
     <string name="msg_email_invalid_user">Email sai định dạng dành cho người dùng</string>
     <string name="msg_sign_up_error">Đăng ký không thành công, vui lòng thử lại</string>
@@ -140,7 +143,7 @@
     <string name="msg_delete_category_successfully">Xóa thể loại thành công</string>
     <string name="msg_count_invalid">Hiện tại không đủ số lượng bạn muốn mua</string>
     <string name="msg_payment_error">Thanh toán lỗi, vui lòng thử lại !!!</string>
-    <string name="msg_movie_date_invalid">Phim đã qua ngày công chiếu, vui lòng chọn phim khác !!!</string>
+    <string name="msg_movie_date_invalid">Phim đã qua ngày chiếu, vui lòng chọn phim khác !!!</string>
     <string name="msg_confirm_booking_success">Xác nhận vé thành công !!!</string>
 
     <string name="msg_add_movie_successfully">Thêm phim mới thành công</string>

@@ -44,8 +44,9 @@ public class SignInActivity extends BaseActivity {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_require), Toast.LENGTH_SHORT).show();
         } else if (StringUtil.isEmpty(strPassword)) {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_password_require), Toast.LENGTH_SHORT).show();
-        } else if (!StringUtil.isValidEmail(strEmail)) {
+        }  else if (!StringUtil.isValidEmail(strEmail)) {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
+
         } else {
             if (mActivitySignInBinding.rdbAdmin.isChecked()) {
                 if (!strEmail.contains(ADMIN_EMAIL_FORMAT)) {
