@@ -128,6 +128,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, mMovie);
+        pauseVideo();
         GlobalFunction.startActivity(this, ConfirmBookingActivity.class, bundle);
     }
 

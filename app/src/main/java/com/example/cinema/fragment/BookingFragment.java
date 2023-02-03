@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingFragment extends Fragment {
+public class BookingFragment extends Fragment implements BookingHistoryAdapter.BookingListener {
 
     private FragmentBookingBinding mFragmentBookingBinding;
     private List<BookingHistory> mListBookingHistory;
@@ -94,7 +94,7 @@ public class BookingFragment extends Fragment {
         mFragmentBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
 
         mBookingHistoryAdapter = new BookingHistoryAdapter(getActivity(), false,
-                mListBookingHistory, this::showDialogConfirmBooking, null);
+                mListBookingHistory, this::showDialogConfirmBooking, null, this);
         mFragmentBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
     }
 
@@ -129,5 +129,11 @@ public class BookingFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (mBookingHistoryAdapter != null) mBookingHistoryAdapter.release();
+    }
+
+    @Override
+    public void onclickTicket(BookingHistory item) {
+        DialogdetailTicketFragment dialogdetailTicketFragment = new DialogdetailTicketFragment();
+        dialogdetailTicketFragment.show(getFragmentManager(),"HEHE");
     }
 }

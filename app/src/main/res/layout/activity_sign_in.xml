@@ -2,65 +2,103 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="@dimen/define_dimen_18">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
             android:text="@string/sign_in"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_xnormal"
-            android:textStyle="bold"
-            android:layout_marginBottom="50dp"
-            android:layout_gravity="center"/>
+            android:textStyle="bold" />
 
+        <com.google.android.material.textfield.TextInputLayout
 
-        <EditText
-            android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/define_dimen_50"
-            android:layout_marginTop="@dimen/define_dimen_20"
-            android:hint="@string/hint_email"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small"
-            android:background="@drawable/custom_edittext"
-            android:drawableRight="@drawable/ic_email"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:layout_marginBottom="@dimen/define_dimen_30"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext">
 
-        <EditText
-            android:id="@+id/edt_password"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_email"
+                android:hint="@string/hint_email"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:paddingRight="25dp"
+                android:textSize="@dimen/text_size_small" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/edt_email"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/define_dimen_50"-->
+        <!--            android:layout_marginTop="@dimen/define_dimen_20"-->
+        <!--            android:layout_marginBottom="@dimen/define_dimen_30"-->
+        <!--            android:background="@drawable/custom_edittext"-->
+        <!--            android:drawableRight="@drawable/ic_email"-->
+        <!--            android:hint="@string/hint_email"-->
+        <!--            android:imeOptions="actionNext"-->
+        <!--            android:inputType="textEmailAddress"-->
+        <!--            android:paddingLeft="15dp"-->
+        <!--            android:paddingRight="15dp"-->
+        <!--            android:textColor="@color/colorPrimaryDark"-->
+        <!--            android:textSize="@dimen/text_size_small" />-->
+        <!--        -->
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/define_dimen_50"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/define_dimen_10"
-            android:hint="@string/hint_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small"
             android:background="@drawable/custom_edittext"
-            android:drawableRight="@drawable/ic_key"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"/>
+            android:inputType="textPassword|textVisiblePassword"
+            android:paddingRight="15dp"
+            app:endIconMode="password_toggle">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="@dimen/text_size_small" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/edt_password"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/define_dimen_50"-->
+        <!--            android:layout_marginTop="@dimen/define_dimen_10"-->
+        <!--            android:background="@drawable/custom_edittext"-->
+        <!--            android:drawableRight="@drawable/ic_key"-->
+        <!--            android:hint="@string/hint_password"-->
+        <!--            android:imeOptions="actionDone"-->
+        <!--            android:inputType="textPassword"-->
+        <!--            android:paddingLeft="15dp"-->
+        <!--            android:paddingRight="15dp"-->
+        <!--            android:textColor="@color/colorPrimaryDark"-->
+        <!--            android:textSize="@dimen/text_size_small" />-->
 
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/define_dimen_20"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rdb_admin"
@@ -90,12 +128,12 @@
             android:id="@+id/tv_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/define_dimen_10"
             android:text="@string/forgot_password"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
-            android:textStyle="normal"
-            android:layout_gravity="center"/>
+            android:textStyle="normal" />
 
     </LinearLayout>
 

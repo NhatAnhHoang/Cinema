@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:scaleType="fitXY"
                 android:id="@+id/img_category"
                 android:layout_width="@dimen/define_dimen_60"
                 android:layout_height="@dimen/define_dimen_40"

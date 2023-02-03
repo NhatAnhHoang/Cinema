@@ -36,7 +36,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminBookingFragment extends Fragment {
+public class AdminBookingFragment extends Fragment implements BookingHistoryAdapter.BookingListener {
 
     private FragmentAdminBookingBinding mFragmentAdminBookingBinding;
     private List<BookingHistory> mListBookingHistory;
@@ -162,7 +162,7 @@ public class AdminBookingFragment extends Fragment {
         mFragmentAdminBookingBinding.rcvBookingHistory.setLayoutManager(linearLayoutManager);
 
         mBookingHistoryAdapter = new BookingHistoryAdapter(getActivity(), true,
-                mListBookingHistory, null, this::updateStatusBooking);
+                mListBookingHistory, null, this::updateStatusBooking,this);
         mFragmentAdminBookingBinding.rcvBookingHistory.setAdapter(mBookingHistoryAdapter);
     }
 
@@ -204,5 +204,10 @@ public class AdminBookingFragment extends Fragment {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    @Override
+    public void onclickTicket(BookingHistory item) {
+      Toast.makeText(getContext(),"Vé chưa sử dụng", Toast.LENGTH_SHORT).show();
     }
 }

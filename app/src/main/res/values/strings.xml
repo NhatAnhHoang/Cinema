@@ -13,7 +13,7 @@
     <string name="nav_admin_manage">Quản lý</string>
 
     <string name="hint_search_movie">Tên phim…</string>
-    <string name="hint_email">Email… ex: abc@gmai.com</string>
+    <string name="hint_email">Email…</string>
     <string name="hint_password">Mật khẩu…</string>
     <string name="hint_password_confirm_singin">Xác Nhận Mật khẩu…</string>
     <string name="hint_password_old">Mật khẩu cũ…</string>

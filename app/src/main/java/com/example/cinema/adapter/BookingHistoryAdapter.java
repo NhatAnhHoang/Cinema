@@ -1,7 +1,9 @@
 package com.example.cinema.adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemBookingHistoryBinding;
+import com.example.cinema.fragment.DialogdetailTicketFragment;
 import com.example.cinema.listener.IOnSingleClickListener;
 import com.example.cinema.model.BookingHistory;
 import com.example.cinema.model.Food;
@@ -28,6 +31,7 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
     private final List<BookingHistory> mListBookingHistory;
     private final IClickQRListener iClickQRListener;
     private final IClickConfirmListener iClickConfirmListener;
+    private final BookingListener bookingListener;
     private final boolean mIsAdmin;
 
     public interface IClickQRListener {
@@ -45,6 +49,17 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         this.mListBookingHistory = mListBookingHistory;
         this.iClickQRListener = listener;
         this.iClickConfirmListener = confirmListener;
+        bookingListener = null;
+    }
+
+    public BookingHistoryAdapter(Context context, boolean isAdmin,
+                                 List<BookingHistory> mListBookingHistory, IClickQRListener listener, IClickConfirmListener confirmListener, BookingListener bookingListener) {
+        this.mContext = context;
+        this.mIsAdmin = isAdmin;
+        this.mListBookingHistory = mListBookingHistory;
+        this.iClickQRListener = listener;
+        this.iClickConfirmListener = confirmListener;
+        this.bookingListener = bookingListener;
     }
 
     @NonNull
@@ -79,7 +94,12 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
         String strTotal = bookingHistory.getTotal() + ConstantKey.UNIT_CURRENCY;
         holder.mItemBookingHistoryBinding.tvTotalAmount.setText(strTotal);
         holder.mItemBookingHistoryBinding.tvDateCreate.setText(DateTimeUtils.convertTimeStampToDate(String.valueOf(bookingHistory.getId())));
-
+        holder.mItemBookingHistoryBinding.layoutItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookingListener.onclickTicket(bookingHistory);
+            }
+        });
         if (mIsAdmin) {
             holder.mItemBookingHistoryBinding.imgQr.setVisibility(View.GONE);
             holder.mItemBookingHistoryBinding.layoutEmail.setVisibility(View.VISIBLE);
@@ -149,5 +169,9 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
             super(itemBookingHistoryBinding.getRoot());
             this.mItemBookingHistoryBinding = itemBookingHistoryBinding;
         }
+    }
+
+    public interface BookingListener{
+        void onclickTicket(BookingHistory item);
     }
 }
