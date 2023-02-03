@@ -2,24 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_splash">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:src="@drawable/popcorn" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/yellow"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:textSize="@dimen/text_size_xxhuge"
-            android:text="@string/app_name"/>
-    </LinearLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#c0392b">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="250dp"
+            android:layout_height="@dimen/define_dimen_250"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/cinemasplash"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MVP Cinema"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_huge"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/define_dimen_20"/>
+    </LinearLayout>
 </RelativeLayout>
