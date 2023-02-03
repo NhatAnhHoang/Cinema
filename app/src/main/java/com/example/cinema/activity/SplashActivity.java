@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(activitySplashBinding.getRoot());
 
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(this::goToNextActivity, 2000);
+        handler.postDelayed(this::goToNextActivity, 3000);
     }
 
     private void goToNextActivity() {

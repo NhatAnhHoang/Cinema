@@ -64,4 +64,6 @@ dependencies {
     // QR code
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    // animation splash
+    implementation 'com.airbnb.android:lottie:3.4.4'
 }
