@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.databinding.ItemFoodBinding;
 import com.example.cinema.model.Food;
+import com.example.cinema.util.GlideUtils;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.Food
         if (food == null) {
             return;
         }
+        GlideUtils.loadUrl(food.getImage(), holder.mItemFoodBinding.imgFood);
         holder.mItemFoodBinding.tvName.setText(food.getName());
         String strPrice = food.getPrice() + ConstantKey.UNIT_CURRENCY;
         holder.mItemFoodBinding.tvPrice.setText(strPrice);

@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/mitr_regular"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
@@ -52,6 +53,7 @@
                     android:text="@string/label_category"
                     android:textColor="@color/xam"
                     android:textStyle="italic"
+                    android:fontFamily="@font/mitr_light"
                     android:textSize="@dimen/text_size_xsmall" />
 
                 <TextView
@@ -60,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/define_dimen_5"
                     android:textColor="@color/xam"
+                    android:fontFamily="@font/mitr_light"
                     android:textStyle="italic"
                     android:textSize="@dimen/text_size_xsmall" />
             </LinearLayout>
@@ -72,6 +75,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@string/app_name"
+                android:fontFamily="@font/mitr_light"
                 android:textColor="@color/xam"
                 android:textSize="@dimen/text_size_xsmall" />
 
@@ -82,6 +86,7 @@
                 android:layout_marginTop="@dimen/define_dimen_2"
                 android:text="100 000 VNĐ / 1 vé"
                 android:textColor="@color/red"
+                android:fontFamily="@font/mitr_light"
                 android:textSize="@dimen/text_size_xsmall"
                 android:textStyle="bold" />
 
@@ -96,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/date_movie"
+                    android:fontFamily="@font/mitr_light"
                     android:textColor="@color/light_blue_600"
                     android:textSize="@dimen/text_size_xsmall" />
 
@@ -105,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/define_dimen_5"
                     android:textColor="@color/xam"
+                    android:fontFamily="@font/mitr_light"
                     android:textSize="@dimen/text_size_xsmall" />
             </LinearLayout>
         </LinearLayout>

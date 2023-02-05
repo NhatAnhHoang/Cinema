@@ -1,6 +1,7 @@
 package com.example.cinema.model;
 
 public class BookingHistory {
+    private String img;
     private long id;
     private long movieId;
     private String name;
@@ -13,6 +14,15 @@ public class BookingHistory {
     private String payment;
     private int total;
     private String user;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     private boolean used;
 
     public BookingHistory() {
@@ -20,7 +30,7 @@ public class BookingHistory {
 //commit
     public BookingHistory(long id, long movieId, String name, String date, String room, String time,
                           String count, String seats, String foods, String payment,
-                          int total, String user, boolean used) {
+                          int total, String user, boolean used,String img) {
         this.id = id;
         this.movieId = movieId;
         this.name = name;
@@ -34,6 +44,7 @@ public class BookingHistory {
         this.total = total;
         this.user = user;
         this.used = used;
+        this.img = img;
     }
 
     public long getId() {

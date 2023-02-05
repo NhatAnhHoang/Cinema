@@ -1,4 +1,4 @@
-package com.example.cinema.activity;
+package com.example.cinema.activity.admin;
 
 import android.animation.ObjectAnimator;
 import android.net.Uri;
@@ -13,11 +13,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
+import com.example.cinema.activity.ConfirmBookingActivity;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFunction;
+import com.example.cinema.databinding.ActivityAdminMovieDetailBinding;
 import com.example.cinema.databinding.ActivityMovieDetailBinding;
 import com.example.cinema.model.Movie;
 import com.example.cinema.util.DateTimeUtils;
@@ -50,9 +51,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class AdminMovieDetailActivity extends AppCompatActivity {
 
-    private ActivityMovieDetailBinding mActivityMovieDetailBinding;
+    private ActivityAdminMovieDetailBinding mActivityAdminMovieDetailBinding;
     private Movie mMovie;
 
     private ExtractorMediaSource mMediaSource;
@@ -61,8 +62,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityMovieDetailBinding = ActivityMovieDetailBinding.inflate(getLayoutInflater());
-        setContentView(mActivityMovieDetailBinding.getRoot());
+        mActivityAdminMovieDetailBinding = ActivityAdminMovieDetailBinding.inflate(getLayoutInflater());
+        setContentView(mActivityAdminMovieDetailBinding.getRoot());
 
         getDataIntent();
     }
@@ -97,13 +98,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (mMovie == null) {
             return;
         }
-        GlideUtils.loadUrl(mMovie.getImage(), mActivityMovieDetailBinding.imgMovie);
-        mActivityMovieDetailBinding.tvTitleMovie.setText(mMovie.getName());
-        mActivityMovieDetailBinding.tvCategoryName.setText(mMovie.getCategoryName());
-        mActivityMovieDetailBinding.tvDateMovie.setText(mMovie.getDate());
+        GlideUtils.loadUrl(mMovie.getImage(), mActivityAdminMovieDetailBinding.imgMovie);
+        mActivityAdminMovieDetailBinding.tvTitleMovie.setText(mMovie.getName());
+        mActivityAdminMovieDetailBinding.tvCategoryName.setText(mMovie.getCategoryName());
+        mActivityAdminMovieDetailBinding.tvDateMovie.setText(mMovie.getDate());
         String strPrice = mMovie.getPrice() + ConstantKey.UNIT_CURRENCY_MOVIE;
-        mActivityMovieDetailBinding.tvPriceMovie.setText(strPrice);
-        mActivityMovieDetailBinding.tvDescriptionMovie.setText(mMovie.getDescription());
+        mActivityAdminMovieDetailBinding.tvPriceMovie.setText(strPrice);
+        mActivityAdminMovieDetailBinding.tvDescriptionMovie.setText(mMovie.getDescription());
 
         if (!StringUtil.isEmpty(mMovie.getUrl())) {
             Log.e("Movie Url", mMovie.getUrl());
@@ -112,11 +113,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        mActivityMovieDetailBinding.imgBack.setOnClickListener(view -> onBackPressed());
-        mActivityMovieDetailBinding.btnWatchTrailer.setOnClickListener(view -> scrollToLayoutTrailer());
-        mActivityMovieDetailBinding.imgPlayMovie.setOnClickListener(view -> startVideo());
-        mActivityMovieDetailBinding.btnBooking.setOnClickListener(view -> onClickGoToConfirmBooking());
-    }
+        mActivityAdminMovieDetailBinding.imgBack.setOnClickListener(view -> onBackPressed());
+        mActivityAdminMovieDetailBinding.btnWatchTrailer.setOnClickListener(view -> scrollToLayoutTrailer());
+        mActivityAdminMovieDetailBinding.imgPlayMovie.setOnClickListener(view -> startVideo());
+         }
 
     private void onClickGoToConfirmBooking() {
         if (mMovie == null) {
@@ -135,8 +135,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void scrollToLayoutTrailer() {
         long dulation = 500;
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            float y = mActivityMovieDetailBinding.labelMovieTrailer.getY();
-            ScrollView sv = mActivityMovieDetailBinding.scrollView;
+            float y = mActivityAdminMovieDetailBinding.labelMovieTrailer.getY();
+            ScrollView sv = mActivityAdminMovieDetailBinding.scrollView;
             ObjectAnimator objectAnimator = ObjectAnimator.ofInt(sv, "scrollY", 0, (int) y);
             objectAnimator.start();
 
@@ -145,7 +145,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void initExoPlayer() {
-        PlayerView mExoPlayerView = mActivityMovieDetailBinding.exoplayer;
+        PlayerView mExoPlayerView = mActivityAdminMovieDetailBinding.exoplayer;
 
         if (mPlayer != null) {
             return;
@@ -223,7 +223,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void startVideo() {
-        mActivityMovieDetailBinding.imgPlayMovie.setVisibility(View.GONE);
+        mActivityAdminMovieDetailBinding.imgPlayMovie.setVisibility(View.GONE);
         if (mPlayer != null) {
             // Prepare video source
             mPlayer.prepare(mMediaSource);
@@ -236,23 +236,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         pauseVideo();
         finish();
     }
-//
-//    private void showDialogLogout() {
-//        new MaterialDialog.Builder(this)
-//                .title("Cảnh Báo!")
-//                .content("Bạn có muốn rời đi không ?")
-//                .positiveText(getString(R.string.action_ok))
-//                .negativeText(getString(R.string.action_cancel))
-//                .onPositive((dialog, which) -> {
-//                    dialog.dismiss();
-//                    pauseVideo();
-//                    finish();
-//
-//                })
-//                .onNegative((dialog, which) -> dialog.dismiss())
-//                .cancelable(true)
-//                .show();
-//    }
 
     private void pauseVideo() {
         mPlayer.setPlayWhenReady(false);

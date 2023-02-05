@@ -15,7 +15,8 @@
         android:layout_toStartOf="@+id/img_drop"
         android:padding="@dimen/define_dimen_12"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/text_size_small"
+        android:fontFamily="@font/mitr_regular"/>
 
     <ImageView
         android:id="@+id/img_drop"

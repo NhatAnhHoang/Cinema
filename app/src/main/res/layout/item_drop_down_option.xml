@@ -13,5 +13,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:textSize="@dimen/text_size_xsmall"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/mitr_regular"/>
 </LinearLayout>

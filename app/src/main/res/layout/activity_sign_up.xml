@@ -14,19 +14,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/define_dimen_18">
-
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/image1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_xnormal"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/define_dimen_50"/>
+            android:textSize="28sp"
+            android:fontFamily="@font/mitr_regular"
+            android:layout_marginBottom="@dimen/define_dimen_10"/>
 
         <EditText
             android:id="@+id/edt_email"
@@ -42,6 +44,7 @@
             android:drawableRight="@drawable/ic_email"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:fontFamily="@font/mitr_light"
             android:layout_marginBottom="@dimen/define_dimen_20"/>
 
         <EditText
@@ -58,6 +61,7 @@
             android:drawableRight="@drawable/ic_key"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:fontFamily="@font/mitr_light"
             android:layout_marginBottom="@dimen/define_dimen_20"/>
         <EditText
             android:id="@+id/edt_password_confirm"
@@ -73,6 +77,7 @@
             android:drawableRight="@drawable/ic_key"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:fontFamily="@font/mitr_light"
             android:layout_marginBottom="@dimen/define_dimen_20"/>
 
         <RadioGroup
@@ -85,14 +90,16 @@
                 android:id="@+id/rdb_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/admin" />
+                android:text="@string/admin"
+                android:fontFamily="@font/mitr_regular"/>
 
             <RadioButton
                 android:id="@+id/rdb_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/define_dimen_20"
-                android:text="@string/user" />
+                android:text="@string/user"
+                android:fontFamily="@font/mitr_regular"/>
         </RadioGroup>
 
         <Button
@@ -103,7 +110,8 @@
             android:background="@drawable/custom_button"
             android:text="@string/sign_up_user"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            android:fontFamily="@font/mitr_medium"/>
 
     </LinearLayout>
 
@@ -121,7 +129,8 @@
             android:layout_height="wrap_content"
             android:text="@string/have_account"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            android:fontFamily="@font/mitr_light"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -129,6 +138,7 @@
             android:layout_marginStart="@dimen/define_dimen_6"
             android:text="@string/sign_in"
             android:textColor="@color/yellow"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"
+            android:fontFamily="@font/mitr_light"/>
     </LinearLayout>
 </RelativeLayout>

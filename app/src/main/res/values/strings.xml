@@ -38,9 +38,9 @@
     <string name="have_account">Đã có tài khoản?</string>
     <string name="have_not_account">Chưa có tài khoản?</string>
     <string name="sign_in">Đăng Nhập</string>
-    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
     <string name="change_password">Đổi mật khẩu</string>
-    <string name="report">Báo cáo doanh thu trong ngày</string>
+    <string name="report">Báo cáo doanh thu</string>
     <string name="sign_out">Đăng xuất</string>
     <string name="history_booking">Lịch sử đặt vé</string>
     <string name="reset_password">Gửi lại mật khẩu</string>

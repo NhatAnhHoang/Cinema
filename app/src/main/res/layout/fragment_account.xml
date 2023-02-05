@@ -22,7 +22,7 @@
         android:layout_marginTop="@dimen/define_dimen_5"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/mitr_light"
         android:text="name"
         android:gravity="center"/>
 
@@ -68,7 +68,8 @@
                     android:text="@string/change_password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_small"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/mitr_light"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -109,7 +110,8 @@
                     android:text="@string/sign_out"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_small"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/mitr_light"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

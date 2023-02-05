@@ -14,11 +14,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
+import com.example.cinema.activity.CategoryActivity;
+import com.example.cinema.activity.MainActivity;
 import com.example.cinema.activity.admin.AddMovieActivity;
+import com.example.cinema.activity.admin.AdminMovieDetailActivity;
+import com.example.cinema.adapter.BannerMovieAdapter;
+import com.example.cinema.adapter.CategoryAdapter;
+import com.example.cinema.adapter.MovieAdapter;
 import com.example.cinema.adapter.admin.AdminMovieAdapter;
 import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFunction;
@@ -31,6 +38,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.wefika.flowlayout.FlowLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,12 +210,17 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
         });
     }
 
+
+
+
+
     private void loadListMovie() {
         if (getActivity() == null) {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mFragmentAdminHomeBinding.rcvMovie.setLayoutManager(linearLayoutManager);
+
         mAdminMovieAdapter = new AdminMovieAdapter(getActivity(), mListMovies, new AdminMovieAdapter.IManagerMovieListener() {
             @Override
             public void editMovie(Movie movie) {
@@ -221,10 +234,17 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
 
             @Override
             public void clickItemMovie(Movie movie) {
-
+                DetailAdminMovies(movie);
             }
         });
         mFragmentAdminHomeBinding.rcvMovie.setAdapter(mAdminMovieAdapter);
+
+    }
+
+    private void DetailAdminMovies(Movie movie) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
+            GlobalFunction.startActivity(getActivity(), AdminMovieDetailActivity.class, bundle);
     }
 
     private boolean isMovieResult(Movie movie) {

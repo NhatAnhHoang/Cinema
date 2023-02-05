@@ -3,6 +3,7 @@ package com.example.cinema.adapter.admin;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +65,7 @@ public class AdminMovieAdapter extends RecyclerView.Adapter<AdminMovieAdapter.Mo
         holder.mItemMovieAdminBinding.imgEdit.setOnClickListener(v -> iManagerMovieListener.editMovie(movie));
         holder.mItemMovieAdminBinding.imgDelete.setOnClickListener(v -> iManagerMovieListener.deleteMovie(movie));
         holder.mItemMovieAdminBinding.layoutItem.setOnClickListener(v -> iManagerMovieListener.clickItemMovie(movie));
+
     }
 
     @Override

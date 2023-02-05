@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.cinema.R;
+import com.example.cinema.databinding.ItemDetailBookingHistoryBinding;
 
 public class DialogdetailTicketFragment extends DialogFragment {
+    private ItemDetailBookingHistoryBinding itemDetailBookingHistoryBinding;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

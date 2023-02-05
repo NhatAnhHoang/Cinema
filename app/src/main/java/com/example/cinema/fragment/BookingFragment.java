@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.cinema.MyApplication;
 import com.example.cinema.R;
 import com.example.cinema.adapter.BookingHistoryAdapter;
+import com.example.cinema.constant.ConstantKey;
 import com.example.cinema.constant.GlobalFunction;
 import com.example.cinema.databinding.FragmentBookingBinding;
 import com.example.cinema.listener.IOnSingleClickListener;
@@ -135,5 +137,9 @@ public class BookingFragment extends Fragment implements BookingHistoryAdapter.B
     public void onclickTicket(BookingHistory item) {
         DialogdetailTicketFragment dialogdetailTicketFragment = new DialogdetailTicketFragment();
         dialogdetailTicketFragment.show(getFragmentManager(),"HEHE");
+
+
+
     }
+
 }

@@ -459,7 +459,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                         mMovie.getDate(), getTitleRoomSelected(), getTitleTimeSelected(),
                         tvCountBooking.getText().toString(), getStringSeatChecked(),
                         getStringFoodAndDrink(), mPaymentMethodSelected.getName(),
-                        getTotalAmount(), DataStoreManager.getUser().getEmail(), false);
+                        getTotalAmount(), DataStoreManager.getUser().getEmail(), false, mMovie.getImage());
 
                 if (ConstantKey.PAYMENT_CASH == mPaymentMethodSelected.getType()) {
                     sendRequestOrder();

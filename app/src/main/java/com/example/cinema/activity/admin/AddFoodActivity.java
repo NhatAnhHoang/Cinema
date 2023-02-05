@@ -57,6 +57,7 @@ public class AddFoodActivity extends BaseActivity {
         String strName = mActivityAddFoodBinding.edtName.getText().toString().trim();
         String strPrice = mActivityAddFoodBinding.edtPrice.getText().toString().trim();
         String strQuantity = mActivityAddFoodBinding.edtQuantity.getText().toString().trim();
+        String strImage = mActivityAddFoodBinding.edtImage.getText().toString().trim();
 
         if (StringUtil.isEmpty(strName)) {
             Toast.makeText(this, getString(R.string.msg_name_food_require), Toast.LENGTH_SHORT).show();
@@ -72,13 +73,17 @@ public class AddFoodActivity extends BaseActivity {
             Toast.makeText(this, getString(R.string.msg_quantity_food_require), Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (StringUtil.isEmpty(strImage)) {
+            Toast.makeText(this, "vui lòng nhập linh ảnh đồ ăn/đồ uống", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // Update food
         if (isUpdate) {
             showProgressDialog(true);
             Map<String, Object> map = new HashMap<>();
             map.put("name", strName);
             map.put("price", Integer.parseInt(strPrice));
+            map.put("image", strImage);
 
             map.put("quantity", Integer.parseInt(strQuantity));
             MyApplication.get(this).getFoodDatabaseReference()
@@ -95,12 +100,13 @@ public class AddFoodActivity extends BaseActivity {
         showProgressDialog(true);
         long foodId = System.currentTimeMillis();
 
-        Food food = new Food(foodId, strName, Integer.parseInt(strPrice), Integer.parseInt(strQuantity));
+        Food food = new Food(foodId, strName, Integer.parseInt(strPrice), Integer.parseInt(strQuantity),strImage );
         MyApplication.get(this).getFoodDatabaseReference().child(String.valueOf(foodId)).setValue(food, (error, ref) -> {
             showProgressDialog(false);
             mActivityAddFoodBinding.edtName.setText("");
             mActivityAddFoodBinding.edtPrice.setText("");
             mActivityAddFoodBinding.edtQuantity.setText("");
+            mActivityAddFoodBinding.edtImage.setText("");
             GlobalFunction.hideSoftKeyboard(this);
             Toast.makeText(this, getString(R.string.msg_add_food_successfully), Toast.LENGTH_SHORT).show();
         });

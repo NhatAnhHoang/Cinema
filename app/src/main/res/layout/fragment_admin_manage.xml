@@ -23,9 +23,9 @@
         android:layout_marginTop="@dimen/define_dimen_5"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:text="name"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/mitr_light"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +64,8 @@
                 android:text="@string/report"
                 android:layout_marginStart="@dimen/define_dimen_10"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/mitr_light"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -110,7 +111,8 @@
                 android:text="@string/change_password"
                 android:layout_marginStart="@dimen/define_dimen_10"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/mitr_light"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -156,7 +158,8 @@
                 android:text="@string/sign_out"
                 android:layout_marginStart="@dimen/define_dimen_10"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/mitr_light"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

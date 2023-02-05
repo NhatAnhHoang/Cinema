@@ -9,11 +9,12 @@
     app:cardCornerRadius="@dimen/define_dimen_6">
 
     <LinearLayout
+
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/define_dimen_30">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,6 +28,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/layoutID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -35,7 +37,8 @@
                         android:layout_width="@dimen/define_dimen_100"
                         android:layout_height="wrap_content"
                         android:text="@string/label_id"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_id"
@@ -45,22 +48,24 @@
                         android:layout_toEndOf="@+id/label_id"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/define_dimen_10">
+                    android:layout_marginTop="@dimen/define_dimen_10"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/label_email"
                         android:layout_width="@dimen/define_dimen_100"
                         android:layout_height="wrap_content"
                         android:text="@string/label_email"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -70,7 +75,8 @@
                         android:layout_toEndOf="@+id/label_email"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -83,7 +89,8 @@
                         android:layout_width="@dimen/define_dimen_100"
                         android:layout_height="wrap_content"
                         android:text="@string/movie_name"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_name_movie"
@@ -93,7 +100,8 @@
                         android:layout_toEndOf="@+id/label_name"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -107,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/date_movie"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_date_movie"
@@ -117,10 +126,12 @@
                         android:layout_toEndOf="@+id/label_date"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/layoutRoom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -131,7 +142,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/room_movie"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_room_movie"
@@ -142,7 +154,8 @@
                         android:layout_toEndOf="@+id/label_room"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -156,7 +169,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/time_movie"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_time_movie"
@@ -166,10 +180,12 @@
                         android:layout_toEndOf="@+id/label_time"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/LayoutCountSeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -180,7 +196,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/count_booking_label"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_count_booking"
@@ -191,10 +208,12 @@
                         android:layout_toEndOf="@+id/label_count_booking"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/LayoutSeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -205,7 +224,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/count_seat_label"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_count_seat"
@@ -216,10 +236,12 @@
                         android:layout_toEndOf="@+id/label_count_seat"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/LayoutFood"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -230,7 +252,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/food_drink_label"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_food_drink"
@@ -240,10 +263,12 @@
                         android:layout_toEndOf="@+id/label_food_drink"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/LayoutPayment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -254,7 +279,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/label_payment"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_payment_method"
@@ -264,10 +290,12 @@
                         android:layout_toEndOf="@+id/label_payment_method"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/LayoutDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/define_dimen_10">
@@ -278,7 +306,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/label_date_create"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:fontFamily="@font/mitr_regular"/>
 
                     <TextView
                         android:id="@+id/tv_date_create"
@@ -288,7 +317,8 @@
                         android:layout_toEndOf="@+id/date_create"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/mitr_light"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -312,7 +342,25 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/label_confirm_booking"/>
+                    android:text="@string/label_confirm_booking"
+                    android:fontFamily="@font/mitr_regular"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/LayoutIMG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgMovie_bon"
+                    android:layout_width="@dimen/define_dimen_100"
+                    android:layout_height="@dimen/define_dimen_100"
+                    android:background="@drawable/used"
+                    />
             </LinearLayout>
         </RelativeLayout>
 
@@ -335,7 +383,8 @@
                 android:text="@string/total_amount_label"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_normal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/mitr_regular"/>
 
             <TextView
                 android:id="@+id/tv_total_amount"
@@ -348,7 +397,8 @@
                 android:layout_toEndOf="@+id/label_total_amount"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_normal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/mitr_light"/>
 
             <ImageView
                 android:id="@+id/img_qr"

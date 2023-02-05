@@ -11,10 +11,12 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cinema.activity.MainActivity;
 import com.example.cinema.activity.MovieDetailActivity;
 import com.example.cinema.activity.admin.AdminMainActivity;
+import com.example.cinema.activity.admin.AdminMovieDetailActivity;
 import com.example.cinema.listener.IGetDateListener;
 import com.example.cinema.model.Movie;
 import com.example.cinema.model.RoomFirebase;
@@ -26,6 +28,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 
+import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,6 +78,11 @@ public class GlobalFunction {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
         GlobalFunction.startActivity(context, MovieDetailActivity.class, bundle);
+    }
+    public static void goToAdminMovieDetail(Context context, Movie movie) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ConstantKey.KEY_INTENT_MOVIE_OBJECT, movie);
+        GlobalFunction.startActivity(context, AdminMovieDetailActivity.class, bundle);
     }
 
     public static List<RoomFirebase> getListRooms() {
@@ -172,4 +180,6 @@ public class GlobalFunction {
             e.printStackTrace();
         }
     }
+
+
 }

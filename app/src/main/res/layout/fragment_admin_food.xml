@@ -26,7 +26,8 @@
             android:padding="@dimen/define_dimen_10"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_small"
-            tools:ignore="Autofill" />
+            tools:ignore="Autofill"
+            android:fontFamily="@font/mitr_light"/>
 
         <ImageView
             android:id="@+id/img_search"
