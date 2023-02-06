@@ -34,7 +34,7 @@
             android:padding="@dimen/define_dimen_10"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_small"
-            android:fontFamily="@font/mitr_light"/>
+            android:fontFamily="@font/baloochettan2_regular"/>
 
         <ImageView
             android:id="@+id/image_delete"

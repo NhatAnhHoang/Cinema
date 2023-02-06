@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@drawable/background1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="@dimen/define_dimen_200"
             android:layout_height="@dimen/define_dimen_200"
             android:layout_gravity="center"
-            android:src="@drawable/imagecinema" />
+            android:src="@drawable/image2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,14 +25,13 @@
             android:textSize="@dimen/text_size_huge"
             android:fontFamily="@font/mitr_regular"
             android:layout_marginBottom="30dp"
-            android:layout_marginTop="@dimen/define_dimen_20"
             android:layout_gravity="center"/>
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_edittext">
+            android:background="@drawable/custom_edittext"
+            android:layout_marginBottom="@dimen/define_dimen_20">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_email"
@@ -40,30 +39,13 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_email"
                 android:hint="@string/hint_email"
-                android:fontFamily="@font/mitr_light"
+                android:fontFamily="@font/baloochettan2_regular"
                 android:inputType="text"
                 android:paddingLeft="15dp"
                 android:paddingRight="25dp"
                 android:textSize="@dimen/text_size_small" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/edt_email"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="@dimen/define_dimen_50"-->
-        <!--            android:layout_marginTop="@dimen/define_dimen_20"-->
-        <!--            android:layout_marginBottom="@dimen/define_dimen_30"-->
-        <!--            android:background="@drawable/custom_edittext"-->
-        <!--            android:drawableRight="@drawable/ic_email"-->
-        <!--            android:hint="@string/hint_email"-->
-        <!--            android:imeOptions="actionNext"-->
-        <!--            android:inputType="textEmailAddress"-->
-        <!--            android:paddingLeft="15dp"-->
-        <!--            android:paddingRight="15dp"-->
-        <!--            android:textColor="@color/colorPrimaryDark"-->
-        <!--            android:textSize="@dimen/text_size_small" />-->
-        <!--        -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -79,29 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
-                android:fontFamily="@font/mitr_light"
+                android:fontFamily="@font/baloochettan2_regular"
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
 
                 android:textSize="@dimen/text_size_small" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/edt_password"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="@dimen/define_dimen_50"-->
-        <!--            android:layout_marginTop="@dimen/define_dimen_10"-->
-        <!--            android:background="@drawable/custom_edittext"-->
-        <!--            android:drawableRight="@drawable/ic_key"-->
-        <!--            android:hint="@string/hint_password"-->
-        <!--            android:imeOptions="actionDone"-->
-        <!--            android:inputType="textPassword"-->
-        <!--            android:paddingLeft="15dp"-->
-        <!--            android:paddingRight="15dp"-->
-        <!--            android:textColor="@color/colorPrimaryDark"-->
-        <!--            android:textSize="@dimen/text_size_small" />-->
-
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -133,7 +99,7 @@
             android:layout_marginTop="@dimen/define_dimen_30"
             android:background="@drawable/custom_button"
             android:text="Đăng Nhập"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/mitr_medium"/>
 
@@ -156,6 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="@dimen/define_dimen_18">
@@ -163,18 +130,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/mitr_light"
             android:text="@string/have_not_account"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_small"
-            android:fontFamily="@font/mitr_light"/>
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/define_dimen_6"
+            android:fontFamily="@font/mitr_light"
             android:text="@string/sign_up"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/text_size_small"
-            android:fontFamily="@font/mitr_light"/>
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 </RelativeLayout>

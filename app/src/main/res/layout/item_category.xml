@@ -30,6 +30,6 @@
             android:text="@string/app_name"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_small"
-            android:fontFamily="@font/mitr_regular"/>
+            android:fontFamily="@font/baloochettan2_regular"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

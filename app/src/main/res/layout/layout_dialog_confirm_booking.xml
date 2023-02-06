@@ -21,6 +21,7 @@
             android:text="@string/confirm_booking_infor"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
+            android:fontFamily="@font/mitr_regular"
             android:textSize="@dimen/text_size_small" />
 
         <RelativeLayout
@@ -33,7 +34,8 @@
                 android:layout_width="@dimen/define_dimen_100"
                 android:layout_height="wrap_content"
                 android:text="@string/movie_name"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_name_movie"
@@ -43,7 +45,8 @@
                 android:layout_toEndOf="@+id/label_name"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -57,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/text_size_small"
-                android:text="@string/date_movie"/>
+                android:text="@string/date_movie"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_date_movie"
@@ -67,7 +71,8 @@
                 android:layout_toEndOf="@+id/label_date"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -81,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/room_movie"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_room_movie"
@@ -92,7 +98,8 @@
                 android:layout_toEndOf="@+id/label_room"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -106,7 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/time_movie"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_time_movie"
@@ -116,7 +124,8 @@
                 android:layout_toEndOf="@+id/label_time"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -130,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/count_booking_label"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_count_booking"
@@ -141,7 +151,8 @@
                 android:layout_toEndOf="@+id/label_count_booking"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -155,7 +166,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/count_seat_label"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_count_seat"
@@ -166,7 +178,8 @@
                 android:layout_toEndOf="@+id/label_count_seat"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -180,7 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/food_drink_label"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_food_drink"
@@ -190,7 +204,8 @@
                 android:layout_toEndOf="@+id/label_food_drink"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -204,7 +219,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/label_payment"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_payment_method"
@@ -214,7 +230,8 @@
                 android:layout_toEndOf="@+id/label_payment_method"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_small"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <View
@@ -236,7 +253,8 @@
                 android:text="@string/total_amount_label"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/text_size_normal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_total_amount"
@@ -247,7 +265,8 @@
                 android:layout_toEndOf="@+id/label_total_amount"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_normal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -266,7 +285,8 @@
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/action_cancel"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/tv_dialog_ok"
@@ -277,7 +297,8 @@
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/action_ok"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:fontFamily="@font/baloochettan2_regular"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

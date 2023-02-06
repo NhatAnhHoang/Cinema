@@ -38,7 +38,7 @@
                 android:layout_marginStart="@dimen/define_dimen_10"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="bold"
-                android:fontFamily="@font/mitr_regular"/>
+                android:fontFamily="@font/baloochettan2_regular"/>
         </LinearLayout>
 
         <ImageView

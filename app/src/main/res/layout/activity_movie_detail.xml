@@ -68,7 +68,7 @@
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_regular"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                             android:textSize="@dimen/text_size_small"
                             android:textStyle="italic"
                             android:text="@string/label_category"
-                            android:fontFamily="@font/mitr_regular"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
 
                         <TextView
                             android:id="@+id/tv_category_name"
@@ -92,7 +92,7 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_small"
                             android:layout_marginStart="@dimen/define_dimen_5"
-                            android:fontFamily="@font/mitr_light"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_small"
                             android:text="@string/date_movie"
-                            android:fontFamily="@font/mitr_regular"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
 
                         <TextView
                             android:id="@+id/tv_date_movie"
@@ -115,7 +115,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/text_size_small"
                             android:layout_marginStart="@dimen/define_dimen_5"
-                            android:fontFamily="@font/mitr_light"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -129,7 +129,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_small"
                             android:text="@string/price_movie"
-                            android:fontFamily="@font/mitr_regular"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
 
                         <TextView
                             android:id="@+id/tv_price_movie"
@@ -139,7 +139,7 @@
                             android:textColor="@color/red"
                             android:textSize="@dimen/text_size_small"
                             android:layout_marginStart="@dimen/define_dimen_5"
-                            android:fontFamily="@font/mitr_light"/>
+                            android:fontFamily="@font/baloochettan2_regular"/>
                     </LinearLayout>
                     <Button
                         android:id="@+id/btn_watch_trailer"
@@ -227,7 +227,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_marginTop="@dimen/define_dimen_5"
                 android:textSize="@dimen/text_size_small"
-                android:fontFamily="@font/mitr_light"/>
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <TextView
                 android:id="@+id/label_movie_trailer"

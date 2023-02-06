@@ -25,7 +25,7 @@
         android:textSize="20sp"
         android:text="name"
         android:gravity="center"
-        android:fontFamily="@font/mitr_light"/>
+        android:fontFamily="@font/baloochettan2_regular"/>
 
     <LinearLayout
         android:layout_width="match_parent"

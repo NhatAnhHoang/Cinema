@@ -14,5 +14,5 @@
         android:ellipsize="end"
         android:textSize="@dimen/text_size_xsmall"
         android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/mitr_regular"/>
+        android:fontFamily="@font/baloochettan2_regular"/>
 </LinearLayout>

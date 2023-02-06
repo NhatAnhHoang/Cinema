@@ -22,7 +22,7 @@
         android:layout_marginTop="@dimen/define_dimen_5"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:fontFamily="@font/mitr_light"
+        android:fontFamily="@font/baloochettan2_regular"
         android:text="name"
         android:gravity="center"/>
 

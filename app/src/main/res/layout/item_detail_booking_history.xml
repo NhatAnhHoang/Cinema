@@ -8,14 +8,12 @@
     app:cardCornerRadius="@dimen/define_dimen_6">
 
     <LinearLayout
-        android:background="@drawable/tickethi"
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingEnd="@dimen/define_dimen_70"
-        android:padding="50dp">
-
+        android:padding="30dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,7 +47,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -76,7 +74,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -101,7 +99,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -127,7 +125,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -154,7 +152,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -180,7 +178,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -207,7 +205,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -234,7 +232,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -260,7 +258,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -286,7 +284,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -312,7 +310,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:fontFamily="@font/mitr_light"/>
+                        android:fontFamily="@font/baloochettan2_regular"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -338,7 +336,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/label_confirm_booking"
-                    android:fontFamily="@font/mitr_light"/>
+                    android:fontFamily="@font/baloochettan2_regular"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -375,7 +373,7 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold"
-                android:fontFamily="@font/mitr_light"/>
+                android:fontFamily="@font/baloochettan2_regular"/>
 
 <!--            <ImageView-->
 <!--                android:id="@+id/img_qr"-->

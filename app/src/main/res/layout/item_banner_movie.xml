@@ -37,7 +37,7 @@
                 android:layout_toStartOf="@+id/layout_view"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small"
-                android:fontFamily="@font/mitr_regular"/>
+                android:fontFamily="@font/baloochettan2_regular"/>
 
             <LinearLayout
                 android:id="@+id/layout_view"
