@@ -47,14 +47,14 @@ public class SignUpActivity extends BaseActivity {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_confirm), Toast.LENGTH_SHORT).show();
         }
         else {
-            if (mActivitySignUpBinding.rdbAdmin.isChecked()) {
-                if (!strEmail.contains(ADMIN_EMAIL_FORMAT)) {
-                    Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
-                } else {
-                    signUpUser(strEmail, strPassword);
-                }
-                return;
-            }
+//            if (mActivitySignUpBinding.rdbAdmin.isChecked()) {
+//                if (!strEmail.contains(ADMIN_EMAIL_FORMAT)) {
+//                    Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
+//                } else {
+//                    signUpUser(strEmail, strPassword);
+//                }
+//                return;
+//            }
 
             if (strEmail.contains(ADMIN_EMAIL_FORMAT)) {
                 Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
